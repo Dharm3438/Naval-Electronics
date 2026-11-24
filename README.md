@@ -27,7 +27,9 @@ Also update `site.url` (used for canonical + OpenGraph URLs) and the
 - `next/font/google`: Plus Jakarta Sans (headings) + Inter (body)
 - No backend required — leads are handed off via a pre-filled WhatsApp deep link
 
-## Commands
+## Run it locally
+
+Requires Node.js 20.9 or newer (check with `node -v`).
 
 ```bash
 npm install
@@ -37,13 +39,123 @@ npm install
 npm run dev
 ```
 
+Then open http://localhost:3000. The dev server hot-reloads on save.
+
+To produce the deployable files:
+
 ```bash
-npm run build && npm run start
+npm run build
 ```
+
+That writes a complete static site into `out/`. To preview exactly what will be
+deployed, serve that folder with any static file server:
+
+```bash
+npx serve out
+```
+
+Lint and type-check:
 
 ```bash
 npm run lint
 ```
+
+## Is this static, and is there a backend?
+
+**It is a fully static site, and there is no backend.** `next.config.ts` sets
+`output: "export"`, so `npm run build` produces plain `.html`, `.css`, `.js`
+and image files in `out/`. Nothing needs Node.js at runtime — the calculator,
+FAQ accordion, mobile drawer and lead form all run in the visitor's browser.
+
+That means it can be hosted anywhere that serves files, including cheap shared
+hosting. Form submissions are handed to WhatsApp via a `wa.me` deep link rather
+than stored in a database, which is why no server is required.
+
+If you later want submissions saved to a database or emailed, that is when a
+backend becomes necessary — see "Adding a backend later" below.
+
+## Deploying
+
+### Hostinger (shared hosting / hPanel)
+
+1. `npm run build` locally.
+2. Open hPanel → **File Manager** → `public_html`.
+3. Upload the **contents** of `out/` (not the `out` folder itself) so that
+   `index.html` sits directly inside `public_html`.
+4. Point your domain at it (see "Domain from GoDaddy" below).
+
+No Node.js setup, no `npm start` on the server. Re-deploying is just a rebuild
+and re-upload; automate it with Hostinger's Git deployment if you prefer.
+
+### Render
+
+Create a **Static Site** (not a Web Service):
+
+| Setting | Value |
+| --- | --- |
+| Build command | `npm install && npm run build` |
+| Publish directory | `out` |
+
+Render builds on every push to the connected branch and serves the result over
+HTTPS for free. A Web Service would also work but costs money and gains nothing
+here, since there is no server code to run.
+
+### Vercel / Netlify / Cloudflare Pages
+
+Connect the repo and accept the defaults — all three detect Next.js. Build
+command `npm run build`, output directory `out`.
+
+### Domain from GoDaddy
+
+Buy the domain at GoDaddy, then change its DNS to point at the host. You do
+**not** need to move the domain itself.
+
+- **Render:** add the custom domain in the Render dashboard, then in GoDaddy's
+  DNS manager add the `CNAME` (for `www`) and `A` record (for the root domain)
+  that Render shows you.
+- **Hostinger:** either change GoDaddy's nameservers to Hostinger's, or add an
+  `A` record pointing to the IP shown in hPanel.
+
+DNS changes take anywhere from a few minutes to a few hours to propagate. Both
+hosts issue a free Let's Encrypt HTTPS certificate automatically once the
+domain resolves to them.
+
+After the domain is live, update `site.url` in `src/lib/site.ts` so the
+canonical and OpenGraph URLs are correct, and rebuild.
+
+## Why not WordPress?
+
+WordPress is a reasonable choice for a site whose content the owner edits daily
+without a developer. For this page it would be a step backwards:
+
+| | This site | WordPress |
+| --- | --- | --- |
+| Hosting | Any static host, free tiers available | PHP + MySQL hosting required |
+| Speed | Prerendered HTML, no database queries | Database query per page view |
+| The savings calculator | Purpose-built, exact PM Surya Ghar tiers | Needs a custom plugin or paid form builder |
+| Maintenance | None — static files do not get hacked | Core, theme and plugin updates; a known attack target |
+| Editing copy | Edit a `.tsx` file and rebuild | Visual editor in the browser |
+
+The honest trade-off is that last row: changing text here means editing code and
+redeploying. If Naval Electronics wants to edit copy and add project photos
+without a developer, the better answer is not WordPress but a headless CMS
+(Sanity, Contentful or Prismic) wired into this same codebase — the design,
+calculator and performance all stay as they are.
+
+## Adding a backend later
+
+Leads currently go out over WhatsApp only. To also capture them server-side:
+
+1. Remove `output: "export"` from `next.config.ts`.
+2. Add a route handler at `src/app/api/leads/route.ts`.
+3. In `LeadForm.tsx`'s `handleSubmit`, `await fetch("/api/leads", ...)` with the
+   `FormState` object before calling `setSubmitted`.
+4. Deploy to Vercel, or to Render as a **Web Service** with start command
+   `npm run start`.
+
+A no-code alternative that keeps the site static: point the form at Formspree,
+Web3Forms or a Google Apps Script endpoint, all of which accept a POST from the
+browser and email you the lead.
 
 ## Structure
 
