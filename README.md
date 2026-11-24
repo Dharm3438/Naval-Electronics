@@ -99,18 +99,22 @@ backend becomes necessary — see "Adding a backend later" below.
 No Node.js setup, no `npm start` on the server. Re-deploying is just a rebuild
 and re-upload; automate it with Hostinger's Git deployment if you prefer.
 
-### Render
+### Render (recommended)
 
-Create a **Static Site** (not a Web Service):
+`render.yaml` in the repo root is a Blueprint, so Render configures itself:
 
-| Setting | Value |
-| --- | --- |
-| Build command | `npm install && npm run build` |
-| Publish directory | `out` |
+1. Sign in at [dashboard.render.com](https://dashboard.render.com) with GitHub.
+2. **New → Blueprint**, pick this repository, approve the plan it shows.
+3. Done. Render builds on every push to `main`.
 
-Render builds on every push to the connected branch and serves the result over
-HTTPS for free. A Web Service would also work but costs money and gains nothing
-here, since there is no server code to run.
+It serves the site at a free `*.onrender.com` subdomain with an automatic
+Let's Encrypt certificate — HTTPS works from the first deploy, before you point
+a custom domain at it.
+
+If you would rather click through manually, create a **Static Site** (not a Web
+Service) with build command `npm ci && npm run build` and publish directory
+`out`. A Web Service costs money and gains nothing here: there is no server
+code to run.
 
 ### Vercel / Netlify / Cloudflare Pages
 
@@ -204,16 +208,22 @@ src/
     └── solar.ts        sizing, costing, subsidy and payback maths
 
 public/
-├── brands/      logo and installation image files (see its README)
-└── customers/   customer photo files (see its README)
+├── brands/      logo and installation image files
+└── customers/   customer photo files
+
+docs/
+├── adding-brand-logos.md
+└── adding-customer-photos.md
 ```
 
 ## Adding customer photos and brand logos
 
-Both folders have their own README with the exact steps. In short: drop the
-file in, point the matching entry in `src/lib/customers.ts` or
-`src/lib/brands.ts` at it, rebuild, redeploy. Entries with no image render a
-designed placeholder, so the layout never breaks while you gather photos.
+Step-by-step in [`docs/adding-customer-photos.md`](docs/adding-customer-photos.md)
+and [`docs/adding-brand-logos.md`](docs/adding-brand-logos.md). In short: drop
+the file into `public/customers/` or `public/brands/`, point the matching entry
+in `src/lib/customers.ts` or `src/lib/brands.ts` at it, rebuild, redeploy.
+Entries with no image render a designed placeholder, so the layout never breaks
+while you gather photos.
 
 ## Calculator assumptions
 
