@@ -1,0 +1,169 @@
+import { Clock, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
+import { navLinks, site, waLink } from "@/lib/site";
+import { CopyrightYear } from "./CopyrightYear";
+import { Logo } from "./Logo";
+
+const services = [
+  "Residential rooftop solar",
+  "Housing society solar",
+  "Commercial & MIDC rooftop plants",
+  "MSEDCL net-metering liaison",
+  "PM Surya Ghar subsidy processing",
+  "Earthing, SPD & electrical works",
+];
+
+const areas = [
+  "CIDCO",
+  "Garkheda",
+  "Beed Bypass",
+  "Waluj MIDC",
+  "Shendra MIDC",
+  "N-Zones",
+  "Jalna Road",
+  "Paithan Road",
+];
+
+export default function Footer() {
+  return (
+    <footer className="border-t border-ink/10 bg-cream">
+      <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8 lg:py-16">
+        <div className="grid gap-10 lg:grid-cols-[1.4fr_1fr_1fr_1.2fr]">
+          <div>
+            <div className="flex items-center gap-2.5">
+              <Logo className="h-10 w-10" />
+              <span className="flex flex-col leading-none">
+                <span className="font-display text-lg font-extrabold text-ink">
+                  {site.name}
+                </span>
+                <span className="mt-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-ink/50">
+                  Solar &amp; Electrical
+                </span>
+              </span>
+            </div>
+            <p className="mt-4 max-w-sm text-sm leading-relaxed text-ink/65">
+              {site.tagline}. Turnkey rooftop solar, MSEDCL net-metering and
+              PM Surya Ghar subsidy processing for homes, housing societies and
+              industries across {site.region}.
+            </p>
+            <a
+              href={waLink(
+                `Hello ${site.name}, I would like a rooftop solar quote.`,
+              )}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-5 inline-flex items-center gap-2 rounded-xl bg-emerald px-4 py-2.5 text-sm font-bold text-white transition-colors hover:bg-emerald-deep"
+            >
+              <MessageCircle className="h-4 w-4" aria-hidden />
+              WhatsApp us
+            </a>
+          </div>
+
+          <nav aria-label="Footer">
+            <h2 className="font-display text-sm font-extrabold uppercase tracking-wider text-ink">
+              Explore
+            </h2>
+            <ul className="mt-4 flex flex-col gap-2.5">
+              {navLinks.map((l) => (
+                <li key={l.href}>
+                  <a
+                    href={l.href}
+                    className="text-sm text-ink/65 transition-colors hover:text-amber-deep"
+                  >
+                    {l.label}
+                  </a>
+                </li>
+              ))}
+              <li>
+                <a
+                  href="#quote"
+                  className="text-sm font-bold text-ink transition-colors hover:text-amber-deep"
+                >
+                  Get a free quote
+                </a>
+              </li>
+            </ul>
+          </nav>
+
+          <div>
+            <h2 className="font-display text-sm font-extrabold uppercase tracking-wider text-ink">
+              Services
+            </h2>
+            <ul className="mt-4 flex flex-col gap-2.5">
+              {services.map((s) => (
+                <li key={s} className="text-sm text-ink/65">
+                  {s}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <h2 className="font-display text-sm font-extrabold uppercase tracking-wider text-ink">
+              Visit / Contact
+            </h2>
+            <ul className="mt-4 flex flex-col gap-3.5 text-sm text-ink/65">
+              <li className="flex items-start gap-2.5">
+                <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-amber" aria-hidden />
+                <address className="not-italic leading-relaxed">
+                  {site.address.line1}
+                  <br />
+                  {site.address.line2}
+                  <br />
+                  {site.address.line3}
+                </address>
+              </li>
+              <li className="flex items-start gap-2.5">
+                <Phone className="mt-0.5 h-4 w-4 shrink-0 text-amber" aria-hidden />
+                <a
+                  href={`tel:${site.phone}`}
+                  className="font-semibold text-ink transition-colors hover:text-amber-deep"
+                >
+                  {site.phoneDisplay}
+                </a>
+              </li>
+              <li className="flex items-start gap-2.5">
+                <Mail className="mt-0.5 h-4 w-4 shrink-0 text-amber" aria-hidden />
+                <a
+                  href={`mailto:${site.email}`}
+                  className="transition-colors hover:text-amber-deep"
+                >
+                  {site.email}
+                </a>
+              </li>
+              <li className="flex items-start gap-2.5">
+                <Clock className="mt-0.5 h-4 w-4 shrink-0 text-amber" aria-hidden />
+                {site.hours}
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div className="mt-12 border-t border-ink/10 pt-8">
+          <h2 className="text-[11px] font-bold uppercase tracking-wider text-ink/45">
+            Service areas in {site.city} ({site.cityAlt})
+          </h2>
+          <ul className="mt-3 flex flex-wrap gap-2">
+            {areas.map((a) => (
+              <li
+                key={a}
+                className="rounded-lg bg-white px-2.5 py-1.5 text-xs font-semibold text-ink/60"
+              >
+                {a}
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div className="mt-8 flex flex-col gap-2 border-t border-ink/10 pt-6 text-xs text-ink/50 sm:flex-row sm:items-center sm:justify-between">
+          <p>
+            © <CopyrightYear fallback={2026} /> {site.name}. All rights reserved.
+          </p>
+          <p>
+            Subsidy amounts as per PM Surya Ghar Muft Bijli Yojana guidelines.
+            Savings shown are estimates, not guarantees.
+          </p>
+        </div>
+      </div>
+    </footer>
+  );
+}
