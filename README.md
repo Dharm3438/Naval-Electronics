@@ -6,8 +6,9 @@ Sambhajinagar (Aurangabad) and the wider Marathwada region of Maharashtra.
 
 ## ⚠️ Before going live
 
-All business copy is production-ready. **Four contact values are placeholders**
-and must be replaced — they live in one place, `src/lib/site.ts`:
+Three things need real content before this is published.
+
+**1. Contact details** — four placeholder values in `src/lib/site.ts`:
 
 | Field      | Used by                                             |
 | ---------- | --------------------------------------------------- |
@@ -18,6 +19,17 @@ and must be replaced — they live in one place, `src/lib/site.ts`:
 
 Also update `site.url` (used for canonical + OpenGraph URLs) and the
 `postalCode` in the JSON-LD schema in `src/app/page.tsx`.
+
+**2. Testimonials and case studies** — the entries in `src/lib/customers.ts`
+and the three cards in `src/components/Projects.tsx` are sample content written
+to show the layout. Replace them with real customers and take written consent
+before publishing anyone's photo, name or words.
+
+**3. Brand logos and copy** — `src/lib/brands.ts` carries no logo files. Request
+official logo packs from each manufacturer's channel-partner contact, drop them
+in `public/brands/`, and set the `logo` path. Confirm each brand's product and
+warranty lines against its current datasheet; they are written from general
+category positioning, not from a specific model sheet.
 
 ## Stack
 
@@ -171,8 +183,12 @@ src/
 │   ├── RooftopIllustration.tsx  custom SVG hero visual
 │   ├── SolarCalculator.tsx   interactive savings + subsidy calculator
 │   ├── SubsidyTable.tsx      PM Surya Ghar tier breakdown
+│   ├── Finance.tsx           0%–8% finance options
 │   ├── Process.tsx           4-step turnkey process
 │   ├── WhyNaval.tsx          engineering/quality differentiators
+│   ├── Brands.tsx            manufacturer cards + detail dialog
+│   ├── BrandVisual.tsx       logo fallback mark and panel illustration
+│   ├── Customers.tsx         satisfied-customer photo gallery
 │   ├── Projects.tsx          local case studies with reviews
 │   ├── FAQ.tsx               accessible accordion
 │   ├── LeadForm.tsx          validated lead capture + WhatsApp hand-off
@@ -183,8 +199,21 @@ src/
 │   └── Logo.tsx              sun/circuit wordmark
 └── lib/
     ├── site.ts         business details + wa.me helper  ← EDIT THIS
+    ├── brands.ts       manufacturer data               ← EDIT THIS
+    ├── customers.ts    testimonial gallery data        ← EDIT THIS
     └── solar.ts        sizing, costing, subsidy and payback maths
+
+public/
+├── brands/      logo and installation image files (see its README)
+└── customers/   customer photo files (see its README)
 ```
+
+## Adding customer photos and brand logos
+
+Both folders have their own README with the exact steps. In short: drop the
+file in, point the matching entry in `src/lib/customers.ts` or
+`src/lib/brands.ts` at it, rebuild, redeploy. Entries with no image render a
+designed placeholder, so the layout never breaks while you gather photos.
 
 ## Calculator assumptions
 

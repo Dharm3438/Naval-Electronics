@@ -52,7 +52,7 @@ export default function Navbar() {
             <li key={link.href}>
               <a
                 href={link.href}
-                className="rounded-lg px-3 py-2 text-sm font-medium text-ink/70 transition-colors hover:bg-ink/5 hover:text-ink"
+                className="whitespace-nowrap rounded-lg px-2.5 py-2 text-[13px] font-medium text-ink/70 transition-colors hover:bg-ink/5 hover:text-ink"
               >
                 {link.label}
               </a>
@@ -63,7 +63,7 @@ export default function Navbar() {
         <div className="flex items-center gap-2">
           <a
             href={`tel:${site.phone}`}
-            className="hidden items-center gap-2 rounded-lg px-3 py-2 text-sm font-semibold text-ink transition-colors hover:bg-ink/5 lg:flex"
+            className="hidden items-center gap-2 whitespace-nowrap rounded-lg px-3 py-2 text-sm font-semibold text-ink transition-colors hover:bg-ink/5 2xl:flex"
           >
             <Phone className="h-4 w-4 text-emerald" aria-hidden />
             {site.phoneDisplay}

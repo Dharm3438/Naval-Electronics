@@ -1,0 +1,265 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
+import {
+  ArrowRight,
+  BadgeCheck,
+  Factory,
+  Layers,
+  ShieldCheck,
+  Target,
+  X,
+} from "lucide-react";
+import { brands, type Brand } from "@/lib/brands";
+import { BrandMark, PanelVisual } from "./BrandVisual";
+
+export default function Brands() {
+  const [active, setActive] = useState<Brand | null>(null);
+  const opener = useRef<HTMLButtonElement | null>(null);
+
+  const open = (brand: Brand, el: HTMLButtonElement) => {
+    opener.current = el;
+    setActive(brand);
+  };
+
+  // Returning focus to the card that opened the dialog keeps keyboard users
+  // in place. React Compiler handles the memoization here.
+  const close = () => {
+    setActive(null);
+    opener.current?.focus();
+  };
+
+  return (
+    <section id="brands" className="py-16 lg:py-24">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-2xl text-center">
+          <div className="inline-flex items-center gap-2 rounded-full bg-ink/5 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.1em] text-ink/70">
+            <Factory className="h-4 w-4" aria-hidden />
+            Brands We Supply
+          </div>
+          <h2 className="mt-5 font-display text-3xl font-extrabold text-ink sm:text-4xl lg:text-[2.75rem]">
+            Tier-1 Indian manufacturers, matched to your roof
+          </h2>
+          <p className="mt-4 text-base leading-relaxed text-ink/65 sm:text-lg">
+            We are not tied to a single manufacturer. After the site survey we
+            recommend the brand that fits your roof, budget and subsidy
+            eligibility — then stand behind the installation either way. Tap any
+            brand for the details.
+          </p>
+        </div>
+
+        <ul className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {brands.map((brand) => (
+            <li key={brand.slug}>
+              <button
+                type="button"
+                onClick={(e) => open(brand, e.currentTarget)}
+                aria-haspopup="dialog"
+                className="group flex h-full w-full flex-col rounded-3xl border border-ink/10 bg-white p-6 text-left shadow-sm transition-all hover:-translate-y-1 hover:border-amber/50 hover:shadow-xl"
+              >
+                <div className="flex items-center gap-3">
+                  {brand.logo ? (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img
+                      src={brand.logo}
+                      alt={`${brand.name} logo`}
+                      className="h-12 w-12 rounded-2xl object-contain"
+                    />
+                  ) : (
+                    <BrandMark
+                      initials={brand.initials}
+                      accent={brand.accent}
+                      className="h-12 w-12 text-sm"
+                    />
+                  )}
+                  <div className="min-w-0">
+                    <div className="font-display text-lg font-extrabold leading-tight text-ink">
+                      {brand.name}
+                    </div>
+                    <div className="mt-0.5 text-[11px] font-bold uppercase tracking-wider text-ink/45">
+                      {brand.category}
+                    </div>
+                  </div>
+                </div>
+
+                <p className="mt-4 flex-1 text-sm leading-relaxed text-ink/65">
+                  {brand.tagline}
+                </p>
+
+                <div className="mt-5 flex items-center gap-1.5 rounded-lg bg-emerald/10 px-2.5 py-1.5 text-[11px] font-bold uppercase tracking-wider text-emerald-deep">
+                  <ShieldCheck className="h-3.5 w-3.5 shrink-0" aria-hidden />
+                  {brand.warranty.split("·")[0].trim()}
+                </div>
+
+                <span className="mt-5 inline-flex items-center gap-1.5 border-t border-ink/10 pt-5 text-sm font-bold text-amber-deep">
+                  View details
+                  <ArrowRight
+                    className="h-4 w-4 transition-transform group-hover:translate-x-1"
+                    aria-hidden
+                  />
+                </span>
+              </button>
+            </li>
+          ))}
+        </ul>
+
+        <p className="mt-8 text-center text-sm text-ink/55">
+          Every module we quote for a subsidised system is ALMM-listed and
+          DCR-compliant — both are mandatory to claim PM Surya Ghar assistance.
+        </p>
+      </div>
+
+      {active && <BrandDialog brand={active} onClose={close} />}
+    </section>
+  );
+}
+
+function BrandDialog({ brand, onClose }: { brand: Brand; onClose: () => void }) {
+  const closeRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    closeRef.current?.focus();
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+    };
+    document.addEventListener("keydown", onKey);
+    const previous = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.body.style.overflow = previous;
+    };
+  }, [onClose]);
+
+  return (
+    <div
+      className="fixed inset-0 z-[60] flex items-end justify-center bg-ink/70 p-0 backdrop-blur-sm sm:items-center sm:p-6"
+      onClick={onClose}
+    >
+      <div
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby={`brand-dialog-${brand.slug}`}
+        onClick={(e) => e.stopPropagation()}
+        className="max-h-[92vh] w-full max-w-2xl overflow-y-auto rounded-t-3xl bg-cream shadow-2xl sm:rounded-3xl"
+      >
+        <div className="relative">
+          {brand.photo ? (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={brand.photo}
+              alt={`${brand.name} modules installed by Naval Electronics`}
+              className="h-44 w-full rounded-t-3xl object-cover sm:h-52"
+            />
+          ) : (
+            <div className="flex h-44 w-full items-center justify-center rounded-t-3xl bg-[#F1F5F9] sm:h-52">
+              <PanelVisual accent={brand.accent} className="h-full w-auto" />
+            </div>
+          )}
+          <button
+            ref={closeRef}
+            type="button"
+            onClick={onClose}
+            aria-label="Close"
+            className="absolute right-4 top-4 inline-flex h-10 w-10 items-center justify-center rounded-full bg-white/95 text-ink shadow-lg transition-colors hover:bg-white"
+          >
+            <X className="h-5 w-5" aria-hidden />
+          </button>
+        </div>
+
+        <div className="p-6 sm:p-8">
+          <div className="flex items-center gap-3">
+            {brand.logo ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                src={brand.logo}
+                alt={`${brand.name} logo`}
+                className="h-14 w-14 rounded-2xl object-contain"
+              />
+            ) : (
+              <BrandMark
+                initials={brand.initials}
+                accent={brand.accent}
+                className="h-14 w-14 text-base"
+              />
+            )}
+            <div>
+              <h3
+                id={`brand-dialog-${brand.slug}`}
+                className="font-display text-2xl font-extrabold text-ink"
+              >
+                {brand.name}
+              </h3>
+              <div className="mt-0.5 text-[11px] font-bold uppercase tracking-wider text-ink/45">
+                {brand.category}
+              </div>
+            </div>
+          </div>
+
+          <p className="mt-5 text-sm leading-relaxed text-ink/70 sm:text-[15px]">
+            {brand.about}
+          </p>
+
+          <div className="mt-6 grid gap-4 sm:grid-cols-2">
+            <div className="rounded-2xl border border-ink/10 bg-white p-5">
+              <div className="flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider text-ink/50">
+                <Layers className="h-3.5 w-3.5" aria-hidden />
+                What we supply
+              </div>
+              <ul className="mt-3 flex flex-col gap-2">
+                {brand.products.map((p) => (
+                  <li key={p} className="flex items-start gap-2 text-sm text-ink/70">
+                    <BadgeCheck
+                      className="mt-0.5 h-4 w-4 shrink-0 text-emerald"
+                      aria-hidden
+                    />
+                    {p}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="flex flex-col gap-4">
+              <div className="rounded-2xl border border-emerald/25 bg-emerald/10 p-5">
+                <div className="flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider text-emerald-deep">
+                  <ShieldCheck className="h-3.5 w-3.5" aria-hidden />
+                  Warranty
+                </div>
+                <p className="mt-2 text-sm font-bold leading-snug text-emerald-deep">
+                  {brand.warranty}
+                </p>
+              </div>
+              <div className="flex-1 rounded-2xl border border-ink/10 bg-white p-5">
+                <div className="flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider text-ink/50">
+                  <Target className="h-3.5 w-3.5" aria-hidden />
+                  Best for
+                </div>
+                <p className="mt-2 text-sm leading-snug text-ink/70">
+                  {brand.bestFor}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+            <a
+              href="#quote"
+              onClick={onClose}
+              className="flex flex-1 items-center justify-center gap-2 rounded-xl bg-amber px-6 py-3.5 text-sm font-bold text-ink shadow-lg shadow-amber/25 transition-all hover:bg-amber-deep"
+            >
+              Get a quote with {brand.name}
+              <ArrowRight className="h-4 w-4" aria-hidden />
+            </a>
+            <button
+              type="button"
+              onClick={onClose}
+              className="rounded-xl border-2 border-ink/15 px-6 py-3.5 text-sm font-bold text-ink transition-colors hover:border-ink/35"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}

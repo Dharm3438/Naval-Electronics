@@ -1,4 +1,7 @@
+import Brands from "@/components/Brands";
+import Customers from "@/components/Customers";
 import FAQ from "@/components/FAQ";
+import Finance from "@/components/Finance";
 import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
 import LeadForm from "@/components/LeadForm";
@@ -47,10 +50,13 @@ export default function Page() {
         <Hero />
         <SolarCalculator />
         <SubsidyTable />
+        <Finance />
         <Process />
         <WhyNaval />
+        <Brands />
         <Projects />
         <FAQ />
+        <Customers />
         <LeadForm />
       </main>
       <Footer />

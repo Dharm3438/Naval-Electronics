@@ -33,10 +33,13 @@ export const site = {
 } as const;
 
 export const navLinks = [
-  { label: "Savings Calculator", href: "#calculator" },
-  { label: "PM Surya Ghar Subsidy", href: "#subsidy" },
-  { label: "How It Works", href: "#process" },
+  { label: "Calculator", href: "#calculator" },
+  { label: "Subsidy", href: "#subsidy" },
+  { label: "Finance", href: "#finance" },
+  { label: "Process", href: "#process" },
+  { label: "Brands", href: "#brands" },
   { label: "Projects", href: "#projects" },
+  { label: "Reviews", href: "#customers" },
   { label: "FAQ", href: "#faq" },
 ] as const;
 

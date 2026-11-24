@@ -9,6 +9,7 @@ const services = [
   "Commercial & MIDC rooftop plants",
   "MSEDCL net-metering liaison",
   "PM Surya Ghar subsidy processing",
+  "Solar finance & EMI assistance",
   "Earthing, SPD & electrical works",
 ];
 
