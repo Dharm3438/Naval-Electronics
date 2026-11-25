@@ -15,7 +15,7 @@ const options = [
     icon: CreditCard,
     rate: "0%",
     rateNote: "No-cost EMI",
-    title: "No-Cost EMI on your card",
+    title: "No-Cost EMI",
     body: "Split the system cost across 3 to 12 months through our consumer-finance partners with no interest charged. The quickest option to approve — usually the same day — and the one most homeowners pick for systems up to 3 kW.",
     points: ["3 to 12 month tenure", "Same-day approval", "No collateral"],
     tenure: "3 – 12 months",
