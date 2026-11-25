@@ -52,10 +52,14 @@ function validate(form: FormState): Errors {
   if (form.name.trim().length < 3) errors.name = "Please enter your full name.";
   if (!/^[6-9]\d{9}$/.test(form.phone.trim()))
     errors.phone = "Enter a valid 10-digit mobile number.";
-  if (form.bill.trim() === "") errors.bill = "Enter your average monthly bill.";
-  else if (Number(form.bill) < 300) errors.bill = "That bill looks too low — please check.";
-  if (form.city.trim().length < 2) errors.city = "Enter your city.";
-  if (!/^[1-9]\d{5}$/.test(form.pincode.trim()))
+  // Bill, city and pincode are optional, but checked when filled in.
+  const bill = form.bill.trim();
+  if (bill !== "" && Number(bill) < 300)
+    errors.bill = "That bill looks too low — please check.";
+  const city = form.city.trim();
+  if (city !== "" && city.length < 2) errors.city = "Enter your city.";
+  const pincode = form.pincode.trim();
+  if (pincode !== "" && !/^[1-9]\d{5}$/.test(pincode))
     errors.pincode = "Enter a valid 6-digit pincode.";
   return errors;
 }
@@ -67,9 +71,11 @@ function buildMessage(form: FormState, systemSize?: number) {
     `Name: ${form.name.trim()}`,
     `Mobile: ${form.phone.trim()}`,
     `Property type: ${form.property}`,
-    `Monthly light bill: ₹${Number(form.bill).toLocaleString("en-IN")}`,
-    `City: ${form.city.trim()}`,
-    `Pincode: ${form.pincode.trim()}`,
+    ...(form.bill.trim()
+      ? [`Monthly light bill: ₹${Number(form.bill).toLocaleString("en-IN")}`]
+      : []),
+    ...(form.city.trim() ? [`City: ${form.city.trim()}`] : []),
+    ...(form.pincode.trim() ? [`Pincode: ${form.pincode.trim()}`] : []),
     ...(systemSize ? [`Calculator estimate: ${systemSize} kW system`] : []),
     "",
     `Enquiry from the ${site.name} website.`,
@@ -297,7 +303,7 @@ function Dialog({
                 </div>
               </fieldset>
 
-              <Field label="Monthly light bill" id="consult-bill" error={errors.bill}>
+              <Field label="Monthly light bill" id="consult-bill" optional error={errors.bill}>
                 <div className="flex items-stretch">
                   <span className="inline-flex items-center rounded-l-xl border border-r-0 border-forest/15 bg-white px-3 text-sm font-bold text-forest/55">
                     ₹
@@ -318,7 +324,7 @@ function Dialog({
               </Field>
 
               <div className="grid grid-cols-[1fr_9rem] gap-3">
-                <Field label="City" id="consult-city" error={errors.city}>
+                <Field label="City" id="consult-city" optional error={errors.city}>
                   <input
                     id="consult-city"
                     type="text"
@@ -330,7 +336,7 @@ function Dialog({
                     className={inputClass(errors.city)}
                   />
                 </Field>
-                <Field label="Pincode" id="consult-pincode" error={errors.pincode}>
+                <Field label="Pincode" id="consult-pincode" optional error={errors.pincode}>
                   <input
                     id="consult-pincode"
                     type="text"
@@ -432,12 +438,14 @@ function Success({
   systemSize?: number;
   onReset: () => void;
 }) {
-  const rows: [string, string][] = [
-    ["Property", data.property],
-    ["Monthly bill", `₹${Number(data.bill).toLocaleString("en-IN")}`],
-    ["City", data.city.trim()],
-    ["Pincode", data.pincode],
-  ];
+  const rows = (
+    [
+      ["Property", data.property],
+      ["Monthly bill", data.bill.trim() && `₹${Number(data.bill).toLocaleString("en-IN")}`],
+      ["City", data.city.trim()],
+      ["Pincode", data.pincode.trim()],
+    ] as [string, string][]
+  ).filter(([, v]) => v !== "");
   return (
     <div className="px-6 pb-7 pt-6 text-center sm:px-8 sm:pb-8">
       <span className="inline-flex h-14 w-14 items-center justify-center rounded-full bg-leaf/12">
@@ -492,11 +500,13 @@ function inputClass(error?: string) {
 function Field({
   label,
   id,
+  optional = false,
   error,
   children,
 }: {
   label: string;
   id: string;
+  optional?: boolean;
   error?: string;
   children: React.ReactNode;
 }) {
@@ -504,7 +514,11 @@ function Field({
     <div>
       <label htmlFor={id} className="mb-1.5 block text-sm font-bold text-forest">
         {label}
-        <span className="ml-0.5 text-leaf-deep">*</span>
+        {optional ? (
+          <span className="ml-1.5 text-xs font-semibold text-forest/45">(optional)</span>
+        ) : (
+          <span className="ml-0.5 text-leaf-deep">*</span>
+        )}
       </label>
       {children}
       {error && (

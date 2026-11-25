@@ -74,24 +74,27 @@ function doGet() {
 function clean(d) {
   const name = text(d.name, 80);
   const phone = String(d.phone || "").replace(/\D/g, "");
-  const property = PROPERTY_TYPES.indexOf(d.property) >= 0 ? d.property : "";
-  const bill = Number(d.bill);
+  const property = PROPERTY_TYPES.indexOf(d.property) >= 0 ? d.property : "Residential";
+  const billText = String(d.bill == null ? "" : d.bill).trim();
+  const bill = Number(billText);
   const city = text(d.city, 60);
   const pincode = String(d.pincode || "").replace(/\D/g, "");
   const size = Number(d.systemSize);
 
   if (name.length < 3) return { error: "Invalid name" };
   if (!/^[6-9]\d{9}$/.test(phone)) return { error: "Invalid mobile number" };
-  if (!property) return { error: "Invalid property type" };
-  if (!isFinite(bill) || bill < 300 || bill > 10000000) return { error: "Invalid bill" };
-  if (city.length < 2) return { error: "Invalid city" };
-  if (!/^[1-9]\d{5}$/.test(pincode)) return { error: "Invalid pincode" };
+  // Bill, city and pincode are optional, but checked when filled in.
+  if (billText && (!isFinite(bill) || bill < 300 || bill > 10000000)) {
+    return { error: "Invalid bill" };
+  }
+  if (city && city.length < 2) return { error: "Invalid city" };
+  if (pincode && !/^[1-9]\d{5}$/.test(pincode)) return { error: "Invalid pincode" };
 
   return {
     name: name,
     phone: phone,
     property: property,
-    bill: Math.round(bill),
+    bill: billText ? Math.round(bill) : "",
     city: city,
     pincode: pincode,
     systemSize: isFinite(size) && size > 0 && size < 1000 ? size : "",
