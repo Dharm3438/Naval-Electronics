@@ -112,3 +112,11 @@ input[type="range"]:focus-visible::-webkit-slider-thumb {
   outline: 2px solid var(--color-ink);
   outline-offset: 2px;
 }
+
+/* Horizontal swipe rows on mobile: keep touch scrolling, hide the bar. */
+@utility no-scrollbar {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
