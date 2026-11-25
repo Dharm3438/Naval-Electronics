@@ -4,8 +4,6 @@
  * The site deliberately avoids naming a city or service region in its copy so
  * the offer reads the same wherever a visitor lands from. The office address
  * appears only as a contact detail.
- *
- * ⚠️ `email` is still a placeholder — replace it with the real inbox.
  */
 export const site = {
   name: "Naval Electronics",
@@ -18,7 +16,7 @@ export const site = {
   /** Office landline / second number, shown in the footer. */
   officePhone: "+919975701977",
   officePhoneDisplay: "+91 99757 01977",
-  email: "enquiry@navalelectronics.in",
+  email: "navalelectronicscsn@gmail.com",
   address: {
     line1: "Ganesh Cross Road, beside Naik Photo Studio",
     line2: "Hanuman Wadi, Chalisgaon",
