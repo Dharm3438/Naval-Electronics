@@ -1,4 +1,3 @@
-import type { CSSProperties } from "react";
 import {
   ArrowRight,
   BadgeIndianRupee,
@@ -11,7 +10,6 @@ import {
 import { site } from "@/lib/site";
 import { formatINR } from "@/lib/solar";
 import ConsultButton from "./ConsultButton";
-import HeroGlobe from "./HeroGlobe";
 import OfferDeadline from "./OfferDeadline";
 
 const price = formatINR(site.offer.startingPrice);
@@ -34,12 +32,12 @@ const highlights = [
 export default function Hero() {
   return (
     <section id="top" className="px-3 pt-3 sm:px-5 sm:pt-4 lg:px-6">
-      <div className="relative isolate mx-auto flex max-w-[96rem] flex-col overflow-hidden rounded-[1.75rem] bg-gradient-to-br from-white via-[#f3fbf6] to-mint ring-1 ring-leaf/10 lg:rounded-[2.25rem]">
+      <div className="relative isolate mx-auto flex max-w-[96rem] flex-col overflow-hidden rounded-[1.75rem] bg-hero-wash ring-1 ring-leaf/10 lg:rounded-[2.25rem]">
         <HeroBackdrop />
-        <FloatingLeaves />
+        <HousePhoto />
 
-        <div className="mx-auto grid w-full max-w-7xl flex-1 items-center gap-6 px-5 pb-6 pt-8 sm:px-8 sm:pt-12 lg:grid-cols-[minmax(0,1.5fr)_minmax(0,0.6fr)] lg:gap-0 lg:px-12 lg:pb-10 lg:pt-14">
-          <div className="animate-rise relative z-10 min-w-0">
+        <div className="mx-auto w-full max-w-7xl flex-1 px-5 pb-6 pt-2 sm:px-8 sm:pt-4 lg:px-12 lg:pb-10 lg:pt-14">
+          <div className="animate-rise relative z-10 min-w-0 lg:max-w-[46rem] xl:max-w-[50rem]">
             {/* Offer ribbon */}
             <div className="inline-flex max-w-full flex-wrap items-center gap-x-3 gap-y-1 rounded-2xl sm:flex-nowrap bg-white/80 p-1 pr-4 shadow-sm ring-1 ring-leaf/20 backdrop-blur sm:rounded-full">
               <span className="inline-flex items-center gap-1.5 whitespace-nowrap rounded-full bg-leaf px-3 py-1 text-[10px] font-extrabold uppercase tracking-[0.08em] text-white sm:text-[11px]">
@@ -78,7 +76,7 @@ export default function Hero() {
               </span>
             </h1>
 
-            <p className="mt-5 max-w-xl text-base leading-relaxed text-forest/80 sm:text-lg lg:max-w-lg xl:max-w-xl">
+            <p className="mt-5 max-w-xl text-base leading-relaxed text-forest/80 sm:text-lg">
               Rooftop solar for homes, businesses &amp; societies. Complete
               systems with top brands and MSEDCL net-metering. All handled by{" "}
               {site.name}.
@@ -107,10 +105,6 @@ export default function Hero() {
             <p className="mt-4 text-xs font-medium text-forest/60 sm:text-sm">
               Free loan consultation • Handled by {site.name}
             </p>
-          </div>
-
-          <div className="relative -order-1 min-w-0 lg:order-none lg:-ml-24 lg:-mr-10 xl:-mr-16">
-            <HeroGlobe />
           </div>
         </div>
 
@@ -152,6 +146,35 @@ export default function Hero() {
   );
 }
 
+/**
+ * The rooftop-solar home. On phones it is a banner above the copy that fades
+ * into the page; from `lg` it fills the right of the hero and fades out to
+ * the left behind the headline.
+ */
+function HousePhoto() {
+  const { sizes, alt } = site.heroImage;
+  const largest = sizes[sizes.length - 1];
+  return (
+    <div className="relative h-56 overflow-hidden min-[420px]:h-64 sm:h-80 lg:absolute lg:inset-y-0 lg:right-0 lg:-z-10 lg:h-auto lg:w-[60%] xl:w-[58%]">
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={largest.src}
+        srcSet={sizes.map(({ src, width }) => `${src} ${width}w`).join(", ")}
+        sizes="(min-width: 1280px) 58vw, (min-width: 1024px) 60vw, 100vw"
+        alt={alt}
+        fetchPriority="high"
+        decoding="async"
+        className="animate-ken-burns h-full w-full object-cover object-[60%_62%] lg:object-[65%_center]"
+      />
+      {/* Phone: fade the bottom of the banner into the copy. */}
+      <div aria-hidden className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-hero-wash to-transparent lg:hidden" />
+      {/* Desktop: fade the left of the photo behind the headline. */}
+      <div aria-hidden className="absolute inset-y-0 left-0 hidden w-[70%] bg-gradient-to-r from-hero-wash via-hero-wash/80 to-transparent lg:block xl:w-[55%] xl:via-hero-wash/75" />
+      <div aria-hidden className="absolute inset-x-0 bottom-0 hidden h-40 bg-gradient-to-t from-hero-wash/90 to-transparent lg:block" />
+    </div>
+  );
+}
+
 /** Glowing, slowly turning sun next to "Go solar today". */
 function SunMark() {
   return (
@@ -182,11 +205,10 @@ function SunMark() {
   );
 }
 
-/** Soft mint wash, bottom-left wave and a swaying leaf sprig. */
+/** Bottom-left wave and a swaying leaf sprig. */
 function HeroBackdrop() {
   return (
     <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
-      <div className="absolute -right-40 -top-40 h-[42rem] w-[42rem] rounded-full bg-[radial-gradient(circle,rgba(255,255,255,0.9)_0%,transparent_65%)]" />
       <svg
         viewBox="0 0 1440 520"
         preserveAspectRatio="none"
@@ -214,47 +236,6 @@ function HeroBackdrop() {
         <path d="M80 150 C 46 140 26 152 18 170 C 44 178 68 172 80 150 Z" fill="currentColor" />
         <path d="M84 140 C 108 118 130 118 140 126 C 124 150 100 154 84 140 Z" fill="currentColor" />
       </svg>
-    </div>
-  );
-}
-
-const leaves: Array<{ top: string; size: number; duration: number; delay: number; opacity: number; hue: string }> = [
-  { top: "12%", size: 22, duration: 17, delay: -2, opacity: 0.75, hue: "#4caf6e" },
-  { top: "28%", size: 14, duration: 21, delay: -9, opacity: 0.55, hue: "#7cc68f" },
-  { top: "44%", size: 26, duration: 15, delay: -5, opacity: 0.8, hue: "#2f9b5b" },
-  { top: "58%", size: 16, duration: 19, delay: -13, opacity: 0.6, hue: "#5fbf7c" },
-  { top: "70%", size: 20, duration: 23, delay: -17, opacity: 0.7, hue: "#3aa364" },
-  { top: "36%", size: 12, duration: 25, delay: -20, opacity: 0.45, hue: "#9ad6a8" },
-  { top: "82%", size: 18, duration: 18, delay: -7, opacity: 0.65, hue: "#4caf6e" },
-];
-
-/** Leaves blowing across the hero, as in the poster animation. */
-function FloatingLeaves() {
-  return (
-    <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
-      {leaves.map((leaf, i) => (
-        <svg
-          key={i}
-          viewBox="0 0 24 24"
-          width={leaf.size}
-          height={leaf.size}
-          className={`animate-leaf-drift absolute left-0 opacity-0 ${i > 3 ? "hidden sm:block" : ""}`}
-          style={
-            {
-              top: leaf.top,
-              "--leaf-duration": `${leaf.duration}s`,
-              "--leaf-delay": `${leaf.delay}s`,
-              "--leaf-opacity": leaf.opacity,
-            } as CSSProperties
-          }
-        >
-          <path
-            d="M3 21 C 3 10 10 3 21 3 C 21 14 14 21 3 21 Z"
-            fill={leaf.hue}
-          />
-          <path d="M4 20 L 17 7" stroke="#ffffff" strokeOpacity="0.55" strokeWidth="1" />
-        </svg>
-      ))}
     </div>
   );
 }

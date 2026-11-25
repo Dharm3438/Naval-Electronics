@@ -30,14 +30,17 @@ export const site = {
   mapsUrl: "https://maps.app.goo.gl/bh6oWsYXUJ5tyeg46",
 
   /**
-   * Rotating Earth in the hero. `video` is a short, seamlessly looping,
-   * square H.264 clip (no audio) and `poster` a still of its first frame,
-   * shown while the clip loads and to visitors who prefer reduced motion.
+   * Hero photo: rooftop-solar home, AI-upscaled and exported at three widths
+   * so phones download the small file. Files are cached for a year (see
+   * render.yaml), so bump the `v1` in the file names whenever one is replaced.
    */
-  heroGlobe: {
-    video: "/hero/globe.mp4",
-    poster: "/hero/globe-poster.webp",
-    alt: "Earth covered in rooftop solar panels and greenery, slowly rotating",
+  heroImage: {
+    sizes: [
+      { src: "/hero/house-v1-800.webp", width: 800 },
+      { src: "/hero/house-v1-1200.webp", width: 1200 },
+      { src: "/hero/house-v1-2000.webp", width: 2000 },
+    ],
+    alt: "Indian home with a rooftop solar installation on a sunny day",
   },
 
   hours: "Mon – Sat, 9:30 AM – 8:00 PM",
