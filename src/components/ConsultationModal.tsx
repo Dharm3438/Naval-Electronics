@@ -15,6 +15,7 @@ import {
   ShieldCheck,
   X,
 } from "lucide-react";
+import { sendLead } from "@/lib/leads";
 import { site, waLink } from "@/lib/site";
 import { useQuote, type ConsultPrefill } from "./QuoteContext";
 
@@ -73,43 +74,6 @@ function buildMessage(form: FormState, systemSize?: number) {
     "",
     `Enquiry from the ${site.name} website.`,
   ].join("\n");
-}
-
-/**
- * Leads are emailed through Web3Forms (https://web3forms.com), which accepts a
- * POST straight from the browser — so the site stays fully static. The access
- * key only identifies which inbox to deliver to; it is safe to ship publicly.
- * Set it as NEXT_PUBLIC_WEB3FORMS_KEY in Render → Environment (or .env.local).
- */
-const WEB3FORMS_KEY = process.env.NEXT_PUBLIC_WEB3FORMS_KEY ?? "";
-
-async function sendLead(form: FormState, systemSize?: number) {
-  if (!WEB3FORMS_KEY) {
-    if (process.env.NODE_ENV !== "production") {
-      console.warn("NEXT_PUBLIC_WEB3FORMS_KEY is not set — lead was not emailed.");
-      return;
-    }
-    throw new Error("Lead form is not configured.");
-  }
-  const res = await fetch("https://api.web3forms.com/submit", {
-    method: "POST",
-    headers: { "Content-Type": "application/json", Accept: "application/json" },
-    body: JSON.stringify({
-      access_key: WEB3FORMS_KEY,
-      subject: `New solar enquiry: ${form.name.trim()}, ${form.city.trim()} (₹${Number(form.bill).toLocaleString("en-IN")}/month)`,
-      from_name: `${site.name} website`,
-      Name: form.name.trim(),
-      Mobile: `+91 ${form.phone.trim()}`,
-      "Property type": form.property,
-      "Monthly light bill": `₹${Number(form.bill).toLocaleString("en-IN")}`,
-      City: form.city.trim(),
-      Pincode: form.pincode.trim(),
-      ...(systemSize ? { "Calculator estimate": `${systemSize} kW system` } : {}),
-      "WhatsApp the customer": `https://wa.me/91${form.phone.trim()}`,
-    }),
-  });
-  const data = (await res.json().catch(() => null)) as { success?: boolean } | null;
-  if (!res.ok || !data?.success) throw new Error("Lead could not be sent.");
 }
 
 /** Mounted once by the page; shown whenever `openConsult()` is called. */
@@ -184,7 +148,15 @@ function Dialog({
     setSending(true);
     setSendFailed(false);
     try {
-      await sendLead(form, prefill?.systemSize);
+      await sendLead({
+        name: form.name.trim(),
+        phone: form.phone.trim(),
+        property: form.property,
+        bill: form.bill.trim(),
+        city: form.city.trim(),
+        pincode: form.pincode.trim(),
+        systemSize: prefill?.systemSize,
+      });
       setSubmitted(form);
     } catch {
       setSendFailed(true);
