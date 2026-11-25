@@ -1,17 +1,16 @@
-# Customer photos
+# Customer review photos
 
-Files dropped here are served at `/customers/<filename>`.
+`public/customers/google/` holds the photos and profile pictures from the
+public reviews on the Naval Electronics Google Business Profile, served at
+`/customers/google/<file>`. They are listed in `src/lib/customers.ts`.
 
-1. Add the photo, e.g. `deshmukh-cidco.jpg`.
-2. Add or edit the matching entry in `src/lib/customers.ts`, setting
-   `photo: "/customers/deshmukh-cidco.jpg"` and a descriptive `photoAlt`.
-3. Rebuild and redeploy. Entries without a photo show an illustrated
-   placeholder instead, so the grid never breaks.
+To add another review:
 
-Recommended: landscape 4:3, around 1200×900 JPEG, compressed to under 300 KB
-(Squoosh or TinyPNG). The grid crops to 4:3, so keep the roof or the customer
-centred.
+1. Save the reviewer's photos as `public/customers/google/<name>-1.jpg`,
+   `-2.jpg`, … and their profile picture as `<name>-avatar.png` (optional —
+   without it the card shows the first letter of their name).
+2. Add an entry to `reviews` in `src/lib/customers.ts`, and update
+   `googleProfile.rating` / `reviewCount` if they have changed.
+3. Rebuild and redeploy.
 
-**Take written consent** before publishing a customer's photo, name or words.
-The entries currently in `src/lib/customers.ts` are sample content and must be
-replaced with real, consented testimonials before the site goes live.
+The first photo is the card's 4:3 cover; up to three more show as thumbnails.
