@@ -4,13 +4,16 @@ import { useEffect, useRef, useState } from "react";
 import {
   ArrowRight,
   BadgeCheck,
+  ChevronLeft,
+  ChevronRight,
   Factory,
+  Images,
   Layers,
   ShieldCheck,
   Target,
   X,
 } from "lucide-react";
-import { brands, type Brand } from "@/lib/brands";
+import { brands, type Brand, type BrandPhoto } from "@/lib/brands";
 import { BrandMark, PanelVisual } from "./BrandVisual";
 import ConsultButton from "./ConsultButton";
 
@@ -56,49 +59,74 @@ export default function Brands() {
                 type="button"
                 onClick={(e) => open(brand, e.currentTarget)}
                 aria-haspopup="dialog"
-                className="group flex h-full w-full flex-col rounded-3xl border border-ink/10 bg-white p-6 text-left shadow-sm transition-all hover:-translate-y-1 hover:border-amber/50 hover:shadow-xl"
+                className="group flex h-full w-full flex-col overflow-hidden rounded-3xl border border-ink/10 bg-white text-left shadow-sm transition-all hover:-translate-y-1 hover:border-amber/50 hover:shadow-xl"
               >
-                <div className="flex items-center gap-3">
-                  {brand.logo ? (
+                <div className="relative aspect-[4/3] w-full overflow-hidden border-b border-ink/10 bg-white">
+                  {brand.photos?.length ? (
+                    // Brand images are pre-cropped to 4:3, so cover never trims them.
                     // eslint-disable-next-line @next/next/no-img-element
                     <img
-                      src={brand.logo}
-                      alt={`${brand.name} logo`}
-                      className="h-12 w-12 rounded-2xl object-contain"
+                      src={brand.photos[0].src}
+                      alt={brand.photos[0].alt}
+                      loading="lazy"
+                      className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
                     />
                   ) : (
-                    <BrandMark
-                      initials={brand.initials}
-                      accent={brand.accent}
-                      className="h-12 w-12 text-sm"
-                    />
-                  )}
-                  <div className="min-w-0">
-                    <div className="font-display text-lg font-extrabold leading-tight text-ink">
-                      {brand.name}
+                    <div className="flex h-full items-center justify-center">
+                      <PanelVisual accent={brand.accent} className="h-full w-auto" />
                     </div>
-                    <div className="mt-0.5 text-[11px] font-bold uppercase tracking-wider text-ink/45">
-                      {brand.category}
+                  )}
+                  {brand.photos && brand.photos.length > 1 && (
+                    <span className="absolute bottom-3 right-3 inline-flex items-center gap-1 rounded-full bg-ink/75 px-2.5 py-1 text-[11px] font-bold text-white backdrop-blur-sm">
+                      <Images className="h-3.5 w-3.5" aria-hidden />
+                      {brand.photos.length} photos
+                    </span>
+                  )}
+                </div>
+
+                <div className="flex flex-1 flex-col p-6">
+                  <div className="flex items-center gap-3">
+                    {brand.logo ? (
+                      // eslint-disable-next-line @next/next/no-img-element
+                      <img
+                        src={brand.logo}
+                        alt={`${brand.name} logo`}
+                        className="h-12 w-12 rounded-2xl object-contain"
+                      />
+                    ) : (
+                      <BrandMark
+                        initials={brand.initials}
+                        accent={brand.accent}
+                        className="h-12 w-12 text-sm"
+                      />
+                    )}
+                    <div className="min-w-0">
+                      <div className="font-display text-lg font-extrabold leading-tight text-ink">
+                        {brand.name}
+                      </div>
+                      <div className="mt-0.5 text-[11px] font-bold uppercase tracking-wider text-ink/45">
+                        {brand.category}
+                      </div>
                     </div>
                   </div>
+
+                  <p className="mt-4 flex-1 text-sm leading-relaxed text-ink/65">
+                    {brand.tagline}
+                  </p>
+
+                  <div className="mt-5 flex items-center gap-1.5 rounded-lg bg-emerald/10 px-2.5 py-1.5 text-[11px] font-bold uppercase tracking-wider text-emerald-deep">
+                    <ShieldCheck className="h-3.5 w-3.5 shrink-0" aria-hidden />
+                    {brand.warranty.split("·")[0].trim()}
+                  </div>
+
+                  <span className="mt-5 inline-flex items-center gap-1.5 border-t border-ink/10 pt-5 text-sm font-bold text-amber-deep">
+                    View details
+                    <ArrowRight
+                      className="h-4 w-4 transition-transform group-hover:translate-x-1"
+                      aria-hidden
+                    />
+                  </span>
                 </div>
-
-                <p className="mt-4 flex-1 text-sm leading-relaxed text-ink/65">
-                  {brand.tagline}
-                </p>
-
-                <div className="mt-5 flex items-center gap-1.5 rounded-lg bg-emerald/10 px-2.5 py-1.5 text-[11px] font-bold uppercase tracking-wider text-emerald-deep">
-                  <ShieldCheck className="h-3.5 w-3.5 shrink-0" aria-hidden />
-                  {brand.warranty.split("·")[0].trim()}
-                </div>
-
-                <span className="mt-5 inline-flex items-center gap-1.5 border-t border-ink/10 pt-5 text-sm font-bold text-amber-deep">
-                  View details
-                  <ArrowRight
-                    className="h-4 w-4 transition-transform group-hover:translate-x-1"
-                    aria-hidden
-                  />
-                </span>
               </button>
             </li>
           ))}
@@ -145,13 +173,8 @@ function BrandDialog({ brand, onClose }: { brand: Brand; onClose: () => void }) 
         className="max-h-[92vh] w-full max-w-2xl overflow-y-auto rounded-t-3xl bg-cream shadow-2xl sm:rounded-3xl"
       >
         <div className="relative">
-          {brand.photo ? (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img
-              src={brand.photo}
-              alt={`${brand.name} modules installed by Naval Electronics`}
-              className="h-44 w-full rounded-t-3xl object-cover sm:h-52"
-            />
+          {brand.photos?.length ? (
+            <Gallery photos={brand.photos} />
           ) : (
             <div className="flex h-44 w-full items-center justify-center rounded-t-3xl bg-[#F1F5F9] sm:h-52">
               <PanelVisual accent={brand.accent} className="h-full w-auto" />
@@ -260,6 +283,86 @@ function BrandDialog({ brand, onClose }: { brand: Brand; onClose: () => void }) 
           </div>
         </div>
       </div>
+    </div>
+  );
+}
+
+/** Shows the whole 4:3 image, centred on white, inside a wider frame. */
+function PhotoFrame({ photo }: { photo: BrandPhoto }) {
+  return (
+    // eslint-disable-next-line @next/next/no-img-element
+    <img
+      src={photo.src}
+      alt={photo.alt}
+      className="absolute inset-0 h-full w-full object-contain"
+    />
+  );
+}
+
+function Gallery({ photos }: { photos: BrandPhoto[] }) {
+  const [index, setIndex] = useState(0);
+  const count = photos.length;
+  const go = (step: number) => setIndex((i) => (i + step + count) % count);
+  const touchX = useRef<number | null>(null);
+
+  return (
+    <div className="overflow-hidden rounded-t-3xl bg-white">
+      <div
+        className="relative aspect-[4/3] max-h-[22rem] w-full overflow-hidden bg-white sm:aspect-[16/10]"
+        onTouchStart={(e) => (touchX.current = e.touches[0].clientX)}
+        onTouchEnd={(e) => {
+          if (touchX.current === null) return;
+          const dx = e.changedTouches[0].clientX - touchX.current;
+          if (Math.abs(dx) > 40) go(dx < 0 ? 1 : -1);
+          touchX.current = null;
+        }}
+      >
+        <PhotoFrame key={photos[index].src} photo={photos[index]} />
+        {count > 1 && (
+          <>
+            <button
+              type="button"
+              onClick={() => go(-1)}
+              aria-label="Previous photo"
+              className="absolute left-3 top-1/2 inline-flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white/90 text-ink shadow-lg transition-colors hover:bg-white"
+            >
+              <ChevronLeft className="h-5 w-5" aria-hidden />
+            </button>
+            <button
+              type="button"
+              onClick={() => go(1)}
+              aria-label="Next photo"
+              className="absolute right-3 top-1/2 inline-flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white/90 text-ink shadow-lg transition-colors hover:bg-white"
+            >
+              <ChevronRight className="h-5 w-5" aria-hidden />
+            </button>
+            <span className="absolute bottom-3 left-3 rounded-full bg-ink/75 px-2.5 py-1 text-[11px] font-bold text-white">
+              {index + 1} / {count}
+            </span>
+          </>
+        )}
+      </div>
+      {count > 1 && (
+        <div className="flex gap-2 border-b border-ink/10 bg-cream px-6 pt-4 sm:px-8">
+          {photos.map((p, i) => (
+            <button
+              key={p.src}
+              type="button"
+              onClick={() => setIndex(i)}
+              aria-label={`Show photo ${i + 1}: ${p.alt}`}
+              aria-current={i === index}
+              className={`relative mb-4 h-14 w-[4.5rem] overflow-hidden rounded-lg border-2 bg-white transition-all ${
+                i === index
+                  ? "border-amber shadow-md"
+                  : "border-transparent opacity-60 hover:opacity-100"
+              }`}
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={p.src} alt="" className="h-full w-full object-cover" />
+            </button>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
