@@ -19,7 +19,7 @@ const faqs = [
   },
   {
     q: "How much shadow-free roof space is needed per kW?",
-    a: "Plan for roughly 100 sq. ft. of genuinely shadow-free roof per kW with conventional mounting — so 300 sq. ft. for 3 kW and 500 sq. ft. for 5 kW. 'Shadow-free' matters more than total area: a water tank, parapet wall, staircase room or neighbouring building that shades the array for even two hours a day can cut a string's output sharply. Our free survey includes a 3D shading analysis across the year, and where roof space is tight we use elevated structures that keep the terrace usable underneath.",
+    a: "Plan for roughly 100 sq. ft. of genuinely shadow-free roof per kW with conventional mounting — so 300 sq. ft. for 3 kW and 500 sq. ft. for 5 kW. 'Shadow-free' matters more than total area: a water tank, parapet wall, staircase room or neighbouring building that shades the array for even two hours a day can cut a string's output sharply. Our free site survey checks for these shadows on your roof, and where roof space is tight we use elevated structures that keep the terrace usable underneath.",
   },
   {
     q: "What maintenance do solar panels require?",

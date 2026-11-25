@@ -1,28 +1,28 @@
-import { ClipboardCheck, PencilRuler, PlugZap, Wrench } from "lucide-react";
+import { ClipboardCheck, PlugZap, ReceiptText, Wrench } from "lucide-react";
 
 const steps = [
   {
     icon: ClipboardCheck,
-    title: "Free Site Survey & 3D Shading Analysis",
-    body: "Our engineer measures your usable roof, checks structural capacity and maps year-round shadows from water tanks, parapets and neighbouring buildings before a single panel is quoted.",
+    title: "Free Site Survey",
+    body: "Our engineer visits your home, measures the usable roof, checks structural capacity and notes any shade from water tanks, parapets or neighbouring buildings before a single panel is quoted.",
     meta: "Day 1 · No cost, no obligation",
   },
   {
-    icon: PencilRuler,
-    title: "Custom Engineering Design & Subsidy Application",
-    body: "You get a single-line diagram, string layout and generation estimate. We register your plant on the PM Surya Ghar National Portal and file the MSEDCL application with all paperwork.",
-    meta: "Week 1 · Design + documentation",
+    icon: ReceiptText,
+    title: "Detailed, In-Depth Quotation",
+    body: "A transparent, itemised quotation with every material spelled out — panel and inverter make and model, structure, DC and AC cables, earthing, surge protection and balance of system — plus the expected generation and your subsidy amount. No hidden extras.",
+    meta: "Week 1 · Itemised materials",
   },
   {
     icon: Wrench,
-    title: "Fast, Safe Installation with Dual Earthing",
-    body: "Galvanised cyclone-rated mounting structure, DC and AC surge protection, separate copper earthing pits for array and inverter, and conduit-routed cabling — installed by licensed electricians.",
+    title: "Fast Documentation & Safe Installation with Triple Earthing",
+    body: "We file the PM Surya Ghar and MSEDCL paperwork for you, then install on a galvanised mounting structure with three separate copper earthing pits, each finished with a pit cover, DC and AC surge protection and conduit-routed cabling — by licensed electricians.",
     meta: "2–4 days on site",
   },
   {
     icon: PlugZap,
     title: "MSEDCL Net-Metering & Commissioning",
-    body: "We coordinate the Mahavitaran inspection, net meter replacement and commissioning report, then hand over app-based monitoring and your warranty documents.",
+    body: "We coordinate with the Mahavitaran inspection team for net meter replacement and the commissioning report. Once they verify all your documents, we start your solar system on the government-provided net meter.",
     meta: "Subsidy credited post-commissioning",
   },
 ];
@@ -39,8 +39,8 @@ export default function Process() {
             Four steps. One accountable team.
           </h2>
           <p className="mt-4 text-base leading-relaxed text-ink/65 sm:text-lg">
-            Survey, design, subsidy paperwork, installation and net-metering are
-            all handled in-house. You never chase a separate agent for approvals.
+            Survey, quotation, subsidy paperwork, installation and net-metering
+            are all handled in-house. You never chase a separate agent for approvals.
           </p>
         </div>
 

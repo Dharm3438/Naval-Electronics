@@ -4,14 +4,14 @@ const pillars = [
   {
     icon: CirclePower,
     title: "Electrical Safety First",
-    body: "Naval Electronics began as an electrical contracting firm, so your plant is built to electrical code — not just bolted on. Dedicated AC and DC surge protection devices, copper earthing pits with chemical backfill, correctly derated MCB/MCCB protection and neat conduit-routed cabling throughout.",
-    bullets: ["AC + DC SPD on every string", "Separate copper earthing pits", "Labelled, conduit-routed cabling"],
+    body: "Naval Electronics began as an electrical contracting firm, so your plant is built to electrical code — not just bolted on. Dedicated AC and DC surge protection devices, three separate copper earthing pits with chemical backfill and pit covers, correctly derated MCB/MCCB protection and neat conduit-routed cabling throughout.",
+    bullets: ["AC + DC SPD on every string", "Triple copper earthing with pit covers", "Labelled, conduit-routed cabling"],
   },
   {
     icon: Cpu,
     title: "Tier-1 DCR & ALMM Panels",
     body: "We install only high-efficiency Mono PERC and TOPCon bifacial modules from ALMM-listed, DCR-compliant manufacturers — the exact category required to claim your PM Surya Ghar subsidy — paired with IEC-certified inverters.",
-    bullets: ["25-year performance warranty", "ALMM + DCR subsidy eligible", "Cyclone-rated GI mounting structure"],
+    bullets: ["25-year performance warranty", "ALMM + DCR subsidy eligible", "Galvanised (GI) mounting structure"],
   },
   {
     icon: Smartphone,
