@@ -34,16 +34,16 @@ export default function FAQ() {
     <section id="faq" className="bg-white py-16 lg:py-24">
       <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
         <div className="text-center">
-          <div className="inline-flex items-center gap-2 rounded-full bg-ink/5 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.1em] text-ink/70">
+          <div className="inline-flex items-center gap-2 rounded-full bg-forest/5 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.1em] text-forest/70">
             <HelpCircle className="h-4 w-4" aria-hidden />
             Frequently Asked Questions
           </div>
-          <h2 className="mt-5 font-display text-3xl font-extrabold text-ink sm:text-4xl lg:text-[2.75rem]">
+          <h2 className="mt-5 font-display text-3xl font-extrabold text-forest sm:text-4xl lg:text-[2.75rem]">
             Straight answers before you invest
           </h2>
         </div>
 
-        <div className="mt-10 divide-y divide-ink/10 border-y border-ink/10">
+        <div className="mt-10 divide-y divide-forest/10 border-y border-forest/10">
           {faqs.map((item, i) => {
             const expanded = open === i;
             return (
@@ -55,14 +55,14 @@ export default function FAQ() {
                     aria-expanded={expanded}
                     aria-controls={`faq-panel-${i}`}
                     id={`faq-button-${i}`}
-                    className="flex w-full items-start justify-between gap-4 py-5 text-left transition-colors hover:text-amber-deep"
+                    className="flex w-full items-start justify-between gap-4 py-5 text-left transition-colors hover:text-leaf-deep"
                   >
-                    <span className="font-display text-base font-bold leading-snug text-ink sm:text-lg">
+                    <span className="font-display text-base font-bold leading-snug text-forest sm:text-lg">
                       {item.q}
                     </span>
                     <ChevronDown
-                      className={`mt-0.5 h-5 w-5 shrink-0 text-ink/40 transition-transform duration-200 ${
-                        expanded ? "rotate-180 text-amber-deep" : ""
+                      className={`mt-0.5 h-5 w-5 shrink-0 text-forest/40 transition-transform duration-200 ${
+                        expanded ? "rotate-180 text-leaf-deep" : ""
                       }`}
                       aria-hidden
                     />
@@ -75,7 +75,7 @@ export default function FAQ() {
                   hidden={!expanded}
                   className="pb-6 pr-8"
                 >
-                  <p className="text-sm leading-relaxed text-ink/70 sm:text-[15px]">
+                  <p className="text-sm leading-relaxed text-forest/70 sm:text-[15px]">
                     {item.a}
                   </p>
                 </div>
@@ -84,11 +84,11 @@ export default function FAQ() {
           })}
         </div>
 
-        <p className="mt-8 text-center text-sm text-ink/60">
+        <p className="mt-8 text-center text-sm text-forest/60">
           Still have a question about your roof or your MSEDCL connection?{" "}
           <a
             href={`tel:${site.phone}`}
-            className="font-bold text-amber-deep underline decoration-amber/40 underline-offset-4 hover:decoration-amber"
+            className="font-bold text-leaf-deep underline decoration-leaf/40 underline-offset-4 hover:decoration-leaf"
           >
             Call {site.phoneDisplay}
           </a>{" "}

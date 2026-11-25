@@ -5,17 +5,17 @@ import SwipeRow from "./SwipeRow";
 
 export default function Customers() {
   return (
-    <section id="customers" className="bg-cream py-16 lg:py-24">
+    <section id="customers" className="bg-wash py-16 lg:py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-2xl text-center">
-          <div className="inline-flex items-center gap-2 rounded-full border border-emerald/25 bg-emerald/10 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.1em] text-emerald-deep">
+          <div className="inline-flex items-center gap-2 rounded-full border border-leaf/25 bg-leaf/10 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.1em] text-leaf-deep">
             <Heart className="h-4 w-4" aria-hidden />
             Satisfied Customers
           </div>
-          <h2 className="mt-5 font-display text-3xl font-extrabold text-ink sm:text-4xl lg:text-[2.75rem]">
+          <h2 className="mt-5 font-display text-3xl font-extrabold text-forest sm:text-4xl lg:text-[2.75rem]">
             Roofs we have powered, in their words
           </h2>
-          <p className="mt-4 text-base leading-relaxed text-ink/65 sm:text-lg">
+          <p className="mt-4 text-base leading-relaxed text-forest/65 sm:text-lg">
             Real reviews and installation photos from our customers, as posted
             on Google.
           </p>
@@ -25,17 +25,17 @@ export default function Customers() {
           href={googleProfile.url}
           target="_blank"
           rel="noopener noreferrer"
-          className="mx-auto mt-8 flex w-fit flex-wrap items-center justify-center gap-3 rounded-2xl border border-ink/10 bg-white px-5 py-3 shadow-sm transition-shadow hover:shadow-md"
+          className="mx-auto mt-8 flex w-fit flex-wrap items-center justify-center gap-3 rounded-2xl border border-forest/10 bg-white px-5 py-3 shadow-sm transition-shadow hover:shadow-md"
         >
           <GoogleG className="h-6 w-6" />
-          <span className="font-display text-2xl font-extrabold text-ink">
+          <span className="font-display text-2xl font-extrabold text-forest">
             {googleProfile.rating.toFixed(1)}
           </span>
           <Stars rating={Math.round(googleProfile.rating)} />
-          <span className="text-sm font-semibold text-ink/60">
+          <span className="text-sm font-semibold text-forest/60">
             {googleProfile.reviewCount} Google reviews
           </span>
-          <ExternalLink className="h-4 w-4 text-ink/40" aria-hidden />
+          <ExternalLink className="h-4 w-4 text-forest/40" aria-hidden />
         </a>
 
         <SwipeRow
@@ -46,7 +46,7 @@ export default function Customers() {
           {reviews.map((r) => (
             <article
               key={r.name}
-              className="flex flex-col overflow-hidden rounded-3xl border border-ink/10 bg-white shadow-sm transition-shadow hover:shadow-xl"
+              className="flex flex-col overflow-hidden rounded-3xl border border-forest/10 bg-white shadow-sm transition-shadow hover:shadow-xl"
             >
               <a href={r.photos[0]} target="_blank" rel="noopener noreferrer">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -85,24 +85,24 @@ export default function Customers() {
                       className="h-11 w-11 shrink-0 rounded-full object-cover"
                     />
                   ) : (
-                    <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-emerald text-lg font-bold text-white">
+                    <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-leaf text-lg font-bold text-white">
                       {r.name.charAt(0).toUpperCase()}
                     </span>
                   )}
                   <div className="min-w-0 flex-1">
-                    <div className="truncate font-display text-base font-extrabold capitalize leading-snug text-ink">
+                    <div className="truncate font-display text-base font-extrabold capitalize leading-snug text-forest">
                       {r.name}
                     </div>
                     <div className="mt-0.5 flex flex-wrap items-center gap-x-2">
                       <Stars rating={r.rating} />
-                      <span className="text-xs font-semibold text-ink/50">{r.date}</span>
+                      <span className="text-xs font-semibold text-forest/50">{r.date}</span>
                     </div>
                   </div>
                   <GoogleG className="h-5 w-5 shrink-0" />
                 </div>
 
-                <blockquote className="mt-4 flex-1 text-sm leading-relaxed text-ink/70">
-                  <Quote className="mb-1.5 h-4 w-4 text-ink/20" aria-hidden />
+                <blockquote className="mt-4 flex-1 text-sm leading-relaxed text-forest/70">
+                  <Quote className="mb-1.5 h-4 w-4 text-forest/20" aria-hidden />
                   {r.review}
                 </blockquote>
               </div>
@@ -115,25 +115,25 @@ export default function Customers() {
             href={googleProfile.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 rounded-xl border border-ink/15 bg-white px-5 py-3 text-sm font-bold text-ink transition-colors hover:border-amber hover:text-amber-deep"
+            className="inline-flex items-center gap-2 rounded-xl border border-forest/15 bg-white px-5 py-3 text-sm font-bold text-forest transition-colors hover:border-leaf hover:text-leaf-deep"
           >
             Read all {googleProfile.reviewCount} reviews on Google
             <ExternalLink className="h-4 w-4" aria-hidden />
           </a>
         </div>
 
-        <div className="mt-10 flex flex-col items-center gap-4 rounded-3xl border border-ink/10 bg-white px-6 py-8 text-center">
-          <UserRound className="h-8 w-8 text-amber" aria-hidden />
-          <h3 className="font-display text-xl font-extrabold text-ink sm:text-2xl">
+        <div className="mt-10 flex flex-col items-center gap-4 rounded-3xl border border-forest/10 bg-white px-6 py-8 text-center">
+          <UserRound className="h-8 w-8 text-leaf" aria-hidden />
+          <h3 className="font-display text-xl font-extrabold text-forest sm:text-2xl">
             Your roof could be the next one here
           </h3>
-          <p className="max-w-xl text-sm leading-relaxed text-ink/65">
+          <p className="max-w-xl text-sm leading-relaxed text-forest/65">
             Book a free site survey and we will show you exactly what your roof
             can generate — no obligation, and no payment until you approve the
             design.
           </p>
           <ConsultButton
-            className="inline-flex items-center justify-center rounded-xl bg-amber px-6 py-3.5 text-sm font-bold text-ink shadow-lg shadow-amber/25 transition-all hover:bg-amber-deep"
+            className="inline-flex items-center justify-center rounded-xl bg-leaf px-6 py-3.5 text-sm font-bold text-white shadow-lg shadow-leaf/25 transition-all hover:bg-leaf-deep"
           >
             Book My Free Site Survey
           </ConsultButton>
@@ -149,7 +149,7 @@ function Stars({ rating }: { rating: number }) {
       {Array.from({ length: 5 }).map((_, i) => (
         <Star
           key={i}
-          className={`h-4 w-4 ${i < rating ? "fill-amber text-amber" : "text-ink/20"}`}
+          className={`h-4 w-4 ${i < rating ? "fill-gold text-gold" : "text-forest/20"}`}
           aria-hidden
         />
       ))}

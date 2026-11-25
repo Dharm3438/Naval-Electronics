@@ -32,13 +32,13 @@ export default function WhyNaval() {
     <section id="why" className="py-16 lg:py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-2xl text-center">
-          <div className="inline-flex items-center gap-2 rounded-full bg-ink/5 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.1em] text-ink/70">
+          <div className="inline-flex items-center gap-2 rounded-full bg-forest/5 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.1em] text-forest/70">
             The Engineering Edge
           </div>
-          <h2 className="mt-5 font-display text-3xl font-extrabold text-ink sm:text-4xl lg:text-[2.75rem]">
+          <h2 className="mt-5 font-display text-3xl font-extrabold text-forest sm:text-4xl lg:text-[2.75rem]">
             Why homeowners and industrial units choose Naval Electronics
           </h2>
-          <p className="mt-4 text-base leading-relaxed text-ink/65 sm:text-lg">
+          <p className="mt-4 text-base leading-relaxed text-forest/65 sm:text-lg">
             A rooftop plant is a 25–30 year electrical installation on your
             building. It deserves more than a panel fitter.
           </p>
@@ -48,22 +48,22 @@ export default function WhyNaval() {
           {pillars.map(({ icon: Icon, title, body, bullets }) => (
             <article
               key={title}
-              className="group flex flex-col rounded-3xl border border-ink/10 bg-white p-6 shadow-sm transition-all hover:-translate-y-1 hover:border-amber/40 hover:shadow-xl sm:p-8"
+              className="group flex flex-col rounded-3xl border border-forest/10 bg-white p-6 shadow-sm transition-all hover:-translate-y-1 hover:border-leaf/40 hover:shadow-xl sm:p-8"
             >
-              <span className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-ink text-amber transition-colors group-hover:bg-amber group-hover:text-ink">
+              <span className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-forest text-sprout transition-colors group-hover:bg-leaf group-hover:text-white">
                 <Icon className="h-6 w-6" aria-hidden />
               </span>
-              <h3 className="mt-5 font-display text-xl font-extrabold text-ink">
+              <h3 className="mt-5 font-display text-xl font-extrabold text-forest">
                 {title}
               </h3>
-              <p className="mt-3 flex-1 text-sm leading-relaxed text-ink/65 sm:text-[15px]">
+              <p className="mt-3 flex-1 text-sm leading-relaxed text-forest/65 sm:text-[15px]">
                 {body}
               </p>
-              <ul className="mt-5 flex flex-wrap gap-2 border-t border-ink/10 pt-5">
+              <ul className="mt-5 flex flex-wrap gap-2 border-t border-forest/10 pt-5">
                 {bullets.map((b) => (
                   <li
                     key={b}
-                    className="rounded-lg bg-cream px-2.5 py-1.5 text-xs font-semibold text-ink/70"
+                    className="rounded-lg bg-wash px-2.5 py-1.5 text-xs font-semibold text-forest/70"
                   >
                     {b}
                   </li>

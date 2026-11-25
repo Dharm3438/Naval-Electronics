@@ -57,10 +57,10 @@ export default function SolarCalculator() {
   };
 
   return (
-    <section id="calculator" className="bg-ink py-16 lg:py-24">
+    <section id="calculator" className="bg-forest py-16 lg:py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-2xl text-center">
-          <div className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.1em] text-amber">
+          <div className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.1em] text-sprout">
             <Calculator className="h-4 w-4" aria-hidden />
             Savings &amp; Subsidy Calculator
           </div>
@@ -81,7 +81,7 @@ export default function SolarCalculator() {
               <legend className="text-sm font-bold text-white">
                 Property type
               </legend>
-              <div className="mt-3 grid grid-cols-2 gap-2 rounded-2xl bg-ink/60 p-1.5">
+              <div className="mt-3 grid grid-cols-2 gap-2 rounded-2xl bg-forest/60 p-1.5">
                 {propertyOptions.map(({ value, label, icon: Icon }) => {
                   const active = propertyType === value;
                   return (
@@ -92,7 +92,7 @@ export default function SolarCalculator() {
                       onClick={() => setPropertyType(value)}
                       className={`flex items-center justify-center gap-2 rounded-xl px-2 py-3 text-center text-[13px] font-bold leading-tight transition-all ${
                         active
-                          ? "bg-amber text-ink shadow-lg shadow-amber/20"
+                          ? "bg-leaf text-white shadow-lg shadow-leaf/20"
                           : "text-white/65 hover:bg-white/5 hover:text-white"
                       }`}
                     >
@@ -111,8 +111,8 @@ export default function SolarCalculator() {
               >
                 Average monthly electricity bill
               </label>
-              <div className="mt-3 flex items-center gap-2 rounded-2xl border border-white/15 bg-ink/60 px-4 py-3 focus-within:border-amber">
-                <IndianRupee className="h-5 w-5 shrink-0 text-amber" aria-hidden />
+              <div className="mt-3 flex items-center gap-2 rounded-2xl border border-white/15 bg-forest/60 px-4 py-3 focus-within:border-sprout">
+                <IndianRupee className="h-5 w-5 shrink-0 text-sprout" aria-hidden />
                 <input
                   id="monthly-bill"
                   type="text"
@@ -141,7 +141,7 @@ export default function SolarCalculator() {
                 aria-label="Average monthly electricity bill in rupees"
                 className="mt-6 w-full"
                 style={{
-                  background: `linear-gradient(to right, #F59E0B 0%, #F59E0B ${
+                  background: `linear-gradient(to right, #5FD39A 0%, #5FD39A ${
                     ((bill - BILL_MIN) / (BILL_MAX - BILL_MIN)) * 100
                   }%, rgba(255,255,255,0.18) ${
                     ((bill - BILL_MIN) / (BILL_MAX - BILL_MIN)) * 100
@@ -163,7 +163,7 @@ export default function SolarCalculator() {
                   <Sun className="h-3.5 w-3.5" aria-hidden />
                   System size
                 </dt>
-                <dd className="mt-1.5 font-display text-2xl font-extrabold text-amber">
+                <dd className="mt-1.5 font-display text-2xl font-extrabold text-sprout">
                   {result.systemSize} kW
                 </dd>
               </div>
@@ -187,40 +187,40 @@ export default function SolarCalculator() {
           </div>
 
           {/* ---------- Results ---------- */}
-          <div className="rounded-3xl bg-cream p-6 shadow-2xl sm:p-8">
+          <div className="rounded-3xl bg-wash p-6 shadow-2xl sm:p-8">
             <div className="grid gap-4 sm:grid-cols-2">
-              <div className="rounded-2xl border border-ink/10 bg-white p-5">
-                <div className="text-[11px] font-bold uppercase tracking-wider text-ink/50">
+              <div className="rounded-2xl border border-forest/10 bg-white p-5">
+                <div className="text-[11px] font-bold uppercase tracking-wider text-forest/50">
                   Estimated system cost
                 </div>
-                <div className="mt-1.5 font-display text-2xl font-extrabold text-ink sm:text-[1.75rem]">
+                <div className="mt-1.5 font-display text-2xl font-extrabold text-forest sm:text-[1.75rem]">
                   {formatINR(result.grossCost)}
                 </div>
-                <div className="mt-1 text-xs font-medium text-ink/50">
+                <div className="mt-1 text-xs font-medium text-forest/50">
                   Turnkey, before subsidy (₹60,000 / kW)
                 </div>
               </div>
 
-              <div className="rounded-2xl border border-emerald/30 bg-emerald/10 p-5">
-                <div className="flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider text-emerald-deep">
+              <div className="rounded-2xl border border-leaf/30 bg-leaf/10 p-5">
+                <div className="flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider text-leaf-deep">
                   <Landmark className="h-3.5 w-3.5" aria-hidden />
                   {isResidential ? "PM Surya Ghar subsidy" : "Tax benefit"}
                 </div>
                 {isResidential ? (
                   <>
-                    <div className="mt-1.5 font-display text-2xl font-extrabold text-emerald-deep sm:text-[1.75rem]">
+                    <div className="mt-1.5 font-display text-2xl font-extrabold text-leaf-deep sm:text-[1.75rem]">
                       − {formatINR(result.subsidy)}
                     </div>
-                    <div className="mt-1 text-xs font-medium text-emerald-deep/75">
+                    <div className="mt-1 text-xs font-medium text-leaf-deep/75">
                       Credited directly to your bank account
                     </div>
                   </>
                 ) : (
                   <>
-                    <div className="mt-1.5 font-display text-base font-extrabold leading-snug text-emerald-deep">
+                    <div className="mt-1.5 font-display text-base font-extrabold leading-snug text-leaf-deep">
                       Accelerated Depreciation Tax Benefit Eligible
                     </div>
-                    <div className="mt-1 text-xs font-medium text-emerald-deep/75">
+                    <div className="mt-1 text-xs font-medium text-leaf-deep/75">
                       Claim up to 40% depreciation in year one; central subsidy
                       does not apply to commercial connections.
                     </div>
@@ -229,8 +229,8 @@ export default function SolarCalculator() {
               </div>
             </div>
 
-            <div className="mt-4 rounded-2xl bg-ink p-6">
-              <div className="text-[11px] font-bold uppercase tracking-[0.1em] text-amber">
+            <div className="mt-4 rounded-2xl bg-forest p-6">
+              <div className="text-[11px] font-bold uppercase tracking-[0.1em] text-sprout">
                 Your net investment after subsidy
               </div>
               <div className="mt-2 flex flex-wrap items-end gap-x-3 gap-y-1">
@@ -249,7 +249,7 @@ export default function SolarCalculator() {
                     <PiggyBank className="h-3.5 w-3.5" aria-hidden />
                     Annual savings
                   </div>
-                  <div className="mt-1 font-display text-xl font-extrabold text-emerald">
+                  <div className="mt-1 font-display text-xl font-extrabold text-sprout">
                     {formatINR(result.annualSavings)}
                   </div>
                 </div>
@@ -267,7 +267,7 @@ export default function SolarCalculator() {
                     <TrendingUp className="h-3.5 w-3.5" aria-hidden />
                     25-year savings
                   </div>
-                  <div className="mt-1 font-display text-xl font-extrabold text-amber">
+                  <div className="mt-1 font-display text-xl font-extrabold text-gold">
                     {formatINRShort(result.lifetimeSavings)}
                   </div>
                 </div>
@@ -284,7 +284,7 @@ export default function SolarCalculator() {
                   propertyType,
                 })
               }
-              className="group mt-5 flex w-full items-center justify-center gap-2 rounded-2xl bg-amber px-6 py-4 text-base font-bold text-ink shadow-xl shadow-amber/25 transition-all hover:bg-amber-deep hover:shadow-amber/40"
+              className="group mt-5 flex w-full items-center justify-center gap-2 rounded-2xl bg-leaf px-6 py-4 text-base font-bold text-white shadow-xl shadow-leaf/25 transition-all hover:bg-leaf-deep hover:shadow-leaf/40"
             >
               Get Quote for This {result.systemSize} kW System
               <ArrowRight
@@ -292,7 +292,7 @@ export default function SolarCalculator() {
                 aria-hidden
               />
             </button>
-            <p className="mt-3 text-center text-xs leading-relaxed text-ink/50">
+            <p className="mt-3 text-center text-xs leading-relaxed text-forest/50">
               Estimates assume 90% bill offset with MSEDCL net-metering and ~4
               units per kW per day of generation. Final figures
               are confirmed after the free site survey.

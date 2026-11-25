@@ -17,22 +17,22 @@ const services = [
 
 export default function Footer() {
   return (
-    <footer className="border-t border-ink/10 bg-cream">
+    <footer className="border-t border-forest/10 bg-wash">
       <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8 lg:py-16">
         <div className="grid gap-10 lg:grid-cols-[1.4fr_1fr_1fr_1.2fr]">
           <div>
             <div className="flex items-center gap-2.5">
               <Logo className="h-10 w-10" />
               <span className="flex flex-col leading-none">
-                <span className="font-display text-lg font-extrabold text-ink">
+                <span className="font-display text-lg font-extrabold text-forest">
                   {site.name}
                 </span>
-                <span className="mt-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-ink/50">
+                <span className="mt-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-forest/50">
                   Solar &amp; Electrical
                 </span>
               </span>
             </div>
-            <p className="mt-4 max-w-sm text-sm leading-relaxed text-ink/65">
+            <p className="mt-4 max-w-sm text-sm leading-relaxed text-forest/65">
               {site.tagline}. Turnkey rooftop solar, MSEDCL net-metering and
               PM Surya Ghar subsidy processing for homes, housing societies and
               industries.
@@ -43,7 +43,7 @@ export default function Footer() {
               )}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-5 inline-flex items-center gap-2 rounded-xl bg-emerald px-4 py-2.5 text-sm font-bold text-white transition-colors hover:bg-emerald-deep"
+              className="mt-5 inline-flex items-center gap-2 rounded-xl bg-leaf px-4 py-2.5 text-sm font-bold text-white transition-colors hover:bg-leaf-deep"
             >
               <MessageCircle className="h-4 w-4" aria-hidden />
               WhatsApp us
@@ -51,7 +51,7 @@ export default function Footer() {
           </div>
 
           <nav aria-label="Footer">
-            <h2 className="font-display text-sm font-extrabold uppercase tracking-wider text-ink">
+            <h2 className="font-display text-sm font-extrabold uppercase tracking-wider text-forest">
               Explore
             </h2>
             <ul className="mt-4 flex flex-col gap-2.5">
@@ -59,7 +59,7 @@ export default function Footer() {
                 <li key={l.href}>
                   <a
                     href={l.href}
-                    className="text-sm text-ink/65 transition-colors hover:text-amber-deep"
+                    className="text-sm text-forest/65 transition-colors hover:text-leaf-deep"
                   >
                     {l.label}
                   </a>
@@ -67,7 +67,7 @@ export default function Footer() {
               ))}
               <li>
                 <ConsultButton
-                  className="text-sm font-bold text-ink transition-colors hover:text-amber-deep"
+                  className="text-sm font-bold text-forest transition-colors hover:text-leaf-deep"
                 >
                   Get a free quote
                 </ConsultButton>
@@ -76,12 +76,12 @@ export default function Footer() {
           </nav>
 
           <div>
-            <h2 className="font-display text-sm font-extrabold uppercase tracking-wider text-ink">
+            <h2 className="font-display text-sm font-extrabold uppercase tracking-wider text-forest">
               Services
             </h2>
             <ul className="mt-4 flex flex-col gap-2.5">
               {services.map((s) => (
-                <li key={s} className="text-sm text-ink/65">
+                <li key={s} className="text-sm text-forest/65">
                   {s}
                 </li>
               ))}
@@ -89,12 +89,12 @@ export default function Footer() {
           </div>
 
           <div>
-            <h2 className="font-display text-sm font-extrabold uppercase tracking-wider text-ink">
+            <h2 className="font-display text-sm font-extrabold uppercase tracking-wider text-forest">
               Visit / Contact
             </h2>
-            <ul className="mt-4 flex flex-col gap-3.5 text-sm text-ink/65">
+            <ul className="mt-4 flex flex-col gap-3.5 text-sm text-forest/65">
               <li className="flex items-start gap-2.5">
-                <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-amber" aria-hidden />
+                <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-leaf" aria-hidden />
                 <address className="not-italic leading-relaxed">
                   {site.address.line1}
                   <br />
@@ -106,49 +106,49 @@ export default function Footer() {
                     href={site.mapsUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="font-semibold text-amber-deep transition-colors hover:text-ink"
+                    className="font-semibold text-leaf-deep transition-colors hover:text-forest"
                   >
                     Get directions
                   </a>
                 </address>
               </li>
               <li className="flex items-start gap-2.5">
-                <Phone className="mt-0.5 h-4 w-4 shrink-0 text-amber" aria-hidden />
+                <Phone className="mt-0.5 h-4 w-4 shrink-0 text-leaf" aria-hidden />
                 <a
                   href={`tel:${site.phone}`}
-                  className="font-semibold text-ink transition-colors hover:text-amber-deep"
+                  className="font-semibold text-forest transition-colors hover:text-leaf-deep"
                 >
                   {site.phoneDisplay}
                 </a>
               </li>
               <li className="flex items-start gap-2.5">
-                <Phone className="mt-0.5 h-4 w-4 shrink-0 text-amber" aria-hidden />
+                <Phone className="mt-0.5 h-4 w-4 shrink-0 text-leaf" aria-hidden />
                 <a
                   href={`tel:${site.officePhone}`}
-                  className="font-semibold text-ink transition-colors hover:text-amber-deep"
+                  className="font-semibold text-forest transition-colors hover:text-leaf-deep"
                 >
                   {site.officePhoneDisplay}
-                  <span className="ml-1.5 font-normal text-ink/50">(office)</span>
+                  <span className="ml-1.5 font-normal text-forest/50">(office)</span>
                 </a>
               </li>
               <li className="flex items-start gap-2.5">
-                <Mail className="mt-0.5 h-4 w-4 shrink-0 text-amber" aria-hidden />
+                <Mail className="mt-0.5 h-4 w-4 shrink-0 text-leaf" aria-hidden />
                 <a
                   href={`mailto:${site.email}`}
-                  className="transition-colors hover:text-amber-deep"
+                  className="transition-colors hover:text-leaf-deep"
                 >
                   {site.email}
                 </a>
               </li>
               <li className="flex items-start gap-2.5">
-                <Clock className="mt-0.5 h-4 w-4 shrink-0 text-amber" aria-hidden />
+                <Clock className="mt-0.5 h-4 w-4 shrink-0 text-leaf" aria-hidden />
                 {site.hours}
               </li>
             </ul>
           </div>
         </div>
 
-        <div className="mt-12 flex flex-col gap-2 border-t border-ink/10 pt-6 text-xs text-ink/50 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-12 flex flex-col gap-2 border-t border-forest/10 pt-6 text-xs text-forest/50 sm:flex-row sm:items-center sm:justify-between">
           <p>
             © <CopyrightYear fallback={2026} /> {site.name}. All rights reserved.
           </p>
