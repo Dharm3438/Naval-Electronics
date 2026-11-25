@@ -45,6 +45,7 @@ export const brands: Brand[] = [
     initials: "UTL",
     accent: "#B45309",
     photos: [
+      { src: "/brands/utl-4.webp", alt: "UTL Solar on-grid and hybrid solar system range with modules, inverter and battery" },
       { src: "/brands/utl-1.webp", alt: "UTL Solar Gamma+ inverter with tubular battery and solar module" },
       { src: "/brands/utl-2.webp", alt: "UTL Solar grid-export PCU with tubular battery and solar module" },
       { src: "/brands/utl-3.webp", alt: "UTL Solar on-grid string inverter" },
@@ -67,6 +68,7 @@ export const brands: Brand[] = [
     initials: "WE",
     accent: "#E11D48",
     photos: [
+      { src: "/brands/waaree-3.webp", alt: "Waaree half-cut solar module — Tier 1, 23% efficiency, 30-year performance warranty" },
       { src: "/brands/waaree-1.webp", alt: "Waaree 5.5 kW PM Surya Ghar solar kit with module, inverter and earthing accessories" },
       { src: "/brands/waaree-2.webp", alt: "Complete 3 kW DCR solar kit with battery, hybrid inverter and earthing" },
     ],
@@ -88,6 +90,7 @@ export const brands: Brand[] = [
     initials: "PE",
     accent: "#7C3AED",
     photos: [
+      { src: "/brands/premier-3.webp", alt: "Premier Energies rooftop solar on a family home" },
       { src: "/brands/premier-1.webp", alt: "Premier Energies on-grid solar inverter" },
       { src: "/brands/premier-2.webp", alt: "On-grid string inverter paired with a mono solar module" },
     ],
@@ -109,6 +112,7 @@ export const brands: Brand[] = [
     initials: "VS",
     accent: "#EA580C",
     photos: [
+      { src: "/brands/vikram-2.webp", alt: "Vikram Solar rooftop modules — up to ₹78,000 subsidy under PM Surya Ghar Yojana" },
       { src: "/brands/vikram-1.webp", alt: "Range of Vikram Solar modules in different sizes" },
     ],
     category: "Solar modules",
@@ -150,6 +154,7 @@ export const brands: Brand[] = [
     initials: "TP",
     accent: "#1D4ED8",
     photos: [
+      { src: "/brands/tata-3.webp", alt: "Tata Power Solaroof — clean solar energy for a home, illustrated with a child and a smiling sun" },
       { src: "/brands/tata-2.webp", alt: "Tata Power Solaroof rooftop system with modules, inverter and earthing" },
       { src: "/brands/tata-1.webp", alt: "Tata solar kit with modules, inverter, distribution boxes and cabling" },
     ],
