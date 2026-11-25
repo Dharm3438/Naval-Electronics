@@ -13,7 +13,8 @@ small Google Apps Script attached to the sheet, and the script appends the row.
 | Column | Filled by |
 |---|---|
 | Submitted at | Script (India time) |
-| Name, Mobile, Property type, Monthly bill (₹), City, Pincode | Visitor |
+| Name, Mobile, Property type | Visitor (required; property type defaults to Residential) |
+| Monthly bill (₹), City, Pincode | Visitor (optional; blank when not filled in) |
 | Calculator estimate (kW) | Website, when the form was opened from the solar calculator |
 | Source page | Website (page URL, including any `utm_` campaign tags) |
 | Status | Script sets `New`; the team changes it from the dropdown |
