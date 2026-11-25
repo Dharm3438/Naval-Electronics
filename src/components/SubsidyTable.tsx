@@ -1,8 +1,19 @@
+"use client";
+
+import { useState } from "react";
 import { ArrowRight, BadgeIndianRupee, CheckCircle2, FileCheck2 } from "lucide-react";
 import { formatINR, subsidyTiers } from "@/lib/solar";
 import ConsultButton from "./ConsultButton";
 
+const defaultTier = Math.max(
+  0,
+  subsidyTiers.findIndex((t) => "highlight" in t && t.highlight),
+);
+
 export default function SubsidyTable() {
+  // Phones show one tier at a time, picked from the size tabs; sm+ shows all.
+  const [selected, setSelected] = useState(defaultTier);
+
   return (
     <section id="subsidy" className="py-16 lg:py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -22,13 +33,41 @@ export default function SubsidyTable() {
           </p>
         </div>
 
-        <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {subsidyTiers.map((tier) => {
+        <div
+          role="tablist"
+          aria-label="System size"
+          className="mt-8 grid grid-cols-3 gap-1 rounded-2xl bg-ink/5 p-1 sm:hidden"
+        >
+          {subsidyTiers.map((tier, i) => (
+            <button
+              key={tier.size}
+              type="button"
+              role="tab"
+              id={`subsidy-tab-${i}`}
+              aria-selected={i === selected}
+              aria-controls={`subsidy-panel-${i}`}
+              onClick={() => setSelected(i)}
+              className={`rounded-xl px-2 py-2.5 text-sm font-bold transition-all ${
+                i === selected
+                  ? "bg-white text-ink shadow-sm"
+                  : "text-ink/55 hover:text-ink"
+              }`}
+            >
+              {tier.size.replace(" kW – ", "–")}
+            </button>
+          ))}
+        </div>
+
+        <div className="mt-6 grid gap-5 sm:mt-12 sm:grid-cols-2 lg:grid-cols-3">
+          {subsidyTiers.map((tier, i) => {
             const highlight = "highlight" in tier && tier.highlight;
             return (
               <div
                 key={tier.size}
-                className={`relative flex flex-col rounded-3xl border p-6 transition-shadow sm:p-7 ${
+                id={`subsidy-panel-${i}`}
+                className={`relative flex-col rounded-3xl border p-6 transition-shadow sm:flex sm:p-7 ${
+                  i === selected ? "flex" : "hidden"
+                } ${
                   highlight
                     ? "border-amber bg-white shadow-2xl shadow-amber/15 lg:-translate-y-2"
                     : "border-ink/10 bg-white shadow-sm hover:shadow-lg"

@@ -7,6 +7,7 @@ import {
   ChevronLeft,
   ChevronRight,
   Factory,
+  HelpCircle,
   Images,
   Layers,
   ShieldCheck,
@@ -52,14 +53,14 @@ export default function Brands() {
           </p>
         </div>
 
-        <ul className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <ul className="mt-8 grid grid-cols-2 gap-3 sm:mt-12 sm:gap-5 lg:grid-cols-3">
           {brands.map((brand) => (
             <li key={brand.slug}>
               <button
                 type="button"
                 onClick={(e) => open(brand, e.currentTarget)}
                 aria-haspopup="dialog"
-                className="group flex h-full w-full flex-col overflow-hidden rounded-3xl border border-ink/10 bg-white text-left shadow-sm transition-all hover:-translate-y-1 hover:border-amber/50 hover:shadow-xl"
+                className="group flex h-full w-full flex-col overflow-hidden rounded-2xl border sm:rounded-3xl border-ink/10 bg-white text-left shadow-sm transition-all hover:-translate-y-1 hover:border-amber/50 hover:shadow-xl"
               >
                 <div className="relative aspect-[4/3] w-full overflow-hidden border-b border-ink/10 bg-white">
                   {brand.photos?.length ? (
@@ -77,49 +78,52 @@ export default function Brands() {
                     </div>
                   )}
                   {brand.photos && brand.photos.length > 1 && (
-                    <span className="absolute bottom-3 right-3 inline-flex items-center gap-1 rounded-full bg-ink/75 px-2.5 py-1 text-[11px] font-bold text-white backdrop-blur-sm">
-                      <Images className="h-3.5 w-3.5" aria-hidden />
-                      {brand.photos.length} photos
+                    <span className="absolute bottom-2 right-2 inline-flex items-center gap-1 rounded-full bg-ink/75 px-2 py-0.5 text-[10px] font-bold text-white backdrop-blur-sm sm:bottom-3 sm:right-3 sm:px-2.5 sm:py-1 sm:text-[11px]">
+                      <Images className="h-3 w-3 sm:h-3.5 sm:w-3.5" aria-hidden />
+                      {brand.photos.length}
+                      <span className="hidden sm:inline"> photos</span>
                     </span>
                   )}
                 </div>
 
-                <div className="flex flex-1 flex-col p-6">
+                <div className="flex flex-1 flex-col p-3.5 sm:p-6">
                   <div className="flex items-center gap-3">
-                    {brand.logo ? (
-                      // eslint-disable-next-line @next/next/no-img-element
-                      <img
-                        src={brand.logo}
-                        alt={`${brand.name} logo`}
-                        className="h-12 w-12 rounded-2xl object-contain"
-                      />
-                    ) : (
-                      <BrandMark
-                        initials={brand.initials}
-                        accent={brand.accent}
-                        className="h-12 w-12 text-sm"
-                      />
-                    )}
+                    <span className="hidden shrink-0 sm:block">
+                      {brand.logo ? (
+                        // eslint-disable-next-line @next/next/no-img-element
+                        <img
+                          src={brand.logo}
+                          alt={`${brand.name} logo`}
+                          className="h-12 w-12 rounded-2xl object-contain"
+                        />
+                      ) : (
+                        <BrandMark
+                          initials={brand.initials}
+                          accent={brand.accent}
+                          className="h-12 w-12 text-sm"
+                        />
+                      )}
+                    </span>
                     <div className="min-w-0">
-                      <div className="font-display text-lg font-extrabold leading-tight text-ink">
+                      <div className="font-display text-[15px] font-extrabold leading-tight text-ink sm:text-lg">
                         {brand.name}
                       </div>
-                      <div className="mt-0.5 text-[11px] font-bold uppercase tracking-wider text-ink/45">
+                      <div className="mt-1 text-[10px] font-bold uppercase leading-snug tracking-wider text-ink/45 sm:mt-0.5 sm:text-[11px]">
                         {brand.category}
                       </div>
                     </div>
                   </div>
 
-                  <p className="mt-4 flex-1 text-sm leading-relaxed text-ink/65">
+                  <p className="mt-4 hidden flex-1 text-sm leading-relaxed text-ink/65 sm:block">
                     {brand.tagline}
                   </p>
 
-                  <div className="mt-5 flex items-center gap-1.5 rounded-lg bg-emerald/10 px-2.5 py-1.5 text-[11px] font-bold uppercase tracking-wider text-emerald-deep">
+                  <div className="mt-5 hidden items-center gap-1.5 rounded-lg bg-emerald/10 px-2.5 py-1.5 text-[11px] font-bold uppercase tracking-wider text-emerald-deep sm:flex">
                     <ShieldCheck className="h-3.5 w-3.5 shrink-0" aria-hidden />
                     {brand.warranty.split("·")[0].trim()}
                   </div>
 
-                  <span className="mt-5 inline-flex items-center gap-1.5 border-t border-ink/10 pt-5 text-sm font-bold text-amber-deep">
+                  <span className="mt-5 hidden items-center gap-1.5 border-t border-ink/10 pt-5 text-sm font-bold text-amber-deep sm:inline-flex">
                     View details
                     <ArrowRight
                       className="h-4 w-4 transition-transform group-hover:translate-x-1"
@@ -130,6 +134,26 @@ export default function Brands() {
               </button>
             </li>
           ))}
+          {/* Phones only: fills the empty slot left by an odd brand count. */}
+          {brands.length % 2 === 1 && (
+            <li className="sm:hidden">
+              <ConsultButton className="flex h-full w-full flex-col items-start justify-between gap-3 rounded-2xl bg-ink p-4 text-left text-white">
+                <HelpCircle className="h-7 w-7 text-amber" aria-hidden />
+                <span>
+                  <span className="block font-display text-[15px] font-extrabold leading-tight">
+                    Not sure which brand?
+                  </span>
+                  <span className="mt-1.5 block text-xs leading-snug text-white/65">
+                    We&apos;ll recommend one after a free site survey.
+                  </span>
+                </span>
+                <span className="inline-flex items-center gap-1 text-xs font-bold text-amber">
+                  Ask us
+                  <ArrowRight className="h-3.5 w-3.5" aria-hidden />
+                </span>
+              </ConsultButton>
+            </li>
+          )}
         </ul>
 
         <p className="mt-8 text-center text-sm text-ink/55">

@@ -44,12 +44,20 @@ export default function Process() {
           </p>
         </div>
 
-        <ol className="mt-12 grid gap-6 lg:grid-cols-4 lg:gap-5">
+        {/* Phones and tablets: a vertical timeline. Desktop: four cards. */}
+        <ol className="mt-10 grid gap-8 sm:mt-12 lg:grid-cols-4 lg:gap-5">
           {steps.map(({ icon: Icon, title, body, meta }, i) => (
             <li
               key={title}
-              className="relative flex flex-col rounded-3xl border border-ink/10 bg-cream p-6 lg:p-6"
+              className="relative flex flex-col pl-16 lg:rounded-3xl lg:border lg:border-ink/10 lg:bg-cream lg:p-6"
             >
+              {/* Timeline line on phones and tablets */}
+              {i < steps.length - 1 && (
+                <span
+                  aria-hidden
+                  className="absolute -bottom-8 left-[1.3125rem] top-14 w-0.5 bg-gradient-to-b from-amber/60 to-ink/10 lg:hidden"
+                />
+              )}
               {/* Connector line on desktop */}
               {i < steps.length - 1 && (
                 <span
@@ -57,21 +65,24 @@ export default function Process() {
                   className="absolute -right-3 top-12 hidden h-0.5 w-6 bg-ink/15 lg:block"
                 />
               )}
-              <div className="flex items-center gap-3">
-                <span className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-ink text-amber">
+              <div className="flex min-h-11 items-center gap-3">
+                <span className="absolute left-0 top-0 inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-ink text-amber lg:static">
                   <Icon className="h-5 w-5" aria-hidden />
                 </span>
-                <span className="font-display text-4xl font-extrabold leading-none text-ink/12">
+                <span className="text-[11px] font-bold uppercase tracking-[0.12em] text-amber-deep lg:hidden">
+                  Step {i + 1}
+                </span>
+                <span className="hidden font-display text-4xl font-extrabold leading-none text-ink/12 lg:inline">
                   0{i + 1}
                 </span>
               </div>
-              <h3 className="mt-5 font-display text-lg font-bold leading-snug text-ink">
+              <h3 className="mt-1 font-display text-lg font-bold leading-snug text-ink lg:mt-5">
                 {title}
               </h3>
               <p className="mt-2.5 flex-1 text-sm leading-relaxed text-ink/65">
                 {body}
               </p>
-              <div className="mt-5 inline-flex rounded-lg bg-emerald/10 px-2.5 py-1.5 text-[11px] font-bold uppercase tracking-wider text-emerald-deep">
+              <div className="mt-4 inline-flex self-start rounded-lg lg:mt-5 lg:self-auto bg-emerald/10 px-2.5 py-1.5 text-[11px] font-bold uppercase tracking-wider text-emerald-deep">
                 {meta}
               </div>
             </li>

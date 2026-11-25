@@ -10,6 +10,7 @@ import {
   Wallet,
 } from "lucide-react";
 import ConsultButton from "./ConsultButton";
+import SwipeRow from "./SwipeRow";
 
 const options = [
   {
@@ -79,7 +80,11 @@ export default function Finance() {
           </p>
         </div>
 
-        <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <SwipeRow
+          label="Finance options"
+          gridClassName="sm:grid-cols-2 lg:grid-cols-4 lg:gap-5"
+          className="mt-8 sm:mt-12"
+        >
           {options.map(
             ({ icon: Icon, rate, rateNote, title, body, points, tenure, ...rest }) => {
               const highlight = "highlight" in rest && rest.highlight;
@@ -140,7 +145,7 @@ export default function Finance() {
               );
             },
           )}
-        </div>
+        </SwipeRow>
 
         <div className="mt-10 overflow-hidden rounded-3xl bg-ink">
           <div className="grid gap-8 p-7 sm:p-10 lg:grid-cols-[1.3fr_1fr] lg:items-center">

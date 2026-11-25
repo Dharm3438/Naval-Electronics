@@ -2,6 +2,7 @@ import { Heart, MapPin, Quote, Star, Sun, UserRound } from "lucide-react";
 import { customers } from "@/lib/customers";
 import { site } from "@/lib/site";
 import ConsultButton from "./ConsultButton";
+import SwipeRow from "./SwipeRow";
 
 export default function Customers() {
   return (
@@ -21,9 +22,13 @@ export default function Customers() {
           </p>
         </div>
 
-        <ul className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <SwipeRow
+          label="Customer reviews"
+          gridClassName="sm:grid-cols-2 lg:grid-cols-3"
+          className="mt-8 sm:mt-12"
+        >
           {customers.map((c) => (
-            <li
+            <article
               key={`${c.name}-${c.locality}`}
               className="flex flex-col overflow-hidden rounded-3xl border border-ink/10 bg-white shadow-sm transition-shadow hover:shadow-xl"
             >
@@ -74,9 +79,9 @@ export default function Customers() {
                   </span>
                 </div>
               </div>
-            </li>
+            </article>
           ))}
-        </ul>
+        </SwipeRow>
 
         <div className="mt-10 flex flex-col items-center gap-4 rounded-3xl border border-ink/10 bg-white px-6 py-8 text-center">
           <UserRound className="h-8 w-8 text-amber" aria-hidden />
