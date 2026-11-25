@@ -1,6 +1,4 @@
 import {
-  Banknote,
-  Building2,
   CalendarRange,
   CheckCircle2,
   CreditCard,
@@ -21,10 +19,12 @@ const options = [
     body: "Split the system cost across 3 to 12 months through our consumer-finance partners with no interest charged. The quickest option to approve — usually the same day — and the one most homeowners pick for systems up to 3 kW.",
     points: ["3 to 12 month tenure", "Same-day approval", "No collateral"],
     tenure: "3 – 12 months",
+    badge: "Best value we provide",
   },
   {
     icon: Landmark,
-    rate: "From 7%",
+    ratePrefix: "Starting from",
+    rate: "5.75%",
     rateNote: "p.a. reducing",
     title: "PM Surya Ghar collateral-free loan",
     body: "The central scheme makes concessional, collateral-free bank loans available for residential rooftop systems. We prepare the file alongside your subsidy application, so one set of documents covers both.",
@@ -34,29 +34,8 @@ const options = [
       "Longer tenure keeps EMI low",
     ],
     tenure: "Up to 10 years",
+    badge: "Most popular",
     highlight: true,
-  },
-  {
-    icon: Banknote,
-    rate: "Up to 8%",
-    rateNote: "p.a. reducing",
-    title: "Secured solar term loan",
-    body: "For larger residential systems, housing societies and small commercial roofs that fall outside the concessional scheme. Rates sit at or below 8% per annum on a reducing balance, with tenure set so the EMI stays close to the bill you are already paying.",
-    points: ["5 to 7 year tenure", "Housing societies eligible", "Part-prepayment allowed"],
-    tenure: "5 – 7 years",
-  },
-  {
-    icon: Building2,
-    rate: "CAPEX",
-    rateNote: "or OPEX",
-    title: "Commercial & industrial structures",
-    body: "Industrial units can buy outright and claim accelerated depreciation, or take a zero-upfront OPEX route where you pay only for the units generated. We model both against your load profile before you commit.",
-    points: [
-      "Accelerated depreciation on CAPEX",
-      "Zero-capex OPEX option",
-      "Modelled against your load profile",
-    ],
-    tenure: "Structured per project",
   },
 ];
 
@@ -70,11 +49,11 @@ export default function Finance() {
             Finance Options
           </div>
           <h2 className="mt-5 font-display text-3xl font-extrabold text-ink sm:text-4xl lg:text-[2.75rem]">
-            Pay monthly, from 0% to 8% interest
+            Pay monthly, from 0% interest
           </h2>
           <p className="mt-4 text-base leading-relaxed text-ink/65 sm:text-lg">
             The upfront cost is the usual reason people delay going solar. It
-            does not have to be upfront. We arrange finance across four routes,
+            does not have to be upfront. We arrange finance through two routes,
             and in most cases the EMI lands close to the Mahavitaran bill the
             system replaces.
           </p>
@@ -82,12 +61,15 @@ export default function Finance() {
 
         <SwipeRow
           label="Finance options"
-          gridClassName="sm:grid-cols-2 lg:grid-cols-4 lg:gap-5"
-          className="mt-8 sm:mt-12"
+          gridClassName="sm:grid-cols-2 lg:gap-8"
+          className="mx-auto mt-8 max-w-4xl sm:mt-12"
         >
           {options.map(
             ({ icon: Icon, rate, rateNote, title, body, points, tenure, ...rest }) => {
               const highlight = "highlight" in rest && rest.highlight;
+              const badge = "badge" in rest ? rest.badge : undefined;
+              const ratePrefix =
+                "ratePrefix" in rest ? rest.ratePrefix : undefined;
               return (
                 <article
                   key={title}
@@ -97,16 +79,27 @@ export default function Finance() {
                       : "border-ink/10 bg-cream shadow-sm hover:shadow-lg"
                   }`}
                 >
-                  {highlight && (
-                    <span className="absolute -top-3 left-6 rounded-full bg-amber px-3 py-1 text-[11px] font-extrabold uppercase tracking-wider text-ink">
-                      Most popular
+                  {badge && (
+                    <span
+                      className={`absolute -top-3 left-6 rounded-full px-3 py-1 text-[11px] font-extrabold uppercase tracking-wider ${
+                        highlight ? "bg-amber text-ink" : "bg-emerald text-white"
+                      }`}
+                    >
+                      {badge}
                     </span>
                   )}
                   <span className="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-ink text-amber">
                     <Icon className="h-5 w-5" aria-hidden />
                   </span>
 
-                  <div className="mt-5 flex items-end gap-1.5">
+                  {ratePrefix && (
+                    <div className="mt-5 text-[11px] font-bold uppercase tracking-wider text-ink/50">
+                      {ratePrefix}
+                    </div>
+                  )}
+                  <div
+                    className={`${ratePrefix ? "mt-1" : "mt-5"} flex items-end gap-1.5`}
+                  >
                     <span className="font-display text-3xl font-extrabold leading-none text-emerald-deep">
                       {rate}
                     </span>
@@ -190,7 +183,6 @@ export default function Finance() {
                 {[
                   "PAN and Aadhaar",
                   "Latest MSEDCL bill for the connection",
-                  "Last 6 months' bank statement",
                   "Proof of property ownership",
                 ].map((d) => (
                   <li key={d} className="flex items-start gap-2.5 text-sm text-white/80">
