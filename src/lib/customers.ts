@@ -54,7 +54,6 @@ export const reviews: Review[] = [
     review:
       "Before buying my solar system I checked with many vendors about what materials they use, but none of them gave me proof, sirf bolte ki acha quality rahega karke bas... Where as naval electronics gave me such a detailed quotation that after reading it. I was damnn sure that I have to purchase it from them. Very satisfied with the purchase",
     photos: [`${dir}/enthusiastic-trader-1.jpg`],
-    coverPosition: "bottom",
   },
   {
     name: "Bhikan Rokade",
