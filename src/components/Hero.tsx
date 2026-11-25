@@ -1,141 +1,150 @@
+import type { CSSProperties } from "react";
 import {
   ArrowRight,
-  BadgeCheck,
-  BadgePercent,
-  IndianRupee,
-  Sparkles,
+  BadgeIndianRupee,
+  CirclePercent,
+  SolarPanel,
+  Star,
   TrendingDown,
   Wallet,
 } from "lucide-react";
 import { site } from "@/lib/site";
 import { formatINR } from "@/lib/solar";
 import ConsultButton from "./ConsultButton";
+import HeroGlobe from "./HeroGlobe";
 import OfferDeadline from "./OfferDeadline";
 
+const price = formatINR(site.offer.startingPrice);
+
 const highlights = [
-  { icon: BadgePercent, value: "0%", label: "Interest on EMI" },
+  { icon: CirclePercent, value: "0%", label: "Interest on EMI" },
   { icon: Wallet, value: "₹0", label: "Down payment" },
-  { icon: IndianRupee, value: "₹78,000", label: "Govt. subsidy" },
+  { icon: BadgeIndianRupee, value: "₹78,000", label: "Govt. subsidy" },
   {
-    icon: Sparkles,
-    value: formatINR(site.offer.startingPrice),
-    label: "Complete system from",
+    icon: SolarPanel,
+    value: price,
+    label: (
+      <>
+        Complete 3<span className="normal-case">k</span>W system from
+      </>
+    ),
   },
 ];
 
 export default function Hero() {
-  const { src, alt } = site.heroBanner;
-
   return (
     <section id="top" className="px-3 pt-3 sm:px-5 sm:pt-4 lg:px-6">
-      <div className="relative isolate mx-auto flex min-h-[640px] max-w-[96rem] flex-col overflow-hidden rounded-[1.75rem] bg-ink sm:min-h-[600px] lg:min-h-[680px] lg:rounded-[2.25rem]">
-        {/* Banner image (or designed placeholder until the photo is ready) */}
-        {src ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
-            src={src}
-            alt={alt}
-            fetchPriority="high"
-            className="absolute inset-0 -z-20 h-full w-full object-cover"
-          />
-        ) : (
-          <BannerPlaceholder />
-        )}
+      <div className="relative isolate mx-auto flex max-w-[96rem] flex-col overflow-hidden rounded-[1.75rem] bg-gradient-to-br from-white via-[#f3fbf6] to-mint ring-1 ring-leaf/10 lg:rounded-[2.25rem]">
+        <HeroBackdrop />
+        <FloatingLeaves />
 
-        {/* Legibility scrim */}
-        <div
-          aria-hidden
-          className="absolute inset-0 -z-10 bg-gradient-to-t from-ink via-ink/70 to-ink/20 lg:bg-gradient-to-r lg:from-ink/95 lg:via-ink/65 lg:to-ink/5"
-        />
-
-        <div className="mx-auto flex w-full max-w-7xl flex-1 flex-col justify-end px-5 pb-6 pt-14 sm:px-8 sm:pb-8 lg:justify-center lg:px-12 lg:py-16">
-          <div className="animate-rise max-w-2xl">
+        <div className="mx-auto grid w-full max-w-7xl flex-1 items-center gap-6 px-5 pb-6 pt-8 sm:px-8 sm:pt-12 lg:grid-cols-[minmax(0,1.5fr)_minmax(0,0.6fr)] lg:gap-0 lg:px-12 lg:pb-10 lg:pt-14">
+          <div className="animate-rise relative z-10 min-w-0">
             {/* Offer ribbon */}
-            <div className="inline-flex flex-wrap items-center gap-x-2 gap-y-1 rounded-2xl bg-white/10 p-1 pr-3 sm:rounded-full ring-1 ring-white/20 backdrop-blur-md sm:pr-4">
-              <span className="whitespace-nowrap rounded-full bg-amber px-2.5 py-1 text-[10px] font-extrabold uppercase tracking-[0.1em] text-ink sm:px-3 sm:text-[11px]">
-                <span className="sm:hidden">Festival Offer</span>
-                <span className="hidden sm:inline">{site.offer.label}</span>
+            <div className="inline-flex max-w-full flex-wrap items-center gap-x-3 gap-y-1 rounded-2xl sm:flex-nowrap bg-white/80 p-1 pr-4 shadow-sm ring-1 ring-leaf/20 backdrop-blur sm:rounded-full">
+              <span className="inline-flex items-center gap-1.5 whitespace-nowrap rounded-full bg-leaf px-3 py-1 text-[10px] font-extrabold uppercase tracking-[0.08em] text-white sm:text-[11px]">
+                <Star className="h-3 w-3 fill-current" aria-hidden />
+                {site.offer.label}
               </span>
-              <span className="whitespace-nowrap pl-1.5 text-[13px] font-bold text-white sm:pl-0 sm:text-sm">
-                0% Interest &nbsp;·&nbsp; 0% Down Payment
+              <span className="pl-2 text-[12px] font-medium text-forest/80 sm:whitespace-nowrap sm:pl-0 sm:text-sm">
+                MSEDCL &amp; PM Surya Ghar Approved Partner
+                <span className="hidden sm:inline">
+                  <span className="mx-2 text-leaf" aria-hidden>
+                    •
+                  </span>
+                  {site.name}
+                </span>
               </span>
             </div>
 
-            <h1 className="mt-6 font-display text-[2.35rem] font-extrabold leading-[1.05] tracking-tight text-white sm:text-6xl lg:text-[4.25rem]">
-              Go solar today.
-              <br />
-              <span className="bg-gradient-to-r from-amber via-yellow-300 to-amber bg-clip-text text-transparent">
-                Pay nothing upfront.
+            <h1 className="mt-6 font-display text-[1.7rem] font-extrabold uppercase leading-[1.12] tracking-tight text-forest min-[420px]:text-[2.1rem] sm:text-5xl lg:text-[2.45rem] xl:text-[2.85rem]">
+              <span className="flex items-center gap-3">
+                Go solar today
+                <SunMark />
+              </span>
+              <span className="block text-leaf">
+                0% interest <span aria-hidden>·</span>{" "}
+                <span className="whitespace-nowrap">₹0 down payment</span>
+              </span>
+              <span className="block">
+                <span className="text-leaf">₹78,000</span> govt. subsidy
+              </span>
+              <span className="block">
+                Complete 3<span className="normal-case">k</span>W system
+              </span>
+              <span className="block">
+                Starting at{" "}
+                <span className="whitespace-nowrap text-gold">{price}</span>
               </span>
             </h1>
 
-            <p className="mt-5 max-w-xl text-base leading-relaxed text-white/75 sm:text-lg">
-              Rooftop solar for homes, businesses and housing societies. Up to
-              ₹78,000 government subsidy, complete systems from{" "}
-              <strong className="font-bold text-white">
-                {formatINR(site.offer.startingPrice)}
-              </strong>{" "}
-              with top brands, and MSEDCL net-metering, all handled by{" "}
-              {site.name}.
-            </p>
-            <p className="mt-3 max-w-xl text-sm font-semibold text-amber sm:text-base">
-              0% interest and 0% down payment: a scheme you will only find with{" "}
+            <p className="mt-5 max-w-xl text-base leading-relaxed text-forest/80 sm:text-lg lg:max-w-lg xl:max-w-xl">
+              Rooftop solar for homes, businesses &amp; societies. Complete
+              systems with top brands and MSEDCL net-metering. All handled by{" "}
               {site.name}.
             </p>
 
             <OfferDeadline />
 
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
-              <ConsultButton className="group relative inline-flex items-center justify-center gap-2.5 overflow-hidden rounded-2xl bg-amber px-8 py-4 text-base font-extrabold text-ink shadow-2xl shadow-amber/40 transition-all hover:-translate-y-0.5 hover:bg-amber-deep sm:text-lg">
+            <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:items-center">
+              <ConsultButton className="group relative inline-flex items-center justify-center gap-2.5 overflow-hidden rounded-full bg-leaf px-8 py-4 text-base font-bold text-white shadow-xl shadow-leaf/30 transition-all hover:-translate-y-0.5 hover:bg-leaf-deep hover:shadow-leaf/45 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-leaf sm:text-lg">
                 <span
                   aria-hidden
-                  className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/40 to-transparent transition-transform duration-700 group-hover:translate-x-full"
+                  className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/35 to-transparent transition-transform duration-700 group-hover:translate-x-full"
                 />
                 Get Free Consultation
                 <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" aria-hidden />
               </ConsultButton>
               <a
                 href="#calculator"
-                className="inline-flex items-center justify-center gap-2 rounded-2xl bg-white/10 px-7 py-4 text-base font-bold text-white ring-1 ring-white/25 backdrop-blur-md transition-all hover:bg-white/20"
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-white/70 px-7 py-[0.9rem] text-base font-bold text-forest ring-2 ring-leaf/70 backdrop-blur transition-all hover:-translate-y-0.5 hover:bg-white hover:ring-leaf focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-leaf sm:text-lg"
               >
-                <TrendingDown className="h-5 w-5 text-amber" aria-hidden />
+                <TrendingDown className="h-5 w-5 text-leaf" aria-hidden />
                 Calculate Savings
               </a>
             </div>
 
-            <p className="mt-4 flex items-center gap-1.5 text-xs font-medium text-white/55">
-              <BadgeCheck className="h-4 w-4 shrink-0 text-emerald" aria-hidden />
-              MSEDCL &amp; PM Surya Ghar approved partner · Free loan consultation
+            <p className="mt-4 text-xs font-medium text-forest/60 sm:text-sm">
+              Free loan consultation • Handled by {site.name}
             </p>
+          </div>
+
+          <div className="relative -order-1 min-w-0 lg:order-none lg:-ml-24 lg:-mr-10 xl:-mr-16">
+            <HeroGlobe />
           </div>
         </div>
 
-        {/* Highlight strip */}
-        <div className="relative mx-auto w-full max-w-7xl px-3 pb-3 sm:px-5 sm:pb-5 lg:px-8 lg:pb-8">
-          <ul className="grid grid-cols-2 gap-px overflow-hidden rounded-2xl bg-white/15 ring-1 ring-white/15 backdrop-blur-xl lg:grid-cols-4">
-            {highlights.map(({ icon: Icon, value, label }) => (
+        {/* Highlight cards strung on a single green line */}
+        <div className="relative mx-auto w-full max-w-7xl px-3 pb-4 sm:px-5 sm:pb-6 lg:px-8 lg:pb-8">
+          <span
+            aria-hidden
+            className="absolute inset-x-0 top-[calc(50%-1.1rem)] hidden h-0.5 bg-gradient-to-r from-leaf/0 via-leaf/70 to-leaf/0 lg:block"
+          />
+          <ul className="relative grid grid-cols-2 gap-2.5 sm:gap-4 lg:grid-cols-4 lg:gap-6">
+            {highlights.map(({ icon: Icon, value, label }, i) => (
               <li
-                key={label}
-                className="flex items-center gap-3 bg-ink/55 px-4 py-4 sm:px-5 sm:py-5"
+                key={value}
+                style={{ animationDelay: `${150 + i * 90}ms` }}
+                className="animate-rise flex items-center gap-3 rounded-2xl bg-white/85 px-3.5 py-3.5 shadow-[0_8px_30px_-12px_rgba(11,59,44,0.25)] ring-1 ring-leaf/15 backdrop-blur transition-transform hover:-translate-y-1 sm:px-5 sm:py-4"
               >
-                <span className="hidden h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-amber/15 text-amber min-[480px]:inline-flex sm:h-11 sm:w-11">
-                  <Icon className="h-5 w-5" aria-hidden />
+                <span className="hidden h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-mint text-leaf ring-1 ring-leaf/25 min-[420px]:inline-flex sm:h-12 sm:w-12">
+                  <Icon className="h-6 w-6" aria-hidden />
                 </span>
                 <span className="min-w-0">
-                  <span className="block font-display text-lg font-extrabold leading-none text-white min-[480px]:text-xl sm:text-2xl">
+                  <span className="block font-display text-lg font-extrabold leading-none text-forest sm:text-2xl">
                     {value}
                   </span>
-                  <span className="mt-1 block text-[11px] font-semibold uppercase tracking-wider text-white/55 sm:text-xs">
+                  <span className="mt-1 block text-[10px] font-semibold uppercase tracking-wide text-forest/70 sm:text-xs">
                     {label}
                   </span>
                 </span>
               </li>
             ))}
           </ul>
-          <p className="mt-2 text-center text-[10px] text-white/40 lg:text-right">
+          <p className="mt-3 text-center text-[10px] text-forest/50 sm:text-[11px]">
             *0% interest via No-Cost EMI partners; loans subject to lender
-            approval. Package price is a starting price; final quote depends on
-            system size, brand and site survey.
+            approval. Starting price for complete 3kW system; final quote depends
+            on brand and site survey.
           </p>
         </div>
       </div>
@@ -143,72 +152,109 @@ export default function Hero() {
   );
 }
 
-/**
- * Stand-in artwork for the hero banner: dusk sky, sun glow and a receding
- * solar array. Replace by setting `site.heroBanner.src`.
- */
-function BannerPlaceholder() {
+/** Glowing, slowly turning sun next to "Go solar today". */
+function SunMark() {
   return (
-    <div aria-hidden className="absolute inset-0 -z-20">
-      <div className="absolute inset-0 bg-gradient-to-b from-[#0b1a3a] via-[#1e3a8a] to-[#f59e0b]/80" />
-      <div className="absolute -right-24 top-[-6rem] h-[38rem] w-[38rem] rounded-full bg-[radial-gradient(circle,rgba(253,224,71,0.55)_0%,rgba(245,158,11,0.25)_35%,transparent_68%)] sm:right-[2%]" />
-      <div className="absolute right-[6%] top-[18%] h-36 w-36 rounded-full bg-[radial-gradient(circle_at_40%_35%,#fef9c3_0%,#fde047_30%,#f59e0b_75%)] opacity-90 shadow-[0_0_120px_40px_rgba(245,158,11,0.45)] sm:right-[14%] sm:h-52 sm:w-52" />
+    <svg
+      viewBox="0 0 64 64"
+      aria-hidden
+      className="animate-sun-glow h-[0.95em] w-[0.95em] shrink-0"
+    >
+      <defs>
+        <radialGradient id="sun-core" cx="0.4" cy="0.35" r="0.7">
+          <stop offset="0" stopColor="#fff7c2" />
+          <stop offset="0.45" stopColor="#fcd34d" />
+          <stop offset="1" stopColor="#f59e0b" />
+        </radialGradient>
+      </defs>
+      <g className="animate-sun-spin origin-center [transform-box:fill-box]">
+        {Array.from({ length: 12 }).map((_, i) => (
+          <path
+            key={i}
+            d="M32 2 L35 13 L29 13 Z"
+            fill="#fbbf24"
+            transform={`rotate(${i * 30} 32 32)`}
+          />
+        ))}
+      </g>
+      <circle cx="32" cy="32" r="15" fill="url(#sun-core)" />
+    </svg>
+  );
+}
+
+/** Soft mint wash, bottom-left wave and a swaying leaf sprig. */
+function HeroBackdrop() {
+  return (
+    <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
+      <div className="absolute -right-40 -top-40 h-[42rem] w-[42rem] rounded-full bg-[radial-gradient(circle,rgba(255,255,255,0.9)_0%,transparent_65%)]" />
       <svg
-        viewBox="0 0 1600 600"
-        preserveAspectRatio="xMidYMax slice"
-        className="absolute inset-x-0 bottom-0 h-[62%] w-full"
+        viewBox="0 0 1440 520"
+        preserveAspectRatio="none"
+        className="absolute inset-x-0 bottom-0 h-[55%] w-full"
       >
-        <defs>
-          <linearGradient id="hero-cell" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0" stopColor="#2563eb" />
-            <stop offset="1" stopColor="#0f172a" />
-          </linearGradient>
-          <linearGradient id="hero-ground" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0" stopColor="#1e293b" stopOpacity="0" />
-            <stop offset="0.25" stopColor="#1e293b" />
-            <stop offset="1" stopColor="#020617" />
-          </linearGradient>
-        </defs>
-        <rect y="200" width="1600" height="350" fill="url(#hero-ground)" />
-        {Array.from({ length: 5 }).map((_, row) => {
-          const y = 270 + row * 62;
-          const scale = 0.55 + row * 0.13;
-          const w = 150 * scale;
-          const h = 46 * scale;
-          const count = Math.ceil(1600 / (w + 10)) + 2;
-          return (
-            <g key={row} opacity={0.55 + row * 0.1}>
-              {Array.from({ length: count }).map((__, i) => {
-                const x = i * (w + 10) - (row % 2) * (w / 2);
-                return (
-                  <g key={i}>
-                    <polygon
-                      points={`${x + 10},${y} ${x + w},${y} ${x + w - 8},${y + h} ${x},${y + h}`}
-                      fill="url(#hero-cell)"
-                      stroke="#93c5fd"
-                      strokeOpacity="0.35"
-                      strokeWidth="1"
-                    />
-                    <line
-                      x1={x + w / 2 + 1}
-                      y1={y}
-                      x2={x + w / 2 - 3}
-                      y2={y + h}
-                      stroke="#93c5fd"
-                      strokeOpacity="0.25"
-                    />
-                  </g>
-                );
-              })}
-            </g>
-          );
-        })}
+        <path
+          d="M0 120 C 160 210 260 330 470 360 C 690 390 760 300 1000 340 C 1200 372 1330 430 1440 420 L1440 520 L0 520 Z"
+          fill="#d7f0e1"
+          fillOpacity="0.55"
+        />
+        <path
+          d="M0 260 C 200 330 330 420 560 430 C 760 440 900 400 1100 430 C 1250 452 1360 480 1440 470 L1440 520 L0 520 Z"
+          fill="#c6ead5"
+          fillOpacity="0.45"
+        />
       </svg>
-      {process.env.NODE_ENV !== "production" && (
-        <span className="absolute right-4 top-4 rounded-md border border-dashed border-white/40 px-2 py-1 text-[10px] font-semibold uppercase tracking-wider text-white/60">
-          Banner image placeholder
-        </span>
-      )}
+      <svg
+        viewBox="0 0 160 260"
+        className="animate-sway absolute bottom-[14%] left-[1%] hidden h-56 w-auto origin-bottom text-leaf/25 sm:block"
+      >
+        <path d="M60 255 C 70 190 80 120 120 30" fill="none" stroke="currentColor" strokeWidth="4" strokeLinecap="round" />
+        <path d="M118 34 C 140 20 150 6 152 0 C 130 4 112 14 108 36 Z" fill="currentColor" />
+        <path d="M95 95 C 60 80 40 92 30 110 C 55 120 82 116 95 95 Z" fill="currentColor" />
+        <path d="M102 80 C 130 58 150 60 158 70 C 140 92 116 94 102 80 Z" fill="currentColor" />
+        <path d="M80 150 C 46 140 26 152 18 170 C 44 178 68 172 80 150 Z" fill="currentColor" />
+        <path d="M84 140 C 108 118 130 118 140 126 C 124 150 100 154 84 140 Z" fill="currentColor" />
+      </svg>
+    </div>
+  );
+}
+
+const leaves: Array<{ top: string; size: number; duration: number; delay: number; opacity: number; hue: string }> = [
+  { top: "12%", size: 22, duration: 17, delay: -2, opacity: 0.75, hue: "#4caf6e" },
+  { top: "28%", size: 14, duration: 21, delay: -9, opacity: 0.55, hue: "#7cc68f" },
+  { top: "44%", size: 26, duration: 15, delay: -5, opacity: 0.8, hue: "#2f9b5b" },
+  { top: "58%", size: 16, duration: 19, delay: -13, opacity: 0.6, hue: "#5fbf7c" },
+  { top: "70%", size: 20, duration: 23, delay: -17, opacity: 0.7, hue: "#3aa364" },
+  { top: "36%", size: 12, duration: 25, delay: -20, opacity: 0.45, hue: "#9ad6a8" },
+  { top: "82%", size: 18, duration: 18, delay: -7, opacity: 0.65, hue: "#4caf6e" },
+];
+
+/** Leaves blowing across the hero, as in the poster animation. */
+function FloatingLeaves() {
+  return (
+    <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
+      {leaves.map((leaf, i) => (
+        <svg
+          key={i}
+          viewBox="0 0 24 24"
+          width={leaf.size}
+          height={leaf.size}
+          className={`animate-leaf-drift absolute left-0 opacity-0 ${i > 3 ? "hidden sm:block" : ""}`}
+          style={
+            {
+              top: leaf.top,
+              "--leaf-duration": `${leaf.duration}s`,
+              "--leaf-delay": `${leaf.delay}s`,
+              "--leaf-opacity": leaf.opacity,
+            } as CSSProperties
+          }
+        >
+          <path
+            d="M3 21 C 3 10 10 3 21 3 C 21 14 14 21 3 21 Z"
+            fill={leaf.hue}
+          />
+          <path d="M4 20 L 17 7" stroke="#ffffff" strokeOpacity="0.55" strokeWidth="1" />
+        </svg>
+      ))}
     </div>
   );
 }

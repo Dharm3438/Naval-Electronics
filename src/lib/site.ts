@@ -30,13 +30,14 @@ export const site = {
   mapsUrl: "https://maps.app.goo.gl/bh6oWsYXUJ5tyeg46",
 
   /**
-   * Hero banner photo. Drop the final image into `public/hero/` and set the
-   * path here (e.g. "/hero/banner.jpg", ideally 2400×1200 or wider). While it
-   * is empty the hero renders a designed placeholder scene instead.
+   * Rotating Earth in the hero. `video` is a short, seamlessly looping,
+   * square H.264 clip (no audio) and `poster` a still of its first frame,
+   * shown while the clip loads and to visitors who prefer reduced motion.
    */
-  heroBanner: {
-    src: "" as string,
-    alt: "Rooftop solar installation by Naval Electronics",
+  heroGlobe: {
+    video: "/hero/globe.mp4",
+    poster: "/hero/globe-poster.webp",
+    alt: "Earth covered in rooftop solar panels and greenery, slowly rotating",
   },
 
   hours: "Mon – Sat, 9:30 AM – 8:00 PM",

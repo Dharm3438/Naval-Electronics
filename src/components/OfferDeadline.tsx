@@ -18,14 +18,14 @@ export default function OfferDeadline() {
   if (!open) return null;
 
   return (
-    <p className="mt-6 flex items-start gap-3 rounded-2xl bg-amber/15 px-4 py-3 ring-1 ring-amber/40 backdrop-blur-md">
-      <Megaphone className="mt-0.5 h-5 w-5 shrink-0 text-amber" aria-hidden />
-      <span className="text-sm leading-snug text-white sm:text-[15px]">
-        <strong className="font-extrabold text-amber">
+    <p className="mt-6 inline-flex items-start gap-3 rounded-2xl bg-white/70 px-4 py-3 ring-1 ring-leaf/25 backdrop-blur sm:rounded-full sm:px-5">
+      <Megaphone className="mt-0.5 h-5 w-5 shrink-0 text-forest" aria-hidden />
+      <span className="text-sm leading-snug text-forest/85 sm:text-[15px]">
+        <strong className="font-extrabold text-forest">
           Limited-time offer!
         </strong>{" "}
-        Solar registration is open only until{" "}
-        <strong className="font-bold">
+        Solar registration is open until{" "}
+        <strong className="font-bold text-forest">
           {site.offer.registrationClosesDisplay}
         </strong>
         . Book today.
