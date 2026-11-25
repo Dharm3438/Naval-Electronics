@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { Menu, Phone, X } from "lucide-react";
 import { navLinks, site } from "@/lib/site";
+import ConsultButton from "./ConsultButton";
 import { Logo } from "./Logo";
 
 export default function Navbar() {
@@ -68,13 +69,10 @@ export default function Navbar() {
             <Phone className="h-4 w-4 text-emerald" aria-hidden />
             {site.phoneDisplay}
           </a>
-          <a
-            href="#quote"
-            className="inline-flex shrink-0 whitespace-nowrap rounded-xl bg-amber px-3 py-2.5 text-[13px] font-bold text-ink shadow-lg shadow-amber/25 transition-all hover:bg-amber-deep hover:shadow-amber/40 sm:px-5 sm:text-sm"
-          >
-            <span className="sm:hidden">Quote</span>
-            <span className="hidden sm:inline">Get Free Solar Quote</span>
-          </a>
+          <ConsultButton className="inline-flex shrink-0 whitespace-nowrap rounded-xl bg-amber px-3 py-2.5 text-[13px] font-bold text-ink shadow-lg shadow-amber/25 transition-all hover:bg-amber-deep hover:shadow-amber/40 sm:px-5 sm:text-sm">
+            <span className="sm:hidden">Free Consult</span>
+            <span className="hidden sm:inline">Get Free Consultation</span>
+          </ConsultButton>
           <button
             type="button"
             onClick={() => setOpen((v) => !v)}
@@ -116,13 +114,12 @@ export default function Navbar() {
           ))}
         </ul>
         <div className="mt-5 flex flex-col gap-3">
-          <a
-            href="#quote"
+          <ConsultButton
             onClick={() => setOpen(false)}
             className="rounded-xl bg-amber px-5 py-3.5 text-center text-base font-bold text-ink shadow-lg shadow-amber/25"
           >
-            Get Free Solar Quote
-          </a>
+            Get Free Consultation
+          </ConsultButton>
           <a
             href={`tel:${site.phone}`}
             className="flex items-center justify-center gap-2 rounded-xl border border-ink/15 px-5 py-3.5 text-base font-semibold text-ink"

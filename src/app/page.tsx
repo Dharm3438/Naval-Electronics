@@ -1,3 +1,4 @@
+import ConsultationModal from "@/components/ConsultationModal";
 import Brands from "@/components/Brands";
 import Customers from "@/components/Customers";
 import FAQ from "@/components/FAQ";
@@ -47,20 +48,24 @@ export default function Page() {
       />
       <Navbar />
       <main>
+        {/* 1. Hero banner with 0% interest / 0% down consultation offer */}
         <Hero />
-        <SolarCalculator />
+        {/* 2. Brands  3. Reviews */}
+        <Brands />
+        <Customers />
+        <Projects />
+        {/* Extras: subsidy → process & material → finance → calculator → FAQ */}
         <SubsidyTable />
-        <Finance />
         <Process />
         <WhyNaval />
-        <Brands />
-        <Projects />
+        <Finance />
+        <SolarCalculator />
         <FAQ />
-        <Customers />
         <LeadForm />
       </main>
       <Footer />
       <WhatsAppButton />
+      <ConsultationModal />
     </QuoteProvider>
   );
 }
