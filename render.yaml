@@ -33,7 +33,7 @@ services:
       - path: /_next/static/*
         name: Cache-Control
         value: public, max-age=31536000, immutable
-      # Hero photos. File names carry a version (house-v1-…), so they can be
+      # Hero photos. File names carry a version (hero-v2-…), so they can be
       # cached for a year; bump the version when replacing one.
       - path: /hero/*
         name: Cache-Control

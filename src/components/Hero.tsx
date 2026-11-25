@@ -34,7 +34,7 @@ export default function Hero() {
     <section id="top" className="px-3 pt-3 sm:px-5 sm:pt-4 lg:px-6">
       <div className="relative isolate mx-auto flex max-w-[96rem] flex-col overflow-hidden rounded-[1.75rem] bg-hero-wash ring-1 ring-leaf/10 lg:rounded-[2.25rem]">
         <HeroBackdrop />
-        <HousePhoto />
+        <HeroImage />
 
         <div className="mx-auto w-full max-w-7xl flex-1 px-5 pb-6 pt-2 sm:px-8 sm:pt-4 lg:px-12 lg:pb-10 lg:pt-14">
           <div className="animate-rise relative z-10 min-w-0 lg:max-w-[46rem] xl:max-w-[50rem]">
@@ -146,31 +146,38 @@ export default function Hero() {
   );
 }
 
+const srcSet = (list: ReadonlyArray<{ src: string; width: number }>) =>
+  list.map(({ src, width }) => `${src} ${width}w`).join(", ");
+
 /**
- * The rooftop-solar home. On phones it is a banner above the copy that fades
- * into the page; from `lg` it fills the right of the hero and fades out to
- * the left behind the headline.
+ * The hero artwork. From `lg` it is the full-bleed background (house on the
+ * right, fade, wave and sprig on the left). On phones and tablets a crop of
+ * just the house is shown as a banner above the copy, fading into the page.
  */
-function HousePhoto() {
-  const { sizes, alt } = site.heroImage;
-  const largest = sizes[sizes.length - 1];
+function HeroImage() {
+  const { desktop, mobile, alt } = site.heroImage;
   return (
-    <div className="relative h-56 overflow-hidden min-[420px]:h-64 sm:h-80 lg:absolute lg:inset-y-0 lg:right-0 lg:-z-10 lg:h-auto lg:w-[60%] xl:w-[58%]">
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        src={largest.src}
-        srcSet={sizes.map(({ src, width }) => `${src} ${width}w`).join(", ")}
-        sizes="(min-width: 1280px) 58vw, (min-width: 1024px) 60vw, 100vw"
-        alt={alt}
-        fetchPriority="high"
-        decoding="async"
-        className="animate-ken-burns h-full w-full object-cover object-[60%_62%] lg:object-[65%_center]"
-      />
+    <div className="relative h-56 overflow-hidden min-[420px]:h-64 sm:h-80 lg:absolute lg:inset-0 lg:-z-10 lg:h-auto">
+      <picture>
+        <source
+          media="(min-width: 1024px)"
+          srcSet={srcSet(desktop)}
+          sizes="(min-width: 1536px) 96rem, 100vw"
+        />
+        <img
+          src={mobile[mobile.length - 1].src}
+          srcSet={srcSet(mobile)}
+          sizes="100vw"
+          alt={alt}
+          fetchPriority="high"
+          decoding="async"
+          className="h-full w-full object-cover object-[center_60%] lg:object-[72%_center] xl:object-right"
+        />
+      </picture>
       {/* Phone: fade the bottom of the banner into the copy. */}
       <div aria-hidden className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-hero-wash to-transparent lg:hidden" />
-      {/* Desktop: fade the left of the photo behind the headline. */}
-      <div aria-hidden className="absolute inset-y-0 left-0 hidden w-[70%] bg-gradient-to-r from-hero-wash via-hero-wash/80 to-transparent lg:block xl:w-[55%] xl:via-hero-wash/75" />
-      <div aria-hidden className="absolute inset-x-0 bottom-0 hidden h-40 bg-gradient-to-t from-hero-wash/90 to-transparent lg:block" />
+      {/* Narrow desktops crop the artwork's white side, so soften the photo behind the text. */}
+      <div aria-hidden className="absolute inset-y-0 left-0 hidden w-[68%] bg-gradient-to-r from-white via-white/85 to-transparent lg:block xl:hidden" />
     </div>
   );
 }
@@ -205,10 +212,10 @@ function SunMark() {
   );
 }
 
-/** Bottom-left wave and a swaying leaf sprig. */
+/** Bottom-left wave and leaf sprig for phones (the desktop artwork has its own). */
 function HeroBackdrop() {
   return (
-    <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
+    <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 lg:hidden">
       <svg
         viewBox="0 0 1440 520"
         preserveAspectRatio="none"

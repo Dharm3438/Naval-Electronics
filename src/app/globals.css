@@ -23,7 +23,6 @@
   --animate-float: float 6s ease-in-out infinite;
   --animate-rise: rise 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
   --animate-sun-glow: sun-glow 3.2s ease-in-out infinite;
-  --animate-ken-burns: ken-burns 24s ease-in-out infinite alternate;
   --animate-sway: sway 6s ease-in-out infinite;
 }
 
@@ -36,16 +35,6 @@
   50% {
     filter: drop-shadow(0 0 14px rgb(245 179 1 / 0.85));
     transform: scale(1.08);
-  }
-}
-
-/* Slow push-in on the hero photo. */
-@keyframes ken-burns {
-  from {
-    transform: scale(1);
-  }
-  to {
-    transform: scale(1.06);
   }
 }
 

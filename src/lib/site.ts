@@ -30,15 +30,20 @@ export const site = {
   mapsUrl: "https://maps.app.goo.gl/bh6oWsYXUJ5tyeg46",
 
   /**
-   * Hero photo: rooftop-solar home, AI-upscaled and exported at three widths
-   * so phones download the small file. Files are cached for a year (see
-   * render.yaml), so bump the `v1` in the file names whenever one is replaced.
+   * Hero background: the supplied artwork (rooftop-solar home on the right,
+   * soft fade, wave and leaf sprig on the left), used full-bleed from `lg`.
+   * Phones get `mobile`, a crop of just the house, as a banner above the copy.
+   * Files are cached for a year (see render.yaml), so bump the `v2` in the
+   * file names whenever one is replaced.
    */
   heroImage: {
-    sizes: [
-      { src: "/hero/house-v1-800.webp", width: 800 },
-      { src: "/hero/house-v1-1200.webp", width: 1200 },
-      { src: "/hero/house-v1-2000.webp", width: 2000 },
+    desktop: [
+      { src: "/hero/hero-v2-1920.webp", width: 1920 },
+      { src: "/hero/hero-v2-2720.webp", width: 2720 },
+    ],
+    mobile: [
+      { src: "/hero/hero-v2-house-800.webp", width: 800 },
+      { src: "/hero/hero-v2-house-1200.webp", width: 1200 },
     ],
     alt: "Indian home with a rooftop solar installation on a sunny day",
   },
