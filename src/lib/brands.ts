@@ -177,7 +177,6 @@ export const brands: Brand[] = [
     accent: "#1E3A8A",
     photos: [
       { src: "/brands/reliance-1.webp", alt: "Reliance RNE Pro-L series 690–720 Wp heterojunction module" },
-      { src: "/brands/reliance-2.webp", alt: "Reliance 740 Wp heterojunction (HJT) module" },
     ],
     category: "Solar modules",
     about:
