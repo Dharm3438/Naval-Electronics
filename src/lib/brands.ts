@@ -133,8 +133,8 @@ export const brands: Brand[] = [
     initials: "AS",
     accent: "#0F766E",
     photos: [
-      { src: "/brands/adani-2.webp", alt: "Adani on-grid solar inverter" },
       { src: "/brands/adani-1.webp", alt: "Adani Solar utility-scale solar plant" },
+      { src: "/brands/adani-2.webp", alt: "Adani on-grid solar inverter" },
     ],
     category: "Solar modules & cells",
     about:
