@@ -26,9 +26,8 @@ export const site = {
     locality: "Chalisgaon",
     postalCode: "424101",
   },
-  mapsUrl:
-    "https://www.google.com/maps/search/?api=1&query=Naval+Electronics+Chalisgaon",
-  google: { rating: 4.7, reviews: 52 },
+  /** Google Business Profile — same link as `googleProfile.url` in customers.ts. */
+  mapsUrl: "https://maps.app.goo.gl/bh6oWsYXUJ5tyeg46",
 
   /**
    * Hero banner photo. Drop the final image into `public/hero/` and set the
