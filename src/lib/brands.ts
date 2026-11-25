@@ -78,7 +78,7 @@ export const brands: Brand[] = [
       "Mono PERC half-cut modules",
       "DCR series for PM Surya Ghar subsidy",
     ],
-    warranty: "25-year performance · 12-year product warranty",
+    warranty: "25–30 year performance · 12-year product warranty",
     bestFor: "Residential rooftops claiming subsidy, and large industrial plants",
   },
   {
@@ -99,7 +99,7 @@ export const brands: Brand[] = [
       "Mono PERC modules",
       "DCR-compliant subsidy range",
     ],
-    warranty: "25-year performance · 12-year product warranty",
+    warranty: "25–30 year performance · 12-year product warranty",
     bestFor: "Subsidy-backed residential and housing-society systems",
   },
   {
@@ -113,13 +113,13 @@ export const brands: Brand[] = [
     ],
     category: "Solar modules",
     about:
-      "A Kolkata-headquartered manufacturer that moved early to n-type TOPCon, the technology now replacing PERC across the Indian market. TOPCon modules hold output better at the high roof temperatures of an Indian summer and degrade more slowly over the 25-year life.",
+      "A Kolkata-headquartered manufacturer that moved early to n-type TOPCon, the technology now replacing PERC across the Indian market. TOPCon modules hold output better at the high roof temperatures of an Indian summer and degrade more slowly over its 25–30 year life.",
     products: [
       "N-type TOPCon bifacial modules",
       "High-efficiency large-format modules",
       "Mono PERC modules",
     ],
-    warranty: "25-year performance · 12-year product warranty",
+    warranty: "25–30 year performance · 12-year product warranty",
     bestFor: "Tight roofs needing maximum generation per square foot",
   },
   {
@@ -140,7 +140,7 @@ export const brands: Brand[] = [
       "Mono PERC modules",
       "DCR cells and modules",
     ],
-    warranty: "25-year performance · 12-year product warranty",
+    warranty: "25–30 year performance · 12-year product warranty",
     bestFor: "Commercial and industrial rooftops needing bulk supply",
   },
   {
@@ -161,7 +161,7 @@ export const brands: Brand[] = [
       "Mono PERC modules",
       "Integrated rooftop solutions",
     ],
-    warranty: "25-year performance · 12-year product warranty",
+    warranty: "25–30 year performance · 12-year product warranty",
     bestFor: "Homeowners prioritising brand assurance and resale value",
   },
   {
@@ -182,7 +182,7 @@ export const brands: Brand[] = [
       "N-type high-efficiency modules",
       "Integrated rooftop packages",
     ],
-    warranty: "25-year performance · product warranty per current datasheet",
+    warranty: "25–30 year performance · product warranty per current datasheet",
     bestFor: "Early adopters wanting the latest cell technology",
   },
 ];
