@@ -58,6 +58,10 @@ npm run dev
 
 Then open http://localhost:3000. The dev server hot-reloads on save.
 
+The "Get Free Consultation" form saves each request as a row in a shared
+Google Sheet. Set `NEXT_PUBLIC_LEADS_ENDPOINT` before building; see
+[docs/lead-sheet-setup.md](docs/lead-sheet-setup.md).
+
 To produce the deployable files:
 
 ```bash
