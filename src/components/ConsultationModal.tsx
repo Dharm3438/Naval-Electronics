@@ -7,6 +7,7 @@ import {
   Building2,
   CheckCircle2,
   Factory,
+  Loader2,
   Home,
   MessageCircle,
   Phone,
@@ -14,6 +15,7 @@ import {
   ShieldCheck,
   X,
 } from "lucide-react";
+import { submitLead } from "@/lib/leads";
 import { site, waLink } from "@/lib/site";
 import { useQuote, type ConsultPrefill } from "./QuoteContext";
 
@@ -100,6 +102,9 @@ function Dialog({
   const [form, setForm] = useState<FormState>(() => initialForm(prefill));
   const [errors, setErrors] = useState<Errors>({});
   const [submitted, setSubmitted] = useState<FormState | null>(null);
+  const [sending, setSending] = useState(false);
+  const [sendFailed, setSendFailed] = useState(false);
+  const [honeypot, setHoneypot] = useState("");
   const firstField = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -125,8 +130,9 @@ function Dialog({
       setErrors((prev) => ({ ...prev, [key]: undefined }));
     };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (sending) return;
     const found = validate(form);
     setErrors(found);
     if (Object.keys(found).length > 0) {
@@ -134,7 +140,25 @@ function Dialog({
       document.getElementById(`consult-${firstKey}`)?.focus();
       return;
     }
-    setSubmitted(form);
+    setSending(true);
+    setSendFailed(false);
+    try {
+      await submitLead({
+        name: form.name.trim(),
+        phone: form.phone.trim(),
+        property: form.property,
+        bill: form.bill.trim(),
+        city: form.city.trim(),
+        pincode: form.pincode.trim(),
+        systemSize: prefill?.systemSize,
+        website: honeypot,
+      });
+      setSubmitted(form);
+    } catch {
+      setSendFailed(true);
+    } finally {
+      setSending(false);
+    }
   };
 
   return (
@@ -325,12 +349,67 @@ function Dialog({
               </div>
             </div>
 
+            {/* Honeypot: hidden from people, filled in by spam bots. */}
+            <div aria-hidden className="absolute -left-[9999px] h-px w-px overflow-hidden">
+              <label htmlFor="consult-website">Website</label>
+              <input
+                id="consult-website"
+                type="text"
+                tabIndex={-1}
+                autoComplete="off"
+                value={honeypot}
+                onChange={(e) => setHoneypot(e.target.value)}
+              />
+            </div>
+
+            {sendFailed && (
+              <div
+                role="alert"
+                className="mt-6 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700"
+              >
+                <p className="flex items-start gap-2 font-semibold">
+                  <AlertCircle className="mt-0.5 h-4 w-4 shrink-0" aria-hidden />
+                  We couldn&apos;t send your request. Please try again, or reach us
+                  directly:
+                </p>
+                <div className="mt-3 flex flex-wrap gap-2 pl-6">
+                  <a
+                    href={waLink(buildMessage(form, prefill?.systemSize))}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 rounded-lg bg-leaf px-3 py-2 text-xs font-bold text-white hover:bg-leaf-deep"
+                  >
+                    <MessageCircle className="h-4 w-4" aria-hidden />
+                    WhatsApp
+                  </a>
+                  <a
+                    href={`tel:${site.phone}`}
+                    className="inline-flex items-center gap-1.5 rounded-lg border border-forest/15 bg-white px-3 py-2 text-xs font-bold text-forest hover:border-forest/30"
+                  >
+                    <Phone className="h-4 w-4 text-leaf" aria-hidden />
+                    Call {site.phoneDisplay}
+                  </a>
+                </div>
+              </div>
+            )}
+
             <button
               type="submit"
-              className="mt-6 flex w-full items-center justify-center gap-2 rounded-xl bg-leaf px-6 py-4 text-base font-bold text-white shadow-xl shadow-leaf/25 transition-all hover:bg-leaf-deep hover:shadow-leaf/40"
+              disabled={sending}
+              aria-busy={sending}
+              className="mt-6 flex w-full items-center justify-center gap-2 rounded-xl bg-leaf px-6 py-4 text-base font-bold text-white shadow-xl shadow-leaf/25 transition-all hover:bg-leaf-deep hover:shadow-leaf/40 disabled:cursor-wait disabled:opacity-75"
             >
-              <Send className="h-5 w-5" aria-hidden />
-              Get Free Consultation
+              {sending ? (
+                <>
+                  <Loader2 className="h-5 w-5 animate-spin" aria-hidden />
+                  Sending…
+                </>
+              ) : (
+                <>
+                  <Send className="h-5 w-5" aria-hidden />
+                  {sendFailed ? "Try Again" : "Get Free Consultation"}
+                </>
+              )}
             </button>
 
             <p className="mt-4 flex items-start justify-center gap-1.5 text-center text-xs leading-relaxed text-forest/50">

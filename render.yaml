@@ -9,6 +9,11 @@ services:
     runtime: static
     buildCommand: npm ci && npm run build
     staticPublishPath: ./out
+    # Lead form → Google Sheet. Set the value in the Render dashboard
+    # (see docs/lead-sheet-setup.md); it is read at build time.
+    envVars:
+      - key: NEXT_PUBLIC_LEADS_ENDPOINT
+        sync: false
     # Only rebuild when something that affects the site changes.
     buildFilter:
       paths:
