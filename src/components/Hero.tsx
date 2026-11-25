@@ -103,7 +103,8 @@ export default function Hero() {
             </div>
 
             <p className="mt-4 text-xs font-medium text-forest/60 sm:text-sm">
-              Free loan consultation • Handled by {site.name}
+              700+ installations done • Free loan consultation • Handled by{" "}
+              {site.name}
             </p>
           </div>
         </div>
