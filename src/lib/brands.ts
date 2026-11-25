@@ -133,6 +133,7 @@ export const brands: Brand[] = [
     initials: "AS",
     accent: "#0F766E",
     photos: [
+      { src: "/brands/adani-3.webp", alt: "Adani Solar MonoPERC and Shine TOPCon modules — BloombergNEF Tier 1 PV module manufacturer" },
       { src: "/brands/adani-1.webp", alt: "Adani Solar utility-scale solar plant" },
       { src: "/brands/adani-2.webp", alt: "Adani on-grid solar inverter" },
     ],
