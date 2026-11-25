@@ -22,13 +22,13 @@ export default function Footer() {
         <div className="grid gap-10 lg:grid-cols-[1.4fr_1fr_1fr_1.2fr]">
           <div>
             <div className="flex items-center gap-2.5">
-              <Logo className="h-10 w-10" />
+              <Logo className="h-11 w-11" />
               <span className="flex flex-col leading-none">
-                <span className="font-display text-lg font-extrabold text-forest">
+                <span className="font-display text-lg font-extrabold uppercase tracking-[0.02em] text-forest">
                   {site.name}
                 </span>
-                <span className="mt-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-forest/50">
-                  Solar &amp; Electrical
+                <span className="mt-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-leaf">
+                  Solar Solutions
                 </span>
               </span>
             </div>
