@@ -17,9 +17,21 @@ export default function Customers() {
             Roofs we have powered, in their words
           </h2>
           <p className="mt-4 text-base leading-relaxed text-ink/65 sm:text-lg">
-            Homes, societies and industrial units across {site.city} running on
+            Homes, societies and industrial units running on
             systems we designed, installed and commissioned.
           </p>
+          <a
+            href={site.mapsUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-5 inline-flex items-center gap-2 rounded-full border border-ink/10 bg-white px-4 py-2 text-sm font-bold text-ink shadow-sm transition-colors hover:border-amber/50"
+          >
+            <Star className="h-4 w-4 fill-amber text-amber" aria-hidden />
+            {site.google.rating} on Google
+            <span className="font-semibold text-ink/50">
+              · {site.google.reviews} reviews
+            </span>
+          </a>
         </div>
 
         <SwipeRow

@@ -5,7 +5,7 @@ export default function WhatsAppButton() {
   return (
     <a
       href={waLink(
-        `Hello ${site.name}, I saw your website and would like to know more about rooftop solar for my property in ${site.city}.`,
+        `Hello ${site.name}, I saw your website and would like to know more about rooftop solar for my property.`,
       )}
       target="_blank"
       rel="noopener noreferrer"

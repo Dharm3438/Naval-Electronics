@@ -72,14 +72,14 @@ export const brands: Brand[] = [
     ],
     category: "Solar modules",
     about:
-      "One of India's largest solar module manufacturers, with an ALMM-listed, DCR-compliant range that covers both subsidised residential rooftops and large commercial plants. Their distribution and service footprint across Maharashtra is the widest of any brand we carry, which matters when a module needs replacing eight years from now.",
+      "One of India's largest solar module manufacturers, with an ALMM-listed, DCR-compliant range that covers both subsidised residential rooftops and large commercial plants. Their nationwide distribution and service footprint is the widest of any brand we carry, which matters when a module needs replacing eight years from now.",
     products: [
       "N-type TOPCon bifacial modules",
       "Mono PERC half-cut modules",
       "DCR series for PM Surya Ghar subsidy",
     ],
     warranty: "25-year performance · 12-year product warranty",
-    bestFor: "Residential rooftops claiming subsidy, and large MIDC plants",
+    bestFor: "Residential rooftops claiming subsidy, and large industrial plants",
   },
   {
     slug: "premier-energies",
@@ -113,7 +113,7 @@ export const brands: Brand[] = [
     ],
     category: "Solar modules",
     about:
-      "A Kolkata-headquartered manufacturer that moved early to n-type TOPCon, the technology now replacing PERC across the Indian market. TOPCon modules hold output better at the high roof temperatures we see through a Marathwada summer and degrade more slowly over the 25-year life.",
+      "A Kolkata-headquartered manufacturer that moved early to n-type TOPCon, the technology now replacing PERC across the Indian market. TOPCon modules hold output better at the high roof temperatures of an Indian summer and degrade more slowly over the 25-year life.",
     products: [
       "N-type TOPCon bifacial modules",
       "High-efficiency large-format modules",

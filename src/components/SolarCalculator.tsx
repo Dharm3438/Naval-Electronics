@@ -70,7 +70,7 @@ export default function SolarCalculator() {
           <p className="mt-4 text-base leading-relaxed text-white/65 sm:text-lg">
             Move the slider to your average monthly MSEDCL bill. We estimate
             system size, roof area, your PM Surya Ghar subsidy and the payback
-            period using real Maharashtra generation and pricing figures.
+            period using real generation and pricing figures.
           </p>
         </div>
 
@@ -197,7 +197,7 @@ export default function SolarCalculator() {
                   {formatINR(result.grossCost)}
                 </div>
                 <div className="mt-1 text-xs font-medium text-ink/50">
-                  Turnkey, before subsidy (₹65,000 / kW)
+                  Turnkey, before subsidy (₹60,000 / kW)
                 </div>
               </div>
 
@@ -294,7 +294,7 @@ export default function SolarCalculator() {
             </button>
             <p className="mt-3 text-center text-xs leading-relaxed text-ink/50">
               Estimates assume 90% bill offset with MSEDCL net-metering and ~4
-              units per kW per day of generation in Marathwada. Final figures
+              units per kW per day of generation. Final figures
               are confirmed after the free site survey.
             </p>
           </div>

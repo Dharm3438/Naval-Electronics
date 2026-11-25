@@ -1,5 +1,4 @@
 import { CirclePower, Cpu, Smartphone, Wrench } from "lucide-react";
-import { site } from "@/lib/site";
 
 const pillars = [
   {
@@ -22,9 +21,9 @@ const pillars = [
   },
   {
     icon: Wrench,
-    title: "Local Service Guarantee",
-    body: `Our team and spares are based right here in ${site.city}. No ticket queue in another city — a callback, a site visit and an on-roof fix from engineers who installed the system in the first place.`,
-    bullets: ["Same-city service team", "Annual maintenance contracts", "5-year workmanship warranty"],
+    title: "Direct Service Guarantee",
+    body: "Our own service team and spares, not a call centre. No ticket queue — a callback, a site visit and an on-roof fix from the engineers who installed the system in the first place.",
+    bullets: ["In-house service team", "Annual maintenance contracts", "5-year workmanship warranty"],
   },
 ];
 
@@ -37,7 +36,7 @@ export default function WhyNaval() {
             The Engineering Edge
           </div>
           <h2 className="mt-5 font-display text-3xl font-extrabold text-ink sm:text-4xl lg:text-[2.75rem]">
-            Why homeowners and MIDC units choose Naval Electronics
+            Why homeowners and industrial units choose Naval Electronics
           </h2>
           <p className="mt-4 text-base leading-relaxed text-ink/65 sm:text-lg">
             A rooftop plant is a 25-year electrical installation on your

@@ -7,23 +7,13 @@ import ConsultButton from "./ConsultButton";
 const services = [
   "Residential rooftop solar",
   "Housing society solar",
-  "Commercial & MIDC rooftop plants",
+  "Commercial & industrial rooftop plants",
   "MSEDCL net-metering liaison",
   "PM Surya Ghar subsidy processing",
   "Solar finance & EMI assistance",
   "Earthing, SPD & electrical works",
 ];
 
-const areas = [
-  "CIDCO",
-  "Garkheda",
-  "Beed Bypass",
-  "Waluj MIDC",
-  "Shendra MIDC",
-  "N-Zones",
-  "Jalna Road",
-  "Paithan Road",
-];
 
 export default function Footer() {
   return (
@@ -45,7 +35,7 @@ export default function Footer() {
             <p className="mt-4 max-w-sm text-sm leading-relaxed text-ink/65">
               {site.tagline}. Turnkey rooftop solar, MSEDCL net-metering and
               PM Surya Ghar subsidy processing for homes, housing societies and
-              industries across {site.region}.
+              industries.
             </p>
             <a
               href={waLink(
@@ -111,6 +101,15 @@ export default function Footer() {
                   {site.address.line2}
                   <br />
                   {site.address.line3}
+                  <br />
+                  <a
+                    href={site.mapsUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-semibold text-amber-deep transition-colors hover:text-ink"
+                  >
+                    Get directions
+                  </a>
                 </address>
               </li>
               <li className="flex items-start gap-2.5">
@@ -120,6 +119,16 @@ export default function Footer() {
                   className="font-semibold text-ink transition-colors hover:text-amber-deep"
                 >
                   {site.phoneDisplay}
+                </a>
+              </li>
+              <li className="flex items-start gap-2.5">
+                <Phone className="mt-0.5 h-4 w-4 shrink-0 text-amber" aria-hidden />
+                <a
+                  href={`tel:${site.officePhone}`}
+                  className="font-semibold text-ink transition-colors hover:text-amber-deep"
+                >
+                  {site.officePhoneDisplay}
+                  <span className="ml-1.5 font-normal text-ink/50">(office)</span>
                 </a>
               </li>
               <li className="flex items-start gap-2.5">
@@ -139,23 +148,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-12 border-t border-ink/10 pt-8">
-          <h2 className="text-[11px] font-bold uppercase tracking-wider text-ink/45">
-            Service areas in {site.city} ({site.cityAlt})
-          </h2>
-          <ul className="mt-3 flex flex-wrap gap-2">
-            {areas.map((a) => (
-              <li
-                key={a}
-                className="rounded-lg bg-white px-2.5 py-1.5 text-xs font-semibold text-ink/60"
-              >
-                {a}
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        <div className="mt-8 flex flex-col gap-2 border-t border-ink/10 pt-6 text-xs text-ink/50 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-12 flex flex-col gap-2 border-t border-ink/10 pt-6 text-xs text-ink/50 sm:flex-row sm:items-center sm:justify-between">
           <p>
             © <CopyrightYear fallback={2026} /> {site.name}. All rights reserved.
           </p>

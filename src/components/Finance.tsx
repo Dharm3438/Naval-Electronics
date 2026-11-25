@@ -49,7 +49,7 @@ const options = [
     icon: Building2,
     rate: "CAPEX",
     rateNote: "or OPEX",
-    title: "Commercial & MIDC structures",
+    title: "Commercial & industrial structures",
     body: "Industrial units can buy outright and claim accelerated depreciation, or take a zero-upfront OPEX route where you pay only for the units generated. We model both against your load profile before you commit.",
     points: [
       "Accelerated depreciation on CAPEX",

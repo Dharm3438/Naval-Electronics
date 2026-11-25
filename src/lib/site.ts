@@ -1,32 +1,34 @@
 /**
  * Central business configuration for Naval Electronics.
  *
- * ⚠️ REPLACE THE FOUR PLACEHOLDER VALUES BELOW WITH THE REAL DETAILS
- * before this site goes live. They are the only values in the codebase
- * that are not production-ready.
- *   - phone        : 10-digit landline/mobile in E.164 form
- *   - whatsapp     : 91 + 10-digit number, digits only (used in wa.me links)
- *   - email        : public enquiries inbox
- *   - address      : full office address incl. pincode
+ * The site deliberately avoids naming a city or service region in its copy so
+ * the offer reads the same wherever a visitor lands from. The office address
+ * appears only as a contact detail.
+ *
+ * ⚠️ `email` is still a placeholder — replace it with the real inbox.
  */
 export const site = {
   name: "Naval Electronics",
   tagline: "Engineered Rooftop Solar & Electrical Solutions",
-  city: "Chhatrapati Sambhajinagar",
-  cityAlt: "Aurangabad",
-  region: "Marathwada, Maharashtra",
 
-  // --- REPLACE ---
-  phone: "+919000000000",
-  phoneDisplay: "+91 90000 00000",
-  whatsapp: "919000000000",
+  /** Primary sales line — used for every Call and WhatsApp button. */
+  phone: "+917620693195",
+  phoneDisplay: "+91 76206 93195",
+  whatsapp: "917620693195",
+  /** Office landline / second number, shown in the footer. */
+  officePhone: "+919975701977",
+  officePhoneDisplay: "+91 99757 01977",
   email: "enquiry@navalelectronics.in",
   address: {
-    line1: "Naval Electronics, Solar & Electrical Division",
-    line2: "Jalna Road, Chhatrapati Sambhajinagar (Aurangabad)",
-    line3: "Maharashtra 431001, India",
+    line1: "Ganesh Cross Road, beside Naik Photo Studio",
+    line2: "Hanuman Wadi, Chalisgaon",
+    line3: "Maharashtra 424101, India",
+    locality: "Chalisgaon",
+    postalCode: "424101",
   },
-  // --- /REPLACE ---
+  mapsUrl:
+    "https://www.google.com/maps/search/?api=1&query=Naval+Electronics+Chalisgaon",
+  google: { rating: 4.7, reviews: 52 },
 
   /**
    * Hero banner photo. Drop the final image into `public/hero/` and set the
@@ -38,8 +40,18 @@ export const site = {
     alt: "Rooftop solar installation by Naval Electronics",
   },
 
-  hours: "Mon – Sat, 9:30 AM – 7:30 PM",
+  hours: "Mon – Sat, 9:30 AM – 8:00 PM",
   url: "https://navalelectronics.in",
+  /**
+   * Festival offer from the hero poster. The deadline banner hides itself
+   * automatically once `registrationCloses` has passed (end of day, IST).
+   */
+  offer: {
+    label: "Festival Special Offer",
+    registrationCloses: "2026-12-15T23:59:59+05:30",
+    registrationClosesDisplay: "15 December",
+    startingPrice: 180_000,
+  },
 } as const;
 
 export const navLinks = [

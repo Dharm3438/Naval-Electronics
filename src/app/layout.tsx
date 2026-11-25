@@ -17,9 +17,9 @@ const jakarta = Plus_Jakarta_Sans({
 });
 
 const title =
-  "Rooftop Solar in Chhatrapati Sambhajinagar | Naval Electronics Solar Installation";
+  "Rooftop Solar with 0% Interest & 0% Down Payment | Naval Electronics";
 const description =
-  "Naval Electronics installs turnkey rooftop solar for homes, housing societies and MIDC industries in Chhatrapati Sambhajinagar (Aurangabad). Up to ₹78,000 PM Surya Ghar subsidy, complete MSEDCL net-metering and 25-year panel warranty.";
+  "Naval Electronics installs turnkey rooftop solar for homes, housing societies and industries. 0% interest, 0% down payment, up to ₹78,000 PM Surya Ghar subsidy and complete systems from ₹1,80,000 with top brands.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
@@ -29,14 +29,14 @@ export const metadata: Metadata = {
   },
   description,
   keywords: [
-    "rooftop solar Chhatrapati Sambhajinagar",
-    "solar panel installation Aurangabad",
-    "PM Surya Ghar Muft Bijli Yojana Maharashtra",
+    "rooftop solar 0% interest",
+    "solar 0% down payment",
+    "PM Surya Ghar Muft Bijli Yojana",
     "MSEDCL net metering",
     "solar subsidy 78000",
-    "commercial solar MIDC Waluj",
+    "commercial rooftop solar",
     "Naval Electronics solar",
-    "on-grid solar Marathwada",
+    "on-grid rooftop solar",
   ],
   authors: [{ name: site.name }],
   creator: site.name,
@@ -53,7 +53,7 @@ export const metadata: Metadata = {
         url: "/opengraph-image.svg",
         width: 1200,
         height: 630,
-        alt: "Naval Electronics — engineered rooftop solar in Chhatrapati Sambhajinagar",
+        alt: "Naval Electronics — engineered rooftop solar",
       },
     ],
   },

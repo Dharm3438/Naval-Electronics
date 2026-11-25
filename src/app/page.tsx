@@ -19,20 +19,20 @@ const localBusinessSchema = {
   "@type": "ElectricalContractor",
   name: site.name,
   description:
-    "Turnkey rooftop solar installation, MSEDCL net-metering and PM Surya Ghar subsidy processing in Chhatrapati Sambhajinagar (Aurangabad), Maharashtra.",
+    "Turnkey rooftop solar installation, MSEDCL net-metering and PM Surya Ghar subsidy processing, with 0% interest and 0% down payment finance.",
   url: site.url,
   telephone: site.phone,
   email: site.email,
   address: {
     "@type": "PostalAddress",
-    streetAddress: site.address.line2,
-    addressLocality: site.city,
+    streetAddress: `${site.address.line1}, Hanuman Wadi`,
+    addressLocality: site.address.locality,
     addressRegion: "Maharashtra",
-    postalCode: "431001",
+    postalCode: site.address.postalCode,
     addressCountry: "IN",
   },
-  areaServed: [site.city, site.cityAlt, "Marathwada", "Maharashtra"],
-  openingHours: "Mo-Sa 09:30-19:30",
+  areaServed: "IN",
+  openingHours: "Mo-Sa 09:30-20:00",
   priceRange: "₹₹",
 };
 
