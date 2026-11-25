@@ -42,7 +42,7 @@ category positioning, not from a specific model sheet.
 - **Tailwind CSS v4** (design tokens declared in `src/app/globals.css`)
 - **Lucide React** icons
 - `next/font/google`: Plus Jakarta Sans (headings) + Inter (body)
-- No backend required — leads are handed off via a pre-filled WhatsApp deep link
+- No backend required — consultation requests are emailed via [Web3Forms](https://web3forms.com), with a pre-filled WhatsApp link as a second channel
 
 ## Run it locally
 
@@ -85,11 +85,32 @@ and image files in `out/`. Nothing needs Node.js at runtime — the calculator,
 FAQ accordion, mobile drawer and consultation popup all run in the visitor's browser.
 
 That means it can be hosted anywhere that serves files, including cheap shared
-hosting. Form submissions are handed to WhatsApp via a `wa.me` deep link rather
-than stored in a database, which is why no server is required.
+hosting. Consultation requests are posted from the visitor's browser straight to
+Web3Forms, which emails them to you — see "Getting enquiries by email" below.
 
-If you later want submissions saved to a database or emailed, that is when a
-backend becomes necessary — see "Adding a backend later" below.
+## Getting enquiries by email
+
+When a visitor submits the consultation popup, the browser sends the details to
+[Web3Forms](https://web3forms.com) (free: 250 submissions a month), which emails
+them to whichever address the access key was created for. Any inbox works — a
+personal Gmail now, a business mailbox later.
+
+1. Go to https://web3forms.com, enter the email that should receive leads and
+   click **Create Access Key**. The key arrives in that inbox.
+2. In the Render dashboard, open the `naval-electronics` static site →
+   **Environment** → add `NEXT_PUBLIC_WEB3FORMS_KEY` with that key → save.
+3. **Manual Deploy → Deploy latest commit.** The key is baked in at build time,
+   so it only takes effect after a rebuild.
+4. Submit a test enquiry on the live site and check the inbox (and the spam
+   folder the first time — mark it "Not spam").
+
+To switch inboxes later (e.g. once you have `enquiry@yourdomain`), create a new
+key for that address, replace the value on Render and redeploy. No code change.
+
+The key is not a secret: it only says which inbox to deliver to, and it is
+visible in the page's JavaScript by design. If a production build has no key,
+the form shows an error with a WhatsApp fallback instead of pretending the
+request was sent. For local testing, copy `.env.example` to `.env.local`.
 
 ## Deploying
 
@@ -165,7 +186,7 @@ calculator and performance all stay as they are.
 
 ## Adding a backend later
 
-Leads currently go out over WhatsApp only. To also capture them server-side:
+Leads are emailed through Web3Forms. To store them in your own database instead:
 
 1. Remove `output: "export"` from `next.config.ts`.
 2. Add a route handler at `src/app/api/leads/route.ts`.
@@ -173,10 +194,6 @@ Leads currently go out over WhatsApp only. To also capture them server-side:
    `FormState` object before calling `setSubmitted`.
 4. Deploy to Vercel, or to Render as a **Web Service** with start command
    `npm run start`.
-
-A no-code alternative that keeps the site static: point the form at Formspree,
-Web3Forms or a Google Apps Script endpoint, all of which accept a POST from the
-browser and email you the lead.
 
 ## Structure
 

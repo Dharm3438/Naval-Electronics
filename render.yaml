@@ -9,6 +9,12 @@ services:
     runtime: static
     buildCommand: npm ci && npm run build
     staticPublishPath: ./out
+    # Web3Forms access key for the consultation form (see README → "Getting
+    # enquiries by email"). Render asks for the value when the Blueprint is
+    # created; for an existing service add it under Environment, then redeploy.
+    envVars:
+      - key: NEXT_PUBLIC_WEB3FORMS_KEY
+        sync: false
     # Only rebuild when something that affects the site changes.
     buildFilter:
       paths:

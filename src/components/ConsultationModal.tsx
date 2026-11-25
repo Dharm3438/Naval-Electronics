@@ -8,6 +8,7 @@ import {
   CheckCircle2,
   Factory,
   Home,
+  Loader2,
   MessageCircle,
   Phone,
   Send,
@@ -74,6 +75,43 @@ function buildMessage(form: FormState, systemSize?: number) {
   ].join("\n");
 }
 
+/**
+ * Leads are emailed through Web3Forms (https://web3forms.com), which accepts a
+ * POST straight from the browser — so the site stays fully static. The access
+ * key only identifies which inbox to deliver to; it is safe to ship publicly.
+ * Set it as NEXT_PUBLIC_WEB3FORMS_KEY in Render → Environment (or .env.local).
+ */
+const WEB3FORMS_KEY = process.env.NEXT_PUBLIC_WEB3FORMS_KEY ?? "";
+
+async function sendLead(form: FormState, systemSize?: number) {
+  if (!WEB3FORMS_KEY) {
+    if (process.env.NODE_ENV !== "production") {
+      console.warn("NEXT_PUBLIC_WEB3FORMS_KEY is not set — lead was not emailed.");
+      return;
+    }
+    throw new Error("Lead form is not configured.");
+  }
+  const res = await fetch("https://api.web3forms.com/submit", {
+    method: "POST",
+    headers: { "Content-Type": "application/json", Accept: "application/json" },
+    body: JSON.stringify({
+      access_key: WEB3FORMS_KEY,
+      subject: `New solar enquiry: ${form.name.trim()}, ${form.city.trim()} (₹${Number(form.bill).toLocaleString("en-IN")}/month)`,
+      from_name: `${site.name} website`,
+      Name: form.name.trim(),
+      Mobile: `+91 ${form.phone.trim()}`,
+      "Property type": form.property,
+      "Monthly light bill": `₹${Number(form.bill).toLocaleString("en-IN")}`,
+      City: form.city.trim(),
+      Pincode: form.pincode.trim(),
+      ...(systemSize ? { "Calculator estimate": `${systemSize} kW system` } : {}),
+      "WhatsApp the customer": `https://wa.me/91${form.phone.trim()}`,
+    }),
+  });
+  const data = (await res.json().catch(() => null)) as { success?: boolean } | null;
+  if (!res.ok || !data?.success) throw new Error("Lead could not be sent.");
+}
+
 /** Mounted once by the page; shown whenever `openConsult()` is called. */
 export default function ConsultationModal() {
   const { consultOpen, prefill, closeConsult } = useQuote();
@@ -100,6 +138,10 @@ function Dialog({
   const [form, setForm] = useState<FormState>(() => initialForm(prefill));
   const [errors, setErrors] = useState<Errors>({});
   const [submitted, setSubmitted] = useState<FormState | null>(null);
+  const [sending, setSending] = useState(false);
+  const [sendFailed, setSendFailed] = useState(false);
+  /** Hidden honeypot: real visitors never fill it, spam bots usually do. */
+  const [botcheck, setBotcheck] = useState(false);
   const firstField = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -125,8 +167,9 @@ function Dialog({
       setErrors((prev) => ({ ...prev, [key]: undefined }));
     };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (sending) return;
     const found = validate(form);
     setErrors(found);
     if (Object.keys(found).length > 0) {
@@ -134,7 +177,20 @@ function Dialog({
       document.getElementById(`consult-${firstKey}`)?.focus();
       return;
     }
-    setSubmitted(form);
+    if (botcheck) {
+      setSubmitted(form);
+      return;
+    }
+    setSending(true);
+    setSendFailed(false);
+    try {
+      await sendLead(form, prefill?.systemSize);
+      setSubmitted(form);
+    } catch {
+      setSendFailed(true);
+    } finally {
+      setSending(false);
+    }
   };
 
   return (
@@ -187,6 +243,7 @@ function Dialog({
             systemSize={prefill?.systemSize}
             onReset={() => {
               setSubmitted(null);
+              setSendFailed(false);
               setForm(emptyForm);
             }}
           />
@@ -325,12 +382,50 @@ function Dialog({
               </div>
             </div>
 
+            <input
+              type="checkbox"
+              name="botcheck"
+              tabIndex={-1}
+              autoComplete="off"
+              aria-hidden
+              checked={botcheck}
+              onChange={(e) => setBotcheck(e.target.checked)}
+              className="hidden"
+            />
+
+            {sendFailed && (
+              <div
+                role="alert"
+                className="mt-6 rounded-xl border border-red-300 bg-red-50 px-4 py-3 text-sm text-red-700"
+              >
+                <p className="flex items-start gap-1.5 font-semibold">
+                  <AlertCircle className="mt-0.5 h-4 w-4 shrink-0" aria-hidden />
+                  We couldn&apos;t send your request. Please check your internet
+                  connection and try again, or send it to us on WhatsApp.
+                </p>
+                <a
+                  href={waLink(buildMessage(form, prefill?.systemSize))}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-2 inline-flex items-center gap-1.5 font-bold text-emerald-deep underline underline-offset-4"
+                >
+                  <MessageCircle className="h-4 w-4" aria-hidden />
+                  Send on WhatsApp instead
+                </a>
+              </div>
+            )}
+
             <button
               type="submit"
-              className="mt-6 flex w-full items-center justify-center gap-2 rounded-xl bg-amber px-6 py-4 text-base font-bold text-ink shadow-xl shadow-amber/25 transition-all hover:bg-amber-deep hover:shadow-amber/40"
+              disabled={sending}
+              className="mt-6 flex w-full items-center justify-center gap-2 rounded-xl bg-amber px-6 py-4 text-base font-bold text-ink shadow-xl shadow-amber/25 transition-all hover:bg-amber-deep hover:shadow-amber/40 disabled:cursor-wait disabled:opacity-70"
             >
-              <Send className="h-5 w-5" aria-hidden />
-              Get Free Consultation
+              {sending ? (
+                <Loader2 className="h-5 w-5 animate-spin" aria-hidden />
+              ) : (
+                <Send className="h-5 w-5" aria-hidden />
+              )}
+              {sending ? "Sending…" : "Get Free Consultation"}
             </button>
 
             <p className="mt-4 flex items-start justify-center gap-1.5 text-center text-xs leading-relaxed text-ink/50">

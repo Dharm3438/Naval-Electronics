@@ -5,7 +5,8 @@
  * the offer reads the same wherever a visitor lands from. The office address
  * appears only as a contact detail.
  *
- * ⚠️ `email` is still a placeholder — replace it with the real inbox.
+ * ⚠️ `email` is still a placeholder — replace it with the real inbox. (Form
+ * enquiries are emailed separately — see README → "Getting enquiries by email".)
  */
 export const site = {
   name: "Naval Electronics",
