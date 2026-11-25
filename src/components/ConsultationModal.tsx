@@ -6,6 +6,7 @@ import {
   BadgePercent,
   Building2,
   CheckCircle2,
+  Clock,
   Factory,
   Loader2,
   Home,
@@ -453,9 +454,24 @@ function Success({
       </span>
       <p className="mt-4 text-sm leading-relaxed text-forest/70 sm:text-base">
         Thank you, {data.name.trim().split(" ")[0]}. Our finance expert will call{" "}
-        <strong className="font-bold text-forest">+91 {data.phone}</strong> within one
-        working day.
+        <strong className="font-bold text-forest">+91 {data.phone}</strong> as soon as
+        possible.
       </p>
+      <div className="mt-4 flex items-start gap-2.5 rounded-xl border border-amber-200 bg-amber-50 px-4 py-3 text-left">
+        <Clock className="mt-0.5 h-4 w-4 shrink-0 text-amber-600" aria-hidden />
+        <p className="text-xs leading-relaxed text-amber-900 sm:text-sm">
+          We&apos;re receiving a high number of enquiries right now, so our call may
+          take a little longer than usual. If you haven&apos;t heard from us within{" "}
+          <strong className="font-bold">2 working days</strong>, please call us on{" "}
+          <a
+            href={`tel:${site.phone}`}
+            className="font-bold underline underline-offset-2 hover:text-amber-950"
+          >
+            {site.phoneDisplay}
+          </a>{" "}
+          or message us on WhatsApp.
+        </p>
+      </div>
       <dl className="mt-5 grid grid-cols-2 gap-3 rounded-2xl bg-white p-4 text-left shadow-sm">
         {rows.map(([k, v]) => (
           <div key={k}>
