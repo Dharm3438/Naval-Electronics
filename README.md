@@ -20,10 +20,10 @@ Three things need real content before this is published.
 Also update `site.url` (used for canonical + OpenGraph URLs) and the
 `postalCode` in the JSON-LD schema in `src/app/page.tsx`.
 
-**2. Testimonials and case studies** — the entries in `src/lib/customers.ts`
-are sample content written
-to show the layout. Replace them with real customers and take written consent
-before publishing anyone's photo, name or words.
+**2. Customer reviews** — the entries in `src/lib/customers.ts` are real
+reviews copied from the Naval Electronics Google Business Profile, with the
+reviewers' photos saved in `public/customers/google/`. Update `googleProfile`
+there when the rating or review count changes.
 
 **3. Brand logos and copy** — `src/lib/brands.ts` carries no logo files. Request
 official logo packs from each manufacturer's channel-partner contact, drop them
@@ -204,12 +204,12 @@ src/
 └── lib/
     ├── site.ts         business details + wa.me helper  ← EDIT THIS
     ├── brands.ts       manufacturer data               ← EDIT THIS
-    ├── customers.ts    testimonial gallery data        ← EDIT THIS
+    ├── customers.ts    Google reviews shown on the page
     └── solar.ts        sizing, costing, subsidy and payback maths
 
 public/
 ├── brands/      logo and installation image files
-└── customers/   customer photo files
+└── customers/   Google review photos and avatars
 
 docs/
 ├── adding-brand-logos.md
