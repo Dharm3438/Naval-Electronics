@@ -10,47 +10,37 @@ import {
 } from "react";
 import type { PropertyType } from "@/lib/solar";
 
-export interface QuotePrefill {
+/** Optional values handed to the consultation popup, e.g. from the calculator. */
+export interface ConsultPrefill {
   monthlyBill: number;
   systemSize: number;
   propertyType: PropertyType;
-  /** Increments on every hand-off so the form can react to repeat clicks. */
-  stamp: number;
 }
 
 interface QuoteContextValue {
-  prefill: QuotePrefill | null;
-  sendToForm: (data: Omit<QuotePrefill, "stamp">) => void;
-  /** Whether the free loan-consultation popup is showing. */
+  /** Whether the free consultation popup is showing. */
   consultOpen: boolean;
-  openConsult: () => void;
+  /** Values to pre-fill when the popup was opened from the calculator. */
+  prefill: ConsultPrefill | null;
+  openConsult: (prefill?: ConsultPrefill) => void;
   closeConsult: () => void;
 }
 
 const QuoteContext = createContext<QuoteContextValue | null>(null);
 
 export function QuoteProvider({ children }: { children: ReactNode }) {
-  const [prefill, setPrefill] = useState<QuotePrefill | null>(null);
   const [consultOpen, setConsultOpen] = useState(false);
-  const openConsult = useCallback(() => setConsultOpen(true), []);
+  const [prefill, setPrefill] = useState<ConsultPrefill | null>(null);
+
+  const openConsult = useCallback((data?: ConsultPrefill) => {
+    setPrefill(data ?? null);
+    setConsultOpen(true);
+  }, []);
   const closeConsult = useCallback(() => setConsultOpen(false), []);
 
-  const sendToForm = useCallback((data: Omit<QuotePrefill, "stamp">) => {
-    setPrefill({ ...data, stamp: Date.now() });
-    document
-      .getElementById("quote")
-      ?.scrollIntoView({ behavior: "smooth", block: "start" });
-    // Put the cursor in the first empty field once the scroll is under way.
-    window.setTimeout(() => {
-      document
-        .querySelector<HTMLInputElement>("#lead-name")
-        ?.focus({ preventScroll: true });
-    }, 600);
-  }, []);
-
   const value = useMemo(
-    () => ({ prefill, sendToForm, consultOpen, openConsult, closeConsult }),
-    [prefill, sendToForm, consultOpen, openConsult, closeConsult],
+    () => ({ consultOpen, prefill, openConsult, closeConsult }),
+    [consultOpen, prefill, openConsult, closeConsult],
   );
 
   return <QuoteContext value={value}>{children}</QuoteContext>;

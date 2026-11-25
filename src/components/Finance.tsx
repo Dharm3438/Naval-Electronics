@@ -9,6 +9,7 @@ import {
   Percent,
   Wallet,
 } from "lucide-react";
+import ConsultButton from "./ConsultButton";
 
 const options = [
   {
@@ -196,12 +197,11 @@ export default function Finance() {
                   </li>
                 ))}
               </ul>
-              <a
-                href="#quote"
+              <ConsultButton
                 className="mt-6 flex w-full items-center justify-center rounded-xl bg-amber px-5 py-3.5 text-sm font-bold text-ink shadow-lg shadow-amber/25 transition-all hover:bg-amber-deep"
               >
                 Check my finance options
-              </a>
+              </ConsultButton>
             </div>
           </div>
         </div>

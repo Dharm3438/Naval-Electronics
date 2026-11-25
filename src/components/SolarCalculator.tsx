@@ -35,7 +35,7 @@ export default function SolarCalculator() {
   const [bill, setBill] = useState<number>(BILL_DEFAULT);
   /** Raw text while the field is being edited, so it can be cleared mid-typing. */
   const [draft, setDraft] = useState<string | null>(null);
-  const { sendToForm } = useQuote();
+  const { openConsult } = useQuote();
 
   const result = useMemo(() => estimate(bill, propertyType), [bill, propertyType]);
   const isResidential = propertyType === "residential";
@@ -276,8 +276,9 @@ export default function SolarCalculator() {
 
             <button
               type="button"
+              aria-haspopup="dialog"
               onClick={() =>
-                sendToForm({
+                openConsult({
                   monthlyBill: result.monthlyBill,
                   systemSize: result.systemSize,
                   propertyType,

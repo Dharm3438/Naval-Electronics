@@ -1,6 +1,7 @@
 import { Heart, MapPin, Quote, Star, Sun, UserRound } from "lucide-react";
 import { customers } from "@/lib/customers";
 import { site } from "@/lib/site";
+import ConsultButton from "./ConsultButton";
 
 export default function Customers() {
   return (
@@ -87,12 +88,11 @@ export default function Customers() {
             can generate — no obligation, and no payment until you approve the
             design.
           </p>
-          <a
-            href="#quote"
+          <ConsultButton
             className="inline-flex items-center justify-center rounded-xl bg-amber px-6 py-3.5 text-sm font-bold text-ink shadow-lg shadow-amber/25 transition-all hover:bg-amber-deep"
           >
             Book My Free Site Survey
-          </a>
+          </ConsultButton>
         </div>
       </div>
     </section>

@@ -1,5 +1,6 @@
 import { ArrowRight, BadgeIndianRupee, CheckCircle2, FileCheck2 } from "lucide-react";
 import { formatINR, subsidyTiers } from "@/lib/solar";
+import ConsultButton from "./ConsultButton";
 
 export default function SubsidyTable() {
   return (
@@ -74,8 +75,7 @@ export default function SubsidyTable() {
                   </li>
                 </ul>
 
-                <a
-                  href="#quote"
+                <ConsultButton
                   className={`mt-6 inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-bold transition-all ${
                     highlight
                       ? "bg-amber text-ink shadow-lg shadow-amber/25 hover:bg-amber-deep"
@@ -84,7 +84,7 @@ export default function SubsidyTable() {
                 >
                   Check my eligibility
                   <ArrowRight className="h-4 w-4" aria-hidden />
-                </a>
+                </ConsultButton>
               </div>
             );
           })}

@@ -5,10 +5,8 @@ import FAQ from "@/components/FAQ";
 import Finance from "@/components/Finance";
 import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
-import LeadForm from "@/components/LeadForm";
 import Navbar from "@/components/Navbar";
 import Process from "@/components/Process";
-import Projects from "@/components/Projects";
 import { QuoteProvider } from "@/components/QuoteContext";
 import SolarCalculator from "@/components/SolarCalculator";
 import SubsidyTable from "@/components/SubsidyTable";
@@ -53,7 +51,6 @@ export default function Page() {
         {/* 2. Brands  3. Reviews */}
         <Brands />
         <Customers />
-        <Projects />
         {/* Extras: subsidy → process & material → finance → calculator → FAQ */}
         <SubsidyTable />
         <Process />
@@ -61,7 +58,6 @@ export default function Page() {
         <Finance />
         <SolarCalculator />
         <FAQ />
-        <LeadForm />
       </main>
       <Footer />
       <WhatsAppButton />
