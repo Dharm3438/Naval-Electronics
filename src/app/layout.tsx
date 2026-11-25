@@ -71,7 +71,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#0F172A",
+  themeColor: "#0B3B2C",
   width: "device-width",
   initialScale: 1,
 };
@@ -79,7 +79,7 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en-IN" className={`${inter.variable} ${jakarta.variable}`}>
-      <body className="min-h-screen bg-cream text-ink">{children}</body>
+      <body className="min-h-screen bg-wash text-forest">{children}</body>
     </html>
   );
 }

@@ -44,14 +44,14 @@ export default function Finance() {
     <section id="finance" className="bg-white py-16 lg:py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-2xl text-center">
-          <div className="inline-flex items-center gap-2 rounded-full border border-emerald/25 bg-emerald/10 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.1em] text-emerald-deep">
+          <div className="inline-flex items-center gap-2 rounded-full border border-leaf/25 bg-leaf/10 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.1em] text-leaf-deep">
             <Wallet className="h-4 w-4" aria-hidden />
             Finance Options
           </div>
-          <h2 className="mt-5 font-display text-3xl font-extrabold text-ink sm:text-4xl lg:text-[2.75rem]">
+          <h2 className="mt-5 font-display text-3xl font-extrabold text-forest sm:text-4xl lg:text-[2.75rem]">
             Pay monthly, from 0% interest
           </h2>
-          <p className="mt-4 text-base leading-relaxed text-ink/65 sm:text-lg">
+          <p className="mt-4 text-base leading-relaxed text-forest/65 sm:text-lg">
             The upfront cost is the usual reason people delay going solar. It
             does not have to be upfront. We arrange finance through two routes,
             and in most cases the EMI lands close to the Mahavitaran bill the
@@ -75,54 +75,54 @@ export default function Finance() {
                   key={title}
                   className={`relative flex flex-col rounded-3xl border p-6 transition-shadow ${
                     highlight
-                      ? "border-amber bg-cream shadow-2xl shadow-amber/15 lg:-translate-y-2"
-                      : "border-ink/10 bg-cream shadow-sm hover:shadow-lg"
+                      ? "border-leaf bg-wash shadow-2xl shadow-leaf/15 lg:-translate-y-2"
+                      : "border-forest/10 bg-wash shadow-sm hover:shadow-lg"
                   }`}
                 >
                   {badge && (
                     <span
                       className={`absolute -top-3 left-6 rounded-full px-3 py-1 text-[11px] font-extrabold uppercase tracking-wider ${
-                        highlight ? "bg-amber text-ink" : "bg-emerald text-white"
+                        highlight ? "bg-gold text-forest" : "bg-leaf text-white"
                       }`}
                     >
                       {badge}
                     </span>
                   )}
-                  <span className="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-ink text-amber">
+                  <span className="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-forest text-sprout">
                     <Icon className="h-5 w-5" aria-hidden />
                   </span>
 
                   {ratePrefix && (
-                    <div className="mt-5 text-[11px] font-bold uppercase tracking-wider text-ink/50">
+                    <div className="mt-5 text-[11px] font-bold uppercase tracking-wider text-forest/50">
                       {ratePrefix}
                     </div>
                   )}
                   <div
                     className={`${ratePrefix ? "mt-1" : "mt-5"} flex items-end gap-1.5`}
                   >
-                    <span className="font-display text-3xl font-extrabold leading-none text-emerald-deep">
+                    <span className="font-display text-3xl font-extrabold leading-none text-leaf-deep">
                       {rate}
                     </span>
-                    <span className="pb-0.5 text-xs font-bold text-ink/50">
+                    <span className="pb-0.5 text-xs font-bold text-forest/50">
                       {rateNote}
                     </span>
                   </div>
 
-                  <h3 className="mt-3 font-display text-base font-bold leading-snug text-ink">
+                  <h3 className="mt-3 font-display text-base font-bold leading-snug text-forest">
                     {title}
                   </h3>
-                  <p className="mt-2.5 flex-1 text-sm leading-relaxed text-ink/65">
+                  <p className="mt-2.5 flex-1 text-sm leading-relaxed text-forest/65">
                     {body}
                   </p>
 
-                  <ul className="mt-5 flex flex-col gap-2 border-t border-ink/10 pt-5">
+                  <ul className="mt-5 flex flex-col gap-2 border-t border-forest/10 pt-5">
                     {points.map((p) => (
                       <li
                         key={p}
-                        className="flex items-start gap-2 text-xs font-semibold text-ink/70"
+                        className="flex items-start gap-2 text-xs font-semibold text-forest/70"
                       >
                         <CheckCircle2
-                          className="mt-px h-3.5 w-3.5 shrink-0 text-emerald"
+                          className="mt-px h-3.5 w-3.5 shrink-0 text-leaf"
                           aria-hidden
                         />
                         {p}
@@ -130,7 +130,7 @@ export default function Finance() {
                     ))}
                   </ul>
 
-                  <div className="mt-4 inline-flex items-center gap-1.5 rounded-lg bg-ink/5 px-2.5 py-1.5 text-[11px] font-bold uppercase tracking-wider text-ink/60">
+                  <div className="mt-4 inline-flex items-center gap-1.5 rounded-lg bg-forest/5 px-2.5 py-1.5 text-[11px] font-bold uppercase tracking-wider text-forest/60">
                     <CalendarRange className="h-3.5 w-3.5 shrink-0" aria-hidden />
                     {tenure}
                   </div>
@@ -140,10 +140,10 @@ export default function Finance() {
           )}
         </SwipeRow>
 
-        <div className="mt-10 overflow-hidden rounded-3xl bg-ink">
+        <div className="mt-10 overflow-hidden rounded-3xl bg-forest">
           <div className="grid gap-8 p-7 sm:p-10 lg:grid-cols-[1.3fr_1fr] lg:items-center">
             <div>
-              <div className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3.5 py-1.5 text-[11px] font-bold uppercase tracking-[0.1em] text-amber">
+              <div className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3.5 py-1.5 text-[11px] font-bold uppercase tracking-[0.1em] text-sprout">
                 <Percent className="h-3.5 w-3.5" aria-hidden />
                 Why financing works for solar
               </div>
@@ -187,7 +187,7 @@ export default function Finance() {
                 ].map((d) => (
                   <li key={d} className="flex items-start gap-2.5 text-sm text-white/80">
                     <CheckCircle2
-                      className="mt-0.5 h-4 w-4 shrink-0 text-emerald"
+                      className="mt-0.5 h-4 w-4 shrink-0 text-sprout"
                       aria-hidden
                     />
                     {d}
@@ -195,7 +195,7 @@ export default function Finance() {
                 ))}
               </ul>
               <ConsultButton
-                className="mt-6 flex w-full items-center justify-center rounded-xl bg-amber px-5 py-3.5 text-sm font-bold text-ink shadow-lg shadow-amber/25 transition-all hover:bg-amber-deep"
+                className="mt-6 flex w-full items-center justify-center rounded-xl bg-leaf px-5 py-3.5 text-sm font-bold text-white shadow-lg shadow-leaf/25 transition-all hover:bg-leaf-deep"
               >
                 Check my finance options
               </ConsultButton>
@@ -203,7 +203,7 @@ export default function Finance() {
           </div>
         </div>
 
-        <p className="mt-6 text-center text-xs leading-relaxed text-ink/50">
+        <p className="mt-6 text-center text-xs leading-relaxed text-forest/50">
           Interest rates, tenure and eligibility are set by the lending partner
           and are subject to their credit approval. Rates shown are indicative
           ranges, not an offer of credit.

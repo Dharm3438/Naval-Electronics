@@ -40,7 +40,7 @@ export function PanelVisual({
       <defs>
         <linearGradient id={`pv-${accent.slice(1)}`} x1="0" y1="0" x2="1" y2="1">
           <stop offset="0%" stopColor={accent} stopOpacity="0.9" />
-          <stop offset="100%" stopColor="#0F172A" stopOpacity="0.95" />
+          <stop offset="100%" stopColor="#0B3B2C" stopOpacity="0.95" />
         </linearGradient>
       </defs>
       <circle cx="334" cy="46" r="26" fill={accent} opacity="0.16" />
@@ -58,7 +58,7 @@ export function PanelVisual({
       <path
         d="M44 152 L290 152 L258 62 L76 62 Z"
         fill="none"
-        stroke="#0F172A"
+        stroke="#0B3B2C"
         strokeWidth="3"
       />
       <g stroke="#94A3B8" strokeWidth="5" strokeLinecap="round">

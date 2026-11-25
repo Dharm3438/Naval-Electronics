@@ -32,7 +32,7 @@ const highlights = [
 export default function Hero() {
   return (
     <section id="top" className="px-3 pt-3 sm:px-5 sm:pt-4 lg:px-6">
-      <div className="relative isolate mx-auto flex max-w-[96rem] flex-col overflow-hidden rounded-[1.75rem] bg-hero-wash ring-1 ring-leaf/10 lg:rounded-[2.25rem]">
+      <div className="relative isolate mx-auto flex max-w-[96rem] flex-col overflow-hidden rounded-[1.75rem] bg-wash ring-1 ring-leaf/10 lg:rounded-[2.25rem]">
         <HeroBackdrop />
         <HeroImage />
 
@@ -175,7 +175,7 @@ function HeroImage() {
         />
       </picture>
       {/* Phone: fade the bottom of the banner into the copy. */}
-      <div aria-hidden className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-hero-wash to-transparent lg:hidden" />
+      <div aria-hidden className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-wash to-transparent lg:hidden" />
       {/* Narrow desktops crop the artwork's white side, so soften the photo behind the text. */}
       <div aria-hidden className="absolute inset-y-0 left-0 hidden w-[68%] bg-gradient-to-r from-white via-white/85 to-transparent lg:block xl:hidden" />
     </div>

@@ -74,7 +74,7 @@ export default function SwipeRow({
               aria-label={`Go to item ${i + 1} of ${items.length}`}
               aria-current={i === active}
               className={`h-2 rounded-full transition-all ${
-                i === active ? "w-6 bg-amber" : "w-2 bg-ink/20"
+                i === active ? "w-6 bg-leaf" : "w-2 bg-forest/20"
               }`}
             />
           ))}

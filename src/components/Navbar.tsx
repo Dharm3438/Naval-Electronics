@@ -28,8 +28,8 @@ export default function Navbar() {
     <header
       className={`sticky top-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "border-b border-ink/10 bg-cream/90 shadow-sm backdrop-blur-lg"
-          : "border-b border-transparent bg-cream"
+          ? "border-b border-forest/10 bg-wash/90 shadow-sm backdrop-blur-lg"
+          : "border-b border-transparent bg-wash"
       }`}
     >
       <nav
@@ -39,10 +39,10 @@ export default function Navbar() {
         <a href="#top" className="flex min-w-0 items-center gap-2.5">
           <Logo className="h-9 w-9 lg:h-10 lg:w-10" />
           <span className="flex flex-col leading-none">
-            <span className="truncate font-display text-[15px] font-extrabold tracking-tight text-ink sm:text-[17px] lg:text-lg">
+            <span className="truncate font-display text-[15px] font-extrabold tracking-tight text-forest sm:text-[17px] lg:text-lg">
               Naval Electronics
             </span>
-            <span className="mt-0.5 hidden text-[10px] font-semibold uppercase tracking-[0.14em] text-ink/50 sm:block">
+            <span className="mt-0.5 hidden text-[10px] font-semibold uppercase tracking-[0.14em] text-forest/50 sm:block">
               Solar &amp; Electrical
             </span>
           </span>
@@ -53,7 +53,7 @@ export default function Navbar() {
             <li key={link.href}>
               <a
                 href={link.href}
-                className="whitespace-nowrap rounded-lg px-2.5 py-2 text-[13px] font-medium text-ink/70 transition-colors hover:bg-ink/5 hover:text-ink"
+                className="whitespace-nowrap rounded-lg px-2.5 py-2 text-[13px] font-medium text-forest/70 transition-colors hover:bg-forest/5 hover:text-forest"
               >
                 {link.label}
               </a>
@@ -64,12 +64,12 @@ export default function Navbar() {
         <div className="flex items-center gap-2">
           <a
             href={`tel:${site.phone}`}
-            className="hidden items-center gap-2 whitespace-nowrap rounded-lg px-3 py-2 text-sm font-semibold text-ink transition-colors hover:bg-ink/5 2xl:flex"
+            className="hidden items-center gap-2 whitespace-nowrap rounded-lg px-3 py-2 text-sm font-semibold text-forest transition-colors hover:bg-forest/5 2xl:flex"
           >
-            <Phone className="h-4 w-4 text-emerald" aria-hidden />
+            <Phone className="h-4 w-4 text-leaf" aria-hidden />
             {site.phoneDisplay}
           </a>
-          <ConsultButton className="inline-flex shrink-0 whitespace-nowrap rounded-xl bg-amber px-3 py-2.5 text-[13px] font-bold text-ink shadow-lg shadow-amber/25 transition-all hover:bg-amber-deep hover:shadow-amber/40 sm:px-5 sm:text-sm">
+          <ConsultButton className="inline-flex shrink-0 whitespace-nowrap rounded-xl bg-leaf px-3 py-2.5 text-[13px] font-bold text-white shadow-lg shadow-leaf/25 transition-all hover:bg-leaf-deep hover:shadow-leaf/40 sm:px-5 sm:text-sm">
             <span className="sm:hidden">Free Consult</span>
             <span className="hidden sm:inline">Get Free Consultation</span>
           </ConsultButton>
@@ -79,7 +79,7 @@ export default function Navbar() {
             aria-expanded={open}
             aria-controls="mobile-menu"
             aria-label={open ? "Close menu" : "Open menu"}
-            className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-ink/15 text-ink xl:hidden"
+            className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-forest/15 text-forest xl:hidden"
           >
             {open ? (
               <X className="h-5 w-5" aria-hidden />
@@ -93,7 +93,7 @@ export default function Navbar() {
       {/* Mobile drawer */}
       <div
         id="mobile-menu"
-        className={`fixed inset-x-0 top-16 bottom-0 z-40 origin-top overflow-y-auto border-t border-ink/10 bg-cream px-4 pb-10 pt-4 transition-all duration-200 xl:hidden lg:top-20 ${
+        className={`fixed inset-x-0 top-16 bottom-0 z-40 origin-top overflow-y-auto border-t border-forest/10 bg-wash px-4 pb-10 pt-4 transition-all duration-200 xl:hidden lg:top-20 ${
           open
             ? "pointer-events-auto opacity-100"
             : "pointer-events-none -translate-y-2 opacity-0"
@@ -106,7 +106,7 @@ export default function Navbar() {
               <a
                 href={link.href}
                 onClick={() => setOpen(false)}
-                className="block rounded-xl px-4 py-3.5 text-base font-semibold text-ink transition-colors hover:bg-ink/5"
+                className="block rounded-xl px-4 py-3.5 text-base font-semibold text-forest transition-colors hover:bg-forest/5"
               >
                 {link.label}
               </a>
@@ -116,15 +116,15 @@ export default function Navbar() {
         <div className="mt-5 flex flex-col gap-3">
           <ConsultButton
             onClick={() => setOpen(false)}
-            className="rounded-xl bg-amber px-5 py-3.5 text-center text-base font-bold text-ink shadow-lg shadow-amber/25"
+            className="rounded-xl bg-leaf px-5 py-3.5 text-center text-base font-bold text-white shadow-lg shadow-leaf/25"
           >
             Get Free Consultation
           </ConsultButton>
           <a
             href={`tel:${site.phone}`}
-            className="flex items-center justify-center gap-2 rounded-xl border border-ink/15 px-5 py-3.5 text-base font-semibold text-ink"
+            className="flex items-center justify-center gap-2 rounded-xl border border-forest/15 px-5 py-3.5 text-base font-semibold text-forest"
           >
-            <Phone className="h-4 w-4 text-emerald" aria-hidden />
+            <Phone className="h-4 w-4 text-leaf" aria-hidden />
             Call {site.phoneDisplay}
           </a>
         </div>
