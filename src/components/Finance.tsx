@@ -160,7 +160,7 @@ export default function Finance() {
               <p className="mt-3 max-w-xl text-sm leading-relaxed text-white/65 sm:text-base">
                 An electricity bill never ends and rises most years. A solar EMI
                 ends — and once the subsidy is credited and the loan closes, the
-                generation keeps running for the remaining years of the 25-year
+                generation keeps running for the remaining years of the 25–30 year
                 panel warranty. That is the whole financial case, and it is why
                 we would rather finance a correctly sized system than undersize
                 one to fit a cash budget.

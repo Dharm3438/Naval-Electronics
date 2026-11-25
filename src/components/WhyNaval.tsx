@@ -11,7 +11,7 @@ const pillars = [
     icon: Cpu,
     title: "Tier-1 DCR & ALMM Panels",
     body: "We install only high-efficiency Mono PERC and TOPCon bifacial modules from ALMM-listed, DCR-compliant manufacturers — the exact category required to claim your PM Surya Ghar subsidy — paired with IEC-certified inverters.",
-    bullets: ["25-year performance warranty", "ALMM + DCR subsidy eligible", "GI mounting structure"],
+    bullets: ["25–30 year performance warranty", "ALMM + DCR subsidy eligible", "GI mounting structure"],
   },
   {
     icon: Smartphone,
@@ -39,7 +39,7 @@ export default function WhyNaval() {
             Why homeowners and industrial units choose Naval Electronics
           </h2>
           <p className="mt-4 text-base leading-relaxed text-ink/65 sm:text-lg">
-            A rooftop plant is a 25-year electrical installation on your
+            A rooftop plant is a 25–30 year electrical installation on your
             building. It deserves more than a panel fitter.
           </p>
         </div>
