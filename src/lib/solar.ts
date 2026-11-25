@@ -86,7 +86,7 @@ export function estimate(
     annualSavings,
     monthlySavings: bill * BILL_OFFSET,
     paybackYears: (netCost / annualSavings).toFixed(1),
-    lifetimeSavings: annualSavings * 25,
+    lifetimeSavings: annualSavings * 30,
   };
 }
 

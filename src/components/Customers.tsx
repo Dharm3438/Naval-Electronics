@@ -16,8 +16,8 @@ export default function Customers() {
             Roofs we have powered, in their words
           </h2>
           <p className="mt-4 text-base leading-relaxed text-forest/65 sm:text-lg">
-            Real reviews and installation photos from our customers, as posted
-            on Google.
+            700+ installations done so far. Real reviews and installation
+            photos from our customers, as posted on Google.
           </p>
         </div>
 

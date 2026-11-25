@@ -16,7 +16,7 @@ const steps = [
   {
     icon: Wrench,
     title: "Fast Documentation & Safe Installation with Triple Earthing",
-    body: "We file the PM Surya Ghar and MSEDCL paperwork for you, then install on a galvanised mounting structure with three separate copper earthing pits, each finished with a pit cover, DC and AC surge protection and proper FR wiring — by licensed electricians.",
+    body: "We file the PM Surya Ghar and MSEDCL paperwork for you, then install on a galvanised mounting structure with three separate copper earthing pits, each finished with a pit cover, DC and AC surge protection and proper FR wiring — by trained electricians.",
     meta: "2–4 days on site",
   },
   {
