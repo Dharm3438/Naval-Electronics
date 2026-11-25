@@ -13,6 +13,11 @@ const nextConfig: NextConfig = {
    * a Node process instead.
    */
   output: "export",
+  /**
+   * Emit `consultation/index.html` rather than `consultation.html`, so the
+   * shareable /consultation link works on any static host without rewrites.
+   */
+  trailingSlash: true,
   images: { unoptimized: true },
   turbopack: {
     rules: {
