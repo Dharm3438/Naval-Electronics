@@ -9,7 +9,7 @@
  */
 export const site = {
   name: "Naval Electronics",
-  tagline: "Engineered Rooftop Solar & Electrical Solutions",
+  tagline: "Engineered Rooftop Solar Solutions",
 
   /** Primary sales line — used for every Call and WhatsApp button. */
   phone: "+917620693195",

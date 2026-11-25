@@ -39,11 +39,11 @@ export default function Navbar() {
         <a href="#top" className="flex min-w-0 items-center gap-2.5">
           <Logo className="h-9 w-9 lg:h-10 lg:w-10" />
           <span className="flex flex-col leading-none">
-            <span className="truncate font-display text-[15px] font-extrabold tracking-tight text-forest sm:text-[17px] lg:text-lg">
+            <span className="truncate font-display text-[14px] font-extrabold uppercase tracking-[0.02em] text-forest sm:text-base lg:text-[17px]">
               Naval Electronics
             </span>
-            <span className="mt-0.5 hidden text-[10px] font-semibold uppercase tracking-[0.14em] text-forest/50 sm:block">
-              Solar &amp; Electrical
+            <span className="mt-1 hidden text-[10px] font-semibold uppercase tracking-[0.2em] text-leaf sm:block">
+              Solar Solutions
             </span>
           </span>
         </a>
