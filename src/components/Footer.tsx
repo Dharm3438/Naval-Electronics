@@ -135,7 +135,7 @@ export default function Footer() {
                 <Mail className="mt-0.5 h-4 w-4 shrink-0 text-leaf" aria-hidden />
                 <a
                   href={`mailto:${site.email}`}
-                  className="transition-colors hover:text-leaf-deep"
+                  className="break-all transition-colors hover:text-leaf-deep"
                 >
                   {site.email}
                 </a>
