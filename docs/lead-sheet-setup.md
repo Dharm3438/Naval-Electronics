@@ -44,20 +44,14 @@ Nobody can read the sheet through it.
 
 ## Connect the website
 
-The URL is read at build time from `NEXT_PUBLIC_LEADS_ENDPOINT`.
+The URL is read at build time from `NEXT_PUBLIC_LEADS_ENDPOINT`, which is set
+in the committed `.env.production` file. It is not a secret (it ends up in the
+public JavaScript anyway, and it can only add leads), so every build picks it
+up automatically, on Render, Hostinger or a local `npm run build`.
 
-- **Render:** Dashboard → the `naval-electronics` static site → **Environment**
-  → add `NEXT_PUBLIC_LEADS_ENDPOINT` = the web app URL → **Save, rebuild and
-  deploy**.
-- **Hostinger / any other static host:** build locally with the variable set,
-  then upload `out/` as usual:
-  ```bash
-  NEXT_PUBLIC_LEADS_ENDPOINT="https://script.google.com/macros/s/…/exec" npm run build
-  ```
-- **Local development:** put the same line in `.env.local` (not committed).
-
-Without the variable the form still shows the thank-you screen, but nothing is
-saved and the browser console logs a warning.
+If you ever redeploy the script as a **new deployment** (new URL), update
+`.env.production` and rebuild. A setting with the same name in the Render
+dashboard, or in `.env.local` for local development, overrides the file.
 
 ## Test it
 
