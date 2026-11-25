@@ -2,6 +2,7 @@ import { Clock, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
 import { navLinks, site, waLink } from "@/lib/site";
 import { CopyrightYear } from "./CopyrightYear";
 import { Logo } from "./Logo";
+import ConsultButton from "./ConsultButton";
 
 const services = [
   "Residential rooftop solar",
@@ -75,12 +76,11 @@ export default function Footer() {
                 </li>
               ))}
               <li>
-                <a
-                  href="#quote"
+                <ConsultButton
                   className="text-sm font-bold text-ink transition-colors hover:text-amber-deep"
                 >
                   Get a free quote
-                </a>
+                </ConsultButton>
               </li>
             </ul>
           </nav>

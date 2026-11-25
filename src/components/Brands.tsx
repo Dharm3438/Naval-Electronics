@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import { brands, type Brand } from "@/lib/brands";
 import { BrandMark, PanelVisual } from "./BrandVisual";
+import ConsultButton from "./ConsultButton";
 
 export default function Brands() {
   const [active, setActive] = useState<Brand | null>(null);
@@ -242,14 +243,13 @@ function BrandDialog({ brand, onClose }: { brand: Brand; onClose: () => void }) 
           </div>
 
           <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-            <a
-              href="#quote"
+            <ConsultButton
               onClick={onClose}
               className="flex flex-1 items-center justify-center gap-2 rounded-xl bg-amber px-6 py-3.5 text-sm font-bold text-ink shadow-lg shadow-amber/25 transition-all hover:bg-amber-deep"
             >
               Get a quote with {brand.name}
               <ArrowRight className="h-4 w-4" aria-hidden />
-            </a>
+            </ConsultButton>
             <button
               type="button"
               onClick={onClose}

@@ -12,16 +12,16 @@ Three things need real content before this is published.
 
 | Field      | Used by                                             |
 | ---------- | --------------------------------------------------- |
-| `phone` / `phoneDisplay` | Navbar, FAQ, lead form, footer `tel:` links |
-| `whatsapp` | Every `wa.me` link (floating button, lead form, footer) — must be `91` + 10 digits, digits only |
-| `email`    | Lead form and footer `mailto:` links                |
+| `phone` / `phoneDisplay` | Navbar, FAQ, consultation popup, footer `tel:` links |
+| `whatsapp` | Every `wa.me` link (floating button, consultation popup, footer) — must be `91` + 10 digits, digits only |
+| `email`    | Footer `mailto:` links                              |
 | `address`  | Footer address block and the JSON-LD business schema |
 
 Also update `site.url` (used for canonical + OpenGraph URLs) and the
 `postalCode` in the JSON-LD schema in `src/app/page.tsx`.
 
 **2. Testimonials and case studies** — the entries in `src/lib/customers.ts`
-and the three cards in `src/components/Projects.tsx` are sample content written
+are sample content written
 to show the layout. Replace them with real customers and take written consent
 before publishing anyone's photo, name or words.
 
@@ -77,7 +77,7 @@ npm run lint
 **It is a fully static site, and there is no backend.** `next.config.ts` sets
 `output: "export"`, so `npm run build` produces plain `.html`, `.css`, `.js`
 and image files in `out/`. Nothing needs Node.js at runtime — the calculator,
-FAQ accordion, mobile drawer and lead form all run in the visitor's browser.
+FAQ accordion, mobile drawer and consultation popup all run in the visitor's browser.
 
 That means it can be hosted anywhere that serves files, including cheap shared
 hosting. Form submissions are handed to WhatsApp via a `wa.me` deep link rather
@@ -164,7 +164,7 @@ Leads currently go out over WhatsApp only. To also capture them server-side:
 
 1. Remove `output: "export"` from `next.config.ts`.
 2. Add a route handler at `src/app/api/leads/route.ts`.
-3. In `LeadForm.tsx`'s `handleSubmit`, `await fetch("/api/leads", ...)` with the
+3. In `ConsultationModal.tsx`'s `handleSubmit`, `await fetch("/api/leads", ...)` with the
    `FormState` object before calling `setSubmitted`.
 4. Deploy to Vercel, or to Render as a **Web Service** with start command
    `npm run start`.
@@ -183,8 +183,8 @@ src/
 │   └── globals.css     colour tokens, typography, slider styling
 ├── components/
 │   ├── Navbar.tsx            sticky nav + mobile drawer
-│   ├── Hero.tsx              headline, CTAs, trust strip, live savings badge
-│   ├── RooftopIllustration.tsx  custom SVG hero visual
+│   ├── Hero.tsx              full-width banner, 0% EMI offer, consultation CTA
+│   ├── RooftopIllustration.tsx  custom SVG rooftop visual
 │   ├── SolarCalculator.tsx   interactive savings + subsidy calculator
 │   ├── SubsidyTable.tsx      PM Surya Ghar tier breakdown
 │   ├── Finance.tsx           0%–8% finance options
@@ -193,12 +193,12 @@ src/
 │   ├── Brands.tsx            manufacturer cards + detail dialog
 │   ├── BrandVisual.tsx       logo fallback mark and panel illustration
 │   ├── Customers.tsx         satisfied-customer photo gallery
-│   ├── Projects.tsx          local case studies with reviews
 │   ├── FAQ.tsx               accessible accordion
-│   ├── LeadForm.tsx          validated lead capture + WhatsApp hand-off
+│   ├── ConsultationModal.tsx free-consultation popup: lead capture + WhatsApp hand-off
+│   ├── ConsultButton.tsx     any button that opens the consultation popup
 │   ├── WhatsAppButton.tsx    floating quick-chat button
 │   ├── Footer.tsx            contact, service areas, quick links
-│   ├── QuoteContext.tsx      calculator → lead form hand-off
+│   ├── QuoteContext.tsx      popup open state + calculator prefill
 │   ├── CopyrightYear.tsx     client-rendered footer year
 │   └── Logo.tsx              sun/circuit wordmark
 └── lib/
@@ -242,10 +242,10 @@ one place as module and installation rates move.
 
 ## Lead handling
 
-The form validates client-side (3+ character name, `[6-9]` + 9 digits mobile,
-locality/pincode) and shows a confirmation panel with an indicative system
-summary. Because there is no database, every submission also offers a
-**Send Details via WhatsApp** button that opens `wa.me` with the enquiry
+Every call-to-action opens the same consultation popup. It validates
+client-side (3+ character name, `[6-9]` + 9 digits mobile, monthly bill, city,
+6-digit pincode) and shows a confirmation panel with the submitted details. Because there is no database, every submission also offers a
+**Send on WhatsApp** button that opens `wa.me` with the enquiry
 pre-filled, so no lead is lost. To add server-side persistence later, post the
-`FormState` object in `LeadForm.tsx`'s `handleSubmit` to a route handler before
+`FormState` object in `ConsultationModal.tsx`'s `handleSubmit` to a route handler before
 calling `setSubmitted`.

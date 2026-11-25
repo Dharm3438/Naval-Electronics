@@ -15,7 +15,7 @@ import {
   X,
 } from "lucide-react";
 import { site, waLink } from "@/lib/site";
-import { useQuote } from "./QuoteContext";
+import { useQuote, type ConsultPrefill } from "./QuoteContext";
 
 type PropertyChoice = "Residential" | "Commercial" | "Housing Society";
 
@@ -58,7 +58,7 @@ function validate(form: FormState): Errors {
   return errors;
 }
 
-function buildMessage(form: FormState) {
+function buildMessage(form: FormState, systemSize?: number) {
   return [
     `Hello ${site.name}, I would like a free solar loan consultation (0% interest / 0% down payment).`,
     "",
@@ -68,6 +68,7 @@ function buildMessage(form: FormState) {
     `Monthly light bill: ₹${Number(form.bill).toLocaleString("en-IN")}`,
     `City: ${form.city.trim()}`,
     `Pincode: ${form.pincode.trim()}`,
+    ...(systemSize ? [`Calculator estimate: ${systemSize} kW system`] : []),
     "",
     `Enquiry from the ${site.name} website.`,
   ].join("\n");
@@ -75,13 +76,28 @@ function buildMessage(form: FormState) {
 
 /** Mounted once by the page; shown whenever `openConsult()` is called. */
 export default function ConsultationModal() {
-  const { consultOpen, closeConsult } = useQuote();
+  const { consultOpen, prefill, closeConsult } = useQuote();
   if (!consultOpen) return null;
-  return <Dialog onClose={closeConsult} />;
+  return <Dialog onClose={closeConsult} prefill={prefill} />;
 }
 
-function Dialog({ onClose }: { onClose: () => void }) {
-  const [form, setForm] = useState<FormState>(emptyForm);
+function initialForm(prefill: ConsultPrefill | null): FormState {
+  if (!prefill) return emptyForm;
+  return {
+    ...emptyForm,
+    bill: String(prefill.monthlyBill),
+    property: prefill.propertyType === "commercial" ? "Commercial" : "Residential",
+  };
+}
+
+function Dialog({
+  onClose,
+  prefill,
+}: {
+  onClose: () => void;
+  prefill: ConsultPrefill | null;
+}) {
+  const [form, setForm] = useState<FormState>(() => initialForm(prefill));
   const [errors, setErrors] = useState<Errors>({});
   const [submitted, setSubmitted] = useState<FormState | null>(null);
   const firstField = useRef<HTMLInputElement>(null);
@@ -168,6 +184,7 @@ function Dialog({ onClose }: { onClose: () => void }) {
         {submitted ? (
           <Success
             data={submitted}
+            systemSize={prefill?.systemSize}
             onReset={() => {
               setSubmitted(null);
               setForm(emptyForm);
@@ -175,6 +192,15 @@ function Dialog({ onClose }: { onClose: () => void }) {
           />
         ) : (
           <form onSubmit={handleSubmit} noValidate className="px-6 pb-6 pt-6 sm:px-8 sm:pb-8">
+            {prefill && (
+              <div className="mb-5 flex items-start gap-2.5 rounded-xl border border-emerald/30 bg-emerald/10 px-4 py-3">
+                <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-emerald-deep" aria-hidden />
+                <p className="text-xs font-semibold leading-relaxed text-emerald-deep">
+                  From your calculator: {prefill.systemSize} kW system for a ₹
+                  {prefill.monthlyBill.toLocaleString("en-IN")} monthly bill.
+                </p>
+              </div>
+            )}
             <div className="flex flex-col gap-4">
               <Field label="Full name" id="consult-name" error={errors.name}>
                 <input
@@ -318,7 +344,15 @@ function Dialog({ onClose }: { onClose: () => void }) {
   );
 }
 
-function Success({ data, onReset }: { data: FormState; onReset: () => void }) {
+function Success({
+  data,
+  systemSize,
+  onReset,
+}: {
+  data: FormState;
+  systemSize?: number;
+  onReset: () => void;
+}) {
   const rows: [string, string][] = [
     ["Property", data.property],
     ["Monthly bill", `₹${Number(data.bill).toLocaleString("en-IN")}`],
@@ -344,7 +378,7 @@ function Success({ data, onReset }: { data: FormState; onReset: () => void }) {
         ))}
       </dl>
       <a
-        href={waLink(buildMessage(data))}
+        href={waLink(buildMessage(data, systemSize))}
         target="_blank"
         rel="noopener noreferrer"
         className="mt-6 flex w-full items-center justify-center gap-2 rounded-xl bg-emerald px-6 py-4 text-base font-bold text-white shadow-xl shadow-emerald/25 transition-all hover:bg-emerald-deep"
