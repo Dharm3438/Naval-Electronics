@@ -299,7 +299,7 @@ function Dialog({
                     id="consult-city"
                     type="text"
                     autoComplete="address-level2"
-                    placeholder="e.g. Aurangabad"
+                    placeholder="Your city"
                     value={form.city}
                     onChange={(e) => update("city")(e.target.value)}
                     aria-invalid={Boolean(errors.city)}

@@ -1,14 +1,16 @@
 # Naval Electronics — Rooftop Solar Landing Page
 
 A high-converting, fully responsive marketing site for **Naval Electronics**, a
-rooftop solar installation and electrical solutions firm serving Chhatrapati
-Sambhajinagar (Aurangabad) and the wider Marathwada region of Maharashtra.
+rooftop solar installation and electrical solutions firm. Site copy is kept
+location-neutral; the office (Chalisgaon, Maharashtra) appears only as a
+contact detail.
 
 ## ⚠️ Before going live
 
-Three things need real content before this is published.
+Three things need checking before this is published.
 
-**1. Contact details** — four placeholder values in `src/lib/site.ts`:
+**1. Contact details** — set in `src/lib/site.ts`. Phone, WhatsApp, address and
+hours are real; `email` is still a placeholder.
 
 | Field      | Used by                                             |
 | ---------- | --------------------------------------------------- |
@@ -17,8 +19,11 @@ Three things need real content before this is published.
 | `email`    | Footer `mailto:` links                              |
 | `address`  | Footer address block and the JSON-LD business schema |
 
-Also update `site.url` (used for canonical + OpenGraph URLs) and the
-`postalCode` in the JSON-LD schema in `src/app/page.tsx`.
+Also confirm `site.url` (used for canonical + OpenGraph URLs).
+
+The festival offer (label, 15 December registration deadline, ₹1,80,000
+starting price) lives in `site.offer`. The deadline banner hides itself after
+the date; update or remove `site.offer` for the next campaign.
 
 **2. Customer reviews** — the entries in `src/lib/customers.ts` are real
 reviews copied from the Naval Electronics Google Business Profile, with the

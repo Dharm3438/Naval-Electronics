@@ -1,6 +1,5 @@
 import { ExternalLink, Heart, Quote, Star, UserRound } from "lucide-react";
 import { googleProfile, reviews } from "@/lib/customers";
-import { site } from "@/lib/site";
 import ConsultButton from "./ConsultButton";
 import SwipeRow from "./SwipeRow";
 
@@ -17,8 +16,8 @@ export default function Customers() {
             Roofs we have powered, in their words
           </h2>
           <p className="mt-4 text-base leading-relaxed text-ink/65 sm:text-lg">
-            Real reviews and installation photos from our customers across{" "}
-            {site.region}, as posted on Google.
+            Real reviews and installation photos from our customers, as posted
+            on Google.
           </p>
         </div>
 

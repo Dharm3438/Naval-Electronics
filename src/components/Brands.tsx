@@ -15,6 +15,8 @@ import {
   X,
 } from "lucide-react";
 import { brands, type Brand, type BrandPhoto } from "@/lib/brands";
+import { site } from "@/lib/site";
+import { formatINR } from "@/lib/solar";
 import { BrandMark, PanelVisual } from "./BrandVisual";
 import ConsultButton from "./ConsultButton";
 
@@ -50,6 +52,18 @@ export default function Brands() {
             recommend the brand that fits your roof, budget and subsidy
             eligibility — then stand behind the installation either way. Tap any
             brand for the details.
+          </p>
+          <p className="mt-5 inline-flex flex-wrap items-center justify-center gap-x-2 gap-y-1 rounded-2xl border border-amber/40 bg-amber/10 px-4 py-2.5 text-sm font-semibold text-ink">
+            <span className="font-extrabold uppercase tracking-wider text-amber-deep">
+              Special package price
+            </span>
+            <span>
+              Complete solar system from{" "}
+              <strong className="font-extrabold">
+                {formatINR(site.offer.startingPrice)}
+              </strong>
+              , with every brand below
+            </span>
           </p>
         </div>
 

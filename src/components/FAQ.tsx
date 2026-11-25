@@ -23,7 +23,7 @@ const faqs = [
   },
   {
     q: "What maintenance do solar panels require?",
-    a: "Very little, but not zero. Panels need a water wash every 15–20 days through the dry season — dust on Marathwada rooftops can cost you 10–15% of generation if left for months. Beyond that, we recommend an annual electrical check: inverter error logs, DC connector and MC4 integrity, earthing resistance, SPD status and mounting-bolt torque. Naval Electronics offers annual maintenance contracts covering cleaning and inspection, and your app monitoring will flag a drop in generation long before it shows up on your bill. Modules carry a 25-year performance warranty; inverters typically 5–10 years.",
+    a: "Very little, but not zero. Panels need a water wash every 15–20 days through the dry season — dust on rooftops can cost you 10–15% of generation if left for months. Beyond that, we recommend an annual electrical check: inverter error logs, DC connector and MC4 integrity, earthing resistance, SPD status and mounting-bolt torque. Naval Electronics offers annual maintenance contracts covering cleaning and inspection, and your app monitoring will flag a drop in generation long before it shows up on your bill. Modules carry a 25-year performance warranty; inverters typically 5–10 years.",
   },
 ];
 

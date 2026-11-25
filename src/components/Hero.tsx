@@ -3,18 +3,24 @@ import {
   BadgeCheck,
   BadgePercent,
   IndianRupee,
-  ShieldCheck,
+  Sparkles,
   TrendingDown,
   Wallet,
 } from "lucide-react";
 import { site } from "@/lib/site";
+import { formatINR } from "@/lib/solar";
 import ConsultButton from "./ConsultButton";
+import OfferDeadline from "./OfferDeadline";
 
 const highlights = [
   { icon: BadgePercent, value: "0%", label: "Interest on EMI" },
   { icon: Wallet, value: "₹0", label: "Down payment" },
   { icon: IndianRupee, value: "₹78,000", label: "Govt. subsidy" },
-  { icon: ShieldCheck, value: "25 yrs", label: "Panel warranty" },
+  {
+    icon: Sparkles,
+    value: formatINR(site.offer.startingPrice),
+    label: "Complete system from",
+  },
 ];
 
 export default function Hero() {
@@ -45,11 +51,12 @@ export default function Hero() {
         <div className="mx-auto flex w-full max-w-7xl flex-1 flex-col justify-end px-5 pb-6 pt-14 sm:px-8 sm:pb-8 lg:justify-center lg:px-12 lg:py-16">
           <div className="animate-rise max-w-2xl">
             {/* Offer ribbon */}
-            <div className="inline-flex items-center gap-2 whitespace-nowrap rounded-full bg-white/10 p-1 pr-3 ring-1 ring-white/20 backdrop-blur-md sm:pr-4">
-              <span className="rounded-full bg-amber px-2.5 py-1 text-[10px] font-extrabold uppercase tracking-[0.1em] text-ink sm:px-3 sm:text-[11px]">
-                Offer
+            <div className="inline-flex flex-wrap items-center gap-x-2 gap-y-1 rounded-2xl bg-white/10 p-1 pr-3 sm:rounded-full ring-1 ring-white/20 backdrop-blur-md sm:pr-4">
+              <span className="whitespace-nowrap rounded-full bg-amber px-2.5 py-1 text-[10px] font-extrabold uppercase tracking-[0.1em] text-ink sm:px-3 sm:text-[11px]">
+                <span className="sm:hidden">Festival Offer</span>
+                <span className="hidden sm:inline">{site.offer.label}</span>
               </span>
-              <span className="text-[13px] font-bold text-white sm:text-sm">
+              <span className="whitespace-nowrap pl-1.5 text-[13px] font-bold text-white sm:pl-0 sm:text-sm">
                 0% Interest &nbsp;·&nbsp; 0% Down Payment
               </span>
             </div>
@@ -63,10 +70,20 @@ export default function Hero() {
             </h1>
 
             <p className="mt-5 max-w-xl text-base leading-relaxed text-white/75 sm:text-lg">
-              Rooftop solar for homes, businesses and housing societies in{" "}
-              {site.city}. Easy EMIs, up to ₹78,000 government subsidy and
-              complete MSEDCL net-metering, all handled by {site.name}.
+              Rooftop solar for homes, businesses and housing societies. Up to
+              ₹78,000 government subsidy, complete systems from{" "}
+              <strong className="font-bold text-white">
+                {formatINR(site.offer.startingPrice)}
+              </strong>{" "}
+              with top brands, and MSEDCL net-metering, all handled by{" "}
+              {site.name}.
             </p>
+            <p className="mt-3 max-w-xl text-sm font-semibold text-amber sm:text-base">
+              0% interest and 0% down payment: a scheme you will only find with{" "}
+              {site.name}.
+            </p>
+
+            <OfferDeadline />
 
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
               <ConsultButton className="group relative inline-flex items-center justify-center gap-2.5 overflow-hidden rounded-2xl bg-amber px-8 py-4 text-base font-extrabold text-ink shadow-2xl shadow-amber/40 transition-all hover:-translate-y-0.5 hover:bg-amber-deep sm:text-lg">
@@ -101,11 +118,11 @@ export default function Hero() {
                 key={label}
                 className="flex items-center gap-3 bg-ink/55 px-4 py-4 sm:px-5 sm:py-5"
               >
-                <span className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-amber/15 text-amber sm:h-11 sm:w-11">
+                <span className="hidden h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-amber/15 text-amber min-[480px]:inline-flex sm:h-11 sm:w-11">
                   <Icon className="h-5 w-5" aria-hidden />
                 </span>
                 <span className="min-w-0">
-                  <span className="block font-display text-xl font-extrabold leading-none text-white sm:text-2xl">
+                  <span className="block font-display text-lg font-extrabold leading-none text-white min-[480px]:text-xl sm:text-2xl">
                     {value}
                   </span>
                   <span className="mt-1 block text-[11px] font-semibold uppercase tracking-wider text-white/55 sm:text-xs">
@@ -116,7 +133,9 @@ export default function Hero() {
             ))}
           </ul>
           <p className="mt-2 text-center text-[10px] text-white/40 lg:text-right">
-            *0% interest via No-Cost EMI partners; loans subject to lender approval.
+            *0% interest via No-Cost EMI partners; loans subject to lender
+            approval. Package price is a starting price; final quote depends on
+            system size, brand and site survey.
           </p>
         </div>
       </div>

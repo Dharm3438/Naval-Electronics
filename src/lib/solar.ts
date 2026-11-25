@@ -1,7 +1,10 @@
 export type PropertyType = "residential" | "commercial";
 
-/** ₹ per kW of installed rooftop capacity (turnkey, Maharashtra average). */
-export const COST_PER_KW = 65_000;
+/**
+ * ₹ per kW of installed rooftop capacity (turnkey). Matches the festival
+ * package price: 3 kW × ₹60,000 = ₹1,80,000 (`site.offer.startingPrice`).
+ */
+export const COST_PER_KW = 60_000;
 /** Shadow-free roof area required per kW, in square feet. */
 export const SQFT_PER_KW = 100;
 /** Share of the monthly bill a correctly sized rooftop system offsets. */
