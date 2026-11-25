@@ -6,11 +6,17 @@
  *    `public/brands/` and set the path here. Until then a typographic mark is
  *    rendered. Do not use logos scraped from the web; request the brand's
  *    press-kit file or written permission as a channel partner.
- * 2. `photo` — an installation photo of that brand's modules on one of your
- *    own sites, in `public/brands/`. Falls back to a panel illustration.
+ * 2. `photos` — product / installation images in `public/brands/`, cropped
+ *    to 4:3 (960×720 WebP). The first one is the card cover; all of them show
+ *    in the detail dialog. Falls back to a panel illustration when empty.
  * 3. Product and warranty lines reflect general category positioning. Confirm
  *    against each manufacturer's current datasheet before publishing.
  */
+export interface BrandPhoto {
+  src: string;
+  alt: string;
+}
+
 export interface Brand {
   slug: string;
   name: string;
@@ -22,8 +28,8 @@ export interface Brand {
   accent: string;
   /** Official logo in /public/brands — falls back to the typographic mark. */
   logo?: string;
-  /** Installation photo in /public/brands — falls back to an illustration. */
-  photo?: string;
+  /** 4:3 images in /public/brands — falls back to an illustration. */
+  photos?: BrandPhoto[];
   category: string;
   about: string;
   products: string[];
@@ -38,6 +44,11 @@ export const brands: Brand[] = [
     tagline: "Inverters, PCUs and hybrid backup",
     initials: "UTL",
     accent: "#B45309",
+    photos: [
+      { src: "/brands/utl-1.webp", alt: "UTL Solar Gamma+ inverter with tubular battery and solar module" },
+      { src: "/brands/utl-2.webp", alt: "UTL Solar grid-export PCU with tubular battery and solar module" },
+      { src: "/brands/utl-3.webp", alt: "UTL Solar on-grid string inverter" },
+    ],
     category: "Inverters & hybrid systems",
     about:
       "UTL is best known on the electrical side rather than the panel side — solar inverters, PCUs and hybrid charge controllers. When a customer in a load-shedding pocket wants backup through an outage rather than only a lower bill, a UTL hybrid inverter paired with a battery bank is usually what we specify.",
@@ -55,6 +66,10 @@ export const brands: Brand[] = [
     tagline: "India's most widely installed module brand",
     initials: "WE",
     accent: "#E11D48",
+    photos: [
+      { src: "/brands/waaree-1.webp", alt: "Waaree 5.5 kW PM Surya Ghar solar kit with module, inverter and earthing accessories" },
+      { src: "/brands/waaree-2.webp", alt: "Complete 3 kW DCR solar kit with battery, hybrid inverter and earthing" },
+    ],
     category: "Solar modules",
     about:
       "One of India's largest solar module manufacturers, with an ALMM-listed, DCR-compliant range that covers both subsidised residential rooftops and large commercial plants. Their distribution and service footprint across Maharashtra is the widest of any brand we carry, which matters when a module needs replacing eight years from now.",
@@ -72,6 +87,10 @@ export const brands: Brand[] = [
     tagline: "ALMM-listed cells made in Hyderabad",
     initials: "PE",
     accent: "#7C3AED",
+    photos: [
+      { src: "/brands/premier-1.webp", alt: "Premier Energies on-grid solar inverter" },
+      { src: "/brands/premier-2.webp", alt: "On-grid string inverter paired with a mono solar module" },
+    ],
     category: "Solar modules & cells",
     about:
       "A Hyderabad-based manufacturer of both solar cells and modules, enlisted on ALMM List-II for cells. Their domestic cell production is what makes genuinely DCR-compliant modules possible, which is a hard requirement for PM Surya Ghar subsidy claims rather than a marketing line.",
@@ -89,6 +108,9 @@ export const brands: Brand[] = [
     tagline: "N-type TOPCon specialists",
     initials: "VS",
     accent: "#EA580C",
+    photos: [
+      { src: "/brands/vikram-1.webp", alt: "Range of Vikram Solar modules in different sizes" },
+    ],
     category: "Solar modules",
     about:
       "A Kolkata-headquartered manufacturer that moved early to n-type TOPCon, the technology now replacing PERC across the Indian market. TOPCon modules hold output better at the high roof temperatures we see through a Marathwada summer and degrade more slowly over the 25-year life.",
@@ -106,6 +128,10 @@ export const brands: Brand[] = [
     tagline: "Fully integrated cell-to-module manufacturing",
     initials: "AS",
     accent: "#0F766E",
+    photos: [
+      { src: "/brands/adani-2.webp", alt: "Adani on-grid solar inverter" },
+      { src: "/brands/adani-1.webp", alt: "Adani Solar utility-scale solar plant" },
+    ],
     category: "Solar modules & cells",
     about:
       "Adani's Mundra facility in Gujarat is one of the few in India making both cells and modules under one roof, and its cell capacity is enlisted under ALMM List-II. That vertical integration shows up as consistent supply and short lead times — useful when a commercial project cannot wait on an import queue.",
@@ -123,6 +149,10 @@ export const brands: Brand[] = [
     tagline: "The trust benchmark for Indian homes",
     initials: "TP",
     accent: "#1D4ED8",
+    photos: [
+      { src: "/brands/tata-2.webp", alt: "Tata Power Solaroof rooftop system with modules, inverter and earthing" },
+      { src: "/brands/tata-1.webp", alt: "Tata solar kit with modules, inverter, distribution boxes and cabling" },
+    ],
     category: "Solar modules & cells",
     about:
       "One of the oldest solar manufacturers in India and the brand most homeowners name first. Tata Power Solar's cell capacity is enlisted under ALMM, so its modules remain eligible for the residential subsidy. Customers who want a name their family already trusts, with a nationwide service structure behind it, usually land here.",
@@ -140,6 +170,10 @@ export const brands: Brand[] = [
     tagline: "New-generation giga-scale manufacturing",
     initials: "RS",
     accent: "#1E3A8A",
+    photos: [
+      { src: "/brands/reliance-1.webp", alt: "Reliance RNE Pro-L series 690–720 Wp heterojunction module" },
+      { src: "/brands/reliance-2.webp", alt: "Reliance 740 Wp heterojunction (HJT) module" },
+    ],
     category: "Solar modules",
     about:
       "Reliance's New Energy business is building fully integrated module manufacturing at its Jamnagar giga-complex, with heterojunction technology at the core of the roadmap. We offer it to customers who want the newest cell architecture available from an Indian producer.",
