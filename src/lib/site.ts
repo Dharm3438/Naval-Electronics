@@ -28,18 +28,27 @@ export const site = {
   },
   // --- /REPLACE ---
 
+  /**
+   * Hero banner photo. Drop the final image into `public/hero/` and set the
+   * path here (e.g. "/hero/banner.jpg", ideally 2400×1200 or wider). While it
+   * is empty the hero renders a designed placeholder scene instead.
+   */
+  heroBanner: {
+    src: "" as string,
+    alt: "Rooftop solar installation by Naval Electronics",
+  },
+
   hours: "Mon – Sat, 9:30 AM – 7:30 PM",
   url: "https://navalelectronics.in",
 } as const;
 
 export const navLinks = [
-  { label: "Calculator", href: "#calculator" },
-  { label: "Subsidy", href: "#subsidy" },
-  { label: "Finance", href: "#finance" },
-  { label: "Process", href: "#process" },
   { label: "Brands", href: "#brands" },
-  { label: "Projects", href: "#projects" },
   { label: "Reviews", href: "#customers" },
+  { label: "Subsidy", href: "#subsidy" },
+  { label: "Process", href: "#process" },
+  { label: "Finance", href: "#finance" },
+  { label: "Calculator", href: "#calculator" },
   { label: "FAQ", href: "#faq" },
 ] as const;
 

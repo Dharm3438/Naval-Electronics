@@ -33,6 +33,23 @@ export interface Brand {
 
 export const brands: Brand[] = [
   {
+    slug: "utl-solar",
+    name: "UTL Solar",
+    tagline: "Inverters, PCUs and hybrid backup",
+    initials: "UTL",
+    accent: "#B45309",
+    category: "Inverters & hybrid systems",
+    about:
+      "UTL is best known on the electrical side rather than the panel side — solar inverters, PCUs and hybrid charge controllers. When a customer in a load-shedding pocket wants backup through an outage rather than only a lower bill, a UTL hybrid inverter paired with a battery bank is usually what we specify.",
+    products: [
+      "On-grid and hybrid solar inverters",
+      "Solar PCUs and charge controllers",
+      "Off-grid and backup systems",
+    ],
+    warranty: "Manufacturer warranty per model, typically 2–5 years",
+    bestFor: "Homes and shops needing power through MSEDCL outages",
+  },
+  {
     slug: "waaree",
     name: "Waaree Energies",
     tagline: "India's most widely installed module brand",
@@ -48,40 +65,6 @@ export const brands: Brand[] = [
     ],
     warranty: "25-year performance · 12-year product warranty",
     bestFor: "Residential rooftops claiming subsidy, and large MIDC plants",
-  },
-  {
-    slug: "tata-power-solar",
-    name: "Tata Power Solar",
-    tagline: "The trust benchmark for Indian homes",
-    initials: "TP",
-    accent: "#1D4ED8",
-    category: "Solar modules & cells",
-    about:
-      "One of the oldest solar manufacturers in India and the brand most homeowners name first. Tata Power Solar's cell capacity is enlisted under ALMM, so its modules remain eligible for the residential subsidy. Customers who want a name their family already trusts, with a nationwide service structure behind it, usually land here.",
-    products: [
-      "N-type TOPCon modules",
-      "Mono PERC modules",
-      "Integrated rooftop solutions",
-    ],
-    warranty: "25-year performance · 12-year product warranty",
-    bestFor: "Homeowners prioritising brand assurance and resale value",
-  },
-  {
-    slug: "adani-solar",
-    name: "Adani Solar",
-    tagline: "Fully integrated cell-to-module manufacturing",
-    initials: "AS",
-    accent: "#0F766E",
-    category: "Solar modules & cells",
-    about:
-      "Adani's Mundra facility in Gujarat is one of the few in India making both cells and modules under one roof, and its cell capacity is enlisted under ALMM List-II. That vertical integration shows up as consistent supply and short lead times — useful when a commercial project cannot wait on an import queue.",
-    products: [
-      "N-type TOPCon bifacial modules",
-      "Mono PERC modules",
-      "DCR cells and modules",
-    ],
-    warranty: "25-year performance · 12-year product warranty",
-    bestFor: "Commercial and industrial rooftops needing bulk supply",
   },
   {
     slug: "premier-energies",
@@ -118,6 +101,40 @@ export const brands: Brand[] = [
     bestFor: "Tight roofs needing maximum generation per square foot",
   },
   {
+    slug: "adani-solar",
+    name: "Adani Solar",
+    tagline: "Fully integrated cell-to-module manufacturing",
+    initials: "AS",
+    accent: "#0F766E",
+    category: "Solar modules & cells",
+    about:
+      "Adani's Mundra facility in Gujarat is one of the few in India making both cells and modules under one roof, and its cell capacity is enlisted under ALMM List-II. That vertical integration shows up as consistent supply and short lead times — useful when a commercial project cannot wait on an import queue.",
+    products: [
+      "N-type TOPCon bifacial modules",
+      "Mono PERC modules",
+      "DCR cells and modules",
+    ],
+    warranty: "25-year performance · 12-year product warranty",
+    bestFor: "Commercial and industrial rooftops needing bulk supply",
+  },
+  {
+    slug: "tata-power-solar",
+    name: "Tata Power Solar",
+    tagline: "The trust benchmark for Indian homes",
+    initials: "TP",
+    accent: "#1D4ED8",
+    category: "Solar modules & cells",
+    about:
+      "One of the oldest solar manufacturers in India and the brand most homeowners name first. Tata Power Solar's cell capacity is enlisted under ALMM, so its modules remain eligible for the residential subsidy. Customers who want a name their family already trusts, with a nationwide service structure behind it, usually land here.",
+    products: [
+      "N-type TOPCon modules",
+      "Mono PERC modules",
+      "Integrated rooftop solutions",
+    ],
+    warranty: "25-year performance · 12-year product warranty",
+    bestFor: "Homeowners prioritising brand assurance and resale value",
+  },
+  {
     slug: "reliance-solar",
     name: "Reliance Solar",
     tagline: "New-generation giga-scale manufacturing",
@@ -133,22 +150,5 @@ export const brands: Brand[] = [
     ],
     warranty: "25-year performance · product warranty per current datasheet",
     bestFor: "Early adopters wanting the latest cell technology",
-  },
-  {
-    slug: "utl-solar",
-    name: "UTL Solar",
-    tagline: "Inverters, PCUs and hybrid backup",
-    initials: "UTL",
-    accent: "#B45309",
-    category: "Inverters & hybrid systems",
-    about:
-      "UTL is best known on the electrical side rather than the panel side — solar inverters, PCUs and hybrid charge controllers. When a customer in a load-shedding pocket wants backup through an outage rather than only a lower bill, a UTL hybrid inverter paired with a battery bank is usually what we specify.",
-    products: [
-      "On-grid and hybrid solar inverters",
-      "Solar PCUs and charge controllers",
-      "Off-grid and backup systems",
-    ],
-    warranty: "Manufacturer warranty per model, typically 2–5 years",
-    bestFor: "Homes and shops needing power through MSEDCL outages",
   },
 ];
