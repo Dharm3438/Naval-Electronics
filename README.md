@@ -62,6 +62,10 @@ The "Get Free Consultation" form saves each request as a row in a shared
 Google Sheet. Set `NEXT_PUBLIC_LEADS_ENDPOINT` before building; see
 [docs/lead-sheet-setup.md](docs/lead-sheet-setup.md).
 
+To share the form directly (WhatsApp, Instagram, ads), use
+`https://navalelectronics.in/consultation`: the site loads with the
+consultation popup already open.
+
 To produce the deployable files:
 
 ```bash

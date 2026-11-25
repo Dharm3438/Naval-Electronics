@@ -28,8 +28,15 @@ interface QuoteContextValue {
 
 const QuoteContext = createContext<QuoteContextValue | null>(null);
 
-export function QuoteProvider({ children }: { children: ReactNode }) {
-  const [consultOpen, setConsultOpen] = useState(false);
+export function QuoteProvider({
+  children,
+  initialConsultOpen = false,
+}: {
+  children: ReactNode;
+  /** Show the consultation popup from the first render (used by /consultation/). */
+  initialConsultOpen?: boolean;
+}) {
+  const [consultOpen, setConsultOpen] = useState(initialConsultOpen);
   const [prefill, setPrefill] = useState<ConsultPrefill | null>(null);
 
   const openConsult = useCallback((data?: ConsultPrefill) => {

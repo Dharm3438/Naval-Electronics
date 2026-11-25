@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import {
   AlertCircle,
   BadgePercent,
@@ -84,10 +84,24 @@ function buildMessage(form: FormState, systemSize?: number) {
 }
 
 /** Mounted once by the page; shown whenever `openConsult()` is called. */
-export default function ConsultationModal() {
+export default function ConsultationModal({
+  clearUrlOnClose = false,
+}: {
+  /**
+   * On the shareable /consultation/ link, switch the address bar back to "/"
+   * once the popup closes, so a refresh or a copied link shows the normal site.
+   */
+  clearUrlOnClose?: boolean;
+}) {
   const { consultOpen, prefill, closeConsult } = useQuote();
+  const handleClose = useCallback(() => {
+    closeConsult();
+    if (clearUrlOnClose && window.location.pathname.startsWith("/consultation")) {
+      window.history.replaceState(null, "", "/" + window.location.search);
+    }
+  }, [closeConsult, clearUrlOnClose]);
   if (!consultOpen) return null;
-  return <Dialog onClose={closeConsult} prefill={prefill} />;
+  return <Dialog onClose={handleClose} prefill={prefill} />;
 }
 
 function initialForm(prefill: ConsultPrefill | null): FormState {
@@ -216,6 +230,7 @@ function Dialog({
           <Success
             data={submitted}
             systemSize={prefill?.systemSize}
+            onClose={onClose}
             onReset={() => {
               setSubmitted(null);
               setForm(emptyForm);
@@ -430,15 +445,32 @@ function Dialog({
   );
 }
 
+/** Seconds before the thank-you screen closes itself. */
+const AUTO_CLOSE_SECONDS = 10;
+
 function Success({
   data,
   systemSize,
+  onClose,
   onReset,
 }: {
   data: FormState;
   systemSize?: number;
+  onClose: () => void;
   onReset: () => void;
 }) {
+  // Close automatically so visitors can carry on browsing; "Keep open" stops it.
+  const [secondsLeft, setSecondsLeft] = useState<number | null>(AUTO_CLOSE_SECONDS);
+  useEffect(() => {
+    if (secondsLeft === null) return;
+    if (secondsLeft <= 0) {
+      onClose();
+      return;
+    }
+    const timer = setTimeout(() => setSecondsLeft(secondsLeft - 1), 1000);
+    return () => clearTimeout(timer);
+  }, [secondsLeft, onClose]);
+
   const rows = (
     [
       ["Property", data.property],
@@ -503,6 +535,18 @@ function Success({
       >
         Submit another enquiry
       </button>
+      {secondsLeft !== null && (
+        <p className="mt-4 text-xs text-forest/45" aria-live="off">
+          This window will close in {secondsLeft}s.{" "}
+          <button
+            type="button"
+            onClick={() => setSecondsLeft(null)}
+            className="font-semibold text-forest/60 underline underline-offset-2 hover:text-forest"
+          >
+            Keep open
+          </button>
+        </p>
+      )}
     </div>
   );
 }
