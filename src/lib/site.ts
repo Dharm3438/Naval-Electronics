@@ -33,13 +33,13 @@ export const site = {
    * Hero background: the supplied artwork (rooftop-solar home on the right,
    * soft fade, wave and leaf sprig on the left), used full-bleed from `lg`.
    * Phones get `mobile`, a crop of just the house, as a banner above the copy.
-   * Files are cached for a year (see render.yaml), so bump the `v2` in the
-   * file names whenever one is replaced.
+   * Files are cached for a year (see render.yaml), so bump the version in
+   * a file's name (e.g. `hero-v3` → `hero-v4`) whenever it is replaced.
    */
   heroImage: {
     desktop: [
-      { src: "/hero/hero-v2-1920.webp", width: 1920 },
-      { src: "/hero/hero-v2-2720.webp", width: 2720 },
+      { src: "/hero/hero-v3-1920.webp", width: 1920 },
+      { src: "/hero/hero-v3-2720.webp", width: 2720 },
     ],
     mobile: [
       { src: "/hero/hero-v2-house-800.webp", width: 800 },
