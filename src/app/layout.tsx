@@ -1,18 +1,31 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Plus_Jakarta_Sans } from "next/font/google";
+import localFont from "next/font/local";
 import { site } from "@/lib/site";
 import "./globals.css";
 
-const inter = Inter({
+/*
+ * Inter and Plus Jakarta Sans (both SIL Open Font License), self-hosted as
+ * variable fonts cut down to the characters the site uses: basic Latin plus
+ * ₹ — – · • … × − © → and curly quotes. Google's own "latin" subset leaves out
+ * ₹, which made browsers download a second "latin-ext" file per font (~107 KB).
+ *
+ * To regenerate (e.g. after adding text with a new symbol), download from
+ *   https://fonts.googleapis.com/css2?family=Inter:wght@100..900&text=<chars>
+ *   https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500..800&text=<chars>
+ * and save the woff2 linked in each response over the files in ./fonts.
+ * A character missing from the files still shows, in the fallback font.
+ */
+const inter = localFont({
+  src: "./fonts/inter-var-subset.woff2",
   variable: "--font-inter",
-  subsets: ["latin"],
+  weight: "100 900",
   display: "swap",
 });
 
-const jakarta = Plus_Jakarta_Sans({
+const jakarta = localFont({
+  src: "./fonts/plus-jakarta-sans-var-subset.woff2",
   variable: "--font-jakarta",
-  subsets: ["latin"],
-  weight: ["500", "600", "700", "800"],
+  weight: "500 800",
   display: "swap",
 });
 

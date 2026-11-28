@@ -8,7 +8,10 @@ Files dropped here are served at `/brands/<filename>`.
    `{ src: "/brands/waaree-install.webp", alt: "…" }`. Crop photos to 4:3
    (960×720 WebP works well) — the first one is the card cover, and all of
    them appear in the brand's detail gallery.
-3. Rebuild. A brand with no `logo` renders a typographic mark, and one with no
+3. For photos, run `npm run images`. It writes the smaller 400px and 640px
+   copies to `public/brands/sized/`, which the card and gallery thumbnails
+   load; the full 960px file is only loaded in the detail gallery.
+4. Rebuild. A brand with no `logo` renders a typographic mark, and one with no
    `photos` renders a panel illustration, so the layout never breaks.
 
 **Use official files only.** Request the logo pack from each manufacturer's

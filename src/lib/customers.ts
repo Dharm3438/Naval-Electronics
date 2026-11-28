@@ -3,14 +3,15 @@
  *
  * Source: the Naval Electronics Google Business Profile
  * (see `googleProfile.url` below). Names, star ratings, review text and
- * photos are copied from the public reviews there; files live in
- * `public/customers/google/`.
+ * photos are copied from the public reviews there. Each card shows one photo.
  *
  * To add another review:
- *   1. Save the reviewer's photos to `public/customers/google/<name>-<n>.jpg`
- *      and their profile picture to `<name>-avatar.<ext>` (optional).
- *   2. Add an entry below.
- *   3. Rebuild and redeploy.
+ *   1. Save the reviewer's photo as `assets/customers/<name>.jpg` (the
+ *      full-size original, not deployed) and their profile picture as
+ *      `public/customers/google/<name>-avatar.<ext>` (optional).
+ *   2. Run `npm run images` to write the compressed copies the page loads.
+ *   3. Add an entry below, with `photo` set to `${dir}/<name>`.
+ *   4. Rebuild and redeploy.
  *
  * Text is kept as the reviewer wrote it (Hinglish included); only pasted
  * WhatsApp timestamps were removed.
@@ -23,8 +24,11 @@ export interface Review {
   /** Relative date as Google showed it when the review was copied. */
   date: string;
   review: string;
-  /** Photo paths under /public. The first is the card's cover image. */
-  photos: string[];
+  /**
+   * Cover photo path under /public, without the size suffix — see `photoSrc`.
+   * e.g. "/customers/google/avi-patil".
+   */
+  photo: string;
   /** CSS object-position for the cover photo, e.g. "bottom". */
   coverPosition?: string;
 }
@@ -35,6 +39,10 @@ export const googleProfile = {
   reviewCount: 52,
 } as const;
 
+/** A size of a review photo written by `npm run images`. */
+export const photoSrc = (photo: string, width: 480 | 800 | 1200) =>
+  `${photo}-${width}.webp`;
+
 const dir = "/customers/google";
 
 export const reviews: Review[] = [
@@ -44,7 +52,7 @@ export const reviews: Review[] = [
     rating: 5,
     date: "September 2026",
     review: "Easy process from start to finish. Team har step pe guide karti rahi.",
-    photos: [`${dir}/avi-patil-1.jpg`, `${dir}/avi-patil-2.jpg`, `${dir}/avi-patil-3.jpg`],
+    photo: `${dir}/avi-patil`,
   },
   {
     name: "enthusiastic trader",
@@ -53,7 +61,7 @@ export const reviews: Review[] = [
     date: "September 2026",
     review:
       "Before buying my solar system I checked with many vendors about what materials they use, but none of them gave me proof, sirf bolte ki acha quality rahega karke bas... Where as naval electronics gave me such a detailed quotation that after reading it. I was damnn sure that I have to purchase it from them. Very satisfied with the purchase",
-    photos: [`${dir}/enthusiastic-trader-1.jpg`],
+    photo: `${dir}/enthusiastic-trader`,
   },
   {
     name: "Bhikan Rokade",
@@ -61,11 +69,7 @@ export const reviews: Review[] = [
     rating: 5,
     date: "September 2026",
     review: "Easy process from start to finish. Team har step pe guide karti rahi.",
-    photos: [
-      `${dir}/bhikan-rokade-1.jpg`,
-      `${dir}/bhikan-rokade-2.jpg`,
-      `${dir}/bhikan-rokade-3.jpg`,
-    ],
+    photo: `${dir}/bhikan-rokade`,
   },
   {
     name: "Sapna Naykude",
@@ -74,7 +78,7 @@ export const reviews: Review[] = [
     date: "September 2026",
     review:
       "Good service, installation done. Staff is helpful and polite. Satisfied with overall service.",
-    photos: [`${dir}/sapna-naykude-1.jpg`],
+    photo: `${dir}/sapna-naykude`,
   },
   {
     name: "Veer sham Patil",
@@ -83,6 +87,6 @@ export const reviews: Review[] = [
     date: "September 2026",
     review:
       "Good service, installation done on time. Staff is helpful and polite. Satisfied with overall service.",
-    photos: [`${dir}/veer-sham-patil-1.jpg`],
+    photo: `${dir}/veer-sham-patil`,
   },
 ];

@@ -38,3 +38,11 @@ services:
       - path: /hero/*
         name: Cache-Control
         value: public, max-age=31536000, immutable
+      # Brand and customer photos keep their file names when replaced, so let
+      # browsers reuse them for a week instead of re-checking on every visit.
+      - path: /brands/*
+        name: Cache-Control
+        value: public, max-age=604800
+      - path: /customers/*
+        name: Cache-Control
+        value: public, max-age=604800
