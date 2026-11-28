@@ -36,6 +36,7 @@ export const site = {
    */
   heroImage: {
     desktop: [
+      { src: "/hero/hero-v3-1280.webp", width: 1280 },
       { src: "/hero/hero-v3-1920.webp", width: 1920 },
       { src: "/hero/hero-v3-2720.webp", width: 2720 },
     ],

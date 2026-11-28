@@ -9,6 +9,8 @@
  * 2. `photos` — product / installation images in `public/brands/`, cropped
  *    to 4:3 (960×720 WebP). The first one is the card cover; all of them show
  *    in the detail dialog. Falls back to a panel illustration when empty.
+ *    After adding or replacing one, run `npm run images` to write the smaller
+ *    copies the card and gallery thumbnails use.
  * 3. Product and warranty lines reflect general category positioning. Confirm
  *    against each manufacturer's current datasheet before publishing.
  */
@@ -16,6 +18,13 @@ export interface BrandPhoto {
   src: string;
   alt: string;
 }
+
+/**
+ * Card-sized copy of a brand photo, written by `npm run images` to
+ * `public/brands/sized/` — e.g. `/brands/utl-4.webp` → `/brands/sized/utl-4-400.webp`.
+ */
+export const sizedPhoto = (src: string, width: 400 | 640) =>
+  src.replace(/^\/brands\/(.+)\.[^.]+$/, `/brands/sized/$1-${width}.webp`);
 
 export interface Brand {
   slug: string;

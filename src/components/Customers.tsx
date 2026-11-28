@@ -1,5 +1,5 @@
 import { ExternalLink, Heart, Quote, Star, UserRound } from "lucide-react";
-import { googleProfile, reviews } from "@/lib/customers";
+import { googleProfile, photoSrc, reviews } from "@/lib/customers";
 import ConsultButton from "./ConsultButton";
 import SwipeRow from "./SwipeRow";
 
@@ -48,31 +48,19 @@ export default function Customers() {
               key={r.name}
               className="flex flex-col overflow-hidden rounded-3xl border border-forest/10 bg-white shadow-sm transition-shadow hover:shadow-xl"
             >
-              <a href={r.photos[0]} target="_blank" rel="noopener noreferrer">
+              <a href={photoSrc(r.photo, 1200)} target="_blank" rel="noopener noreferrer">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src={r.photos[0]}
+                  src={photoSrc(r.photo, 480)}
+                  srcSet={`${photoSrc(r.photo, 480)} 480w, ${photoSrc(r.photo, 800)} 800w`}
+                  sizes="(min-width: 1280px) 392px, (min-width: 1024px) 31vw, (min-width: 640px) 50vw, 85vw"
                   alt={`Solar installation photo shared by ${r.name}`}
                   loading="lazy"
+                  decoding="async"
                   className="aspect-4/3 w-full object-cover"
                   style={{ objectPosition: r.coverPosition ?? "center" }}
                 />
               </a>
-              {r.photos.length > 1 && (
-                <div className="grid grid-cols-3 gap-1 px-1 pt-1">
-                  {r.photos.slice(1, 4).map((src, i) => (
-                    <a key={src} href={src} target="_blank" rel="noopener noreferrer">
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img
-                        src={src}
-                        alt={`Photo ${i + 2} shared by ${r.name}`}
-                        loading="lazy"
-                        className="aspect-4/3 w-full rounded-md object-cover"
-                      />
-                    </a>
-                  ))}
-                </div>
-              )}
 
               <div className="flex flex-1 flex-col p-6">
                 <div className="flex items-center gap-3">

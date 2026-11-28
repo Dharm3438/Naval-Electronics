@@ -14,7 +14,7 @@ import {
   Target,
   X,
 } from "lucide-react";
-import { brands, type Brand, type BrandPhoto } from "@/lib/brands";
+import { brands, sizedPhoto, type Brand, type BrandPhoto } from "@/lib/brands";
 import { site } from "@/lib/site";
 import { formatINR } from "@/lib/solar";
 import { BrandMark, PanelVisual } from "./BrandVisual";
@@ -81,9 +81,12 @@ export default function Brands() {
                     // Brand images are pre-cropped to 4:3, so cover never trims them.
                     // eslint-disable-next-line @next/next/no-img-element
                     <img
-                      src={brand.photos[0].src}
+                      src={sizedPhoto(brand.photos[0].src, 400)}
+                      srcSet={`${sizedPhoto(brand.photos[0].src, 400)} 400w, ${sizedPhoto(brand.photos[0].src, 640)} 640w, ${brand.photos[0].src} 960w`}
+                      sizes="(min-width: 1280px) 392px, (min-width: 1024px) 31vw, 50vw"
                       alt={brand.photos[0].alt}
                       loading="lazy"
+                      decoding="async"
                       className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
                     />
                   ) : (
@@ -396,7 +399,7 @@ function Gallery({ photos }: { photos: BrandPhoto[] }) {
               }`}
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={p.src} alt="" className="h-full w-full object-cover" />
+              <img src={sizedPhoto(p.src, 400)} alt="" className="h-full w-full object-cover" />
             </button>
           ))}
         </div>

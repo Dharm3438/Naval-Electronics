@@ -1,16 +1,22 @@
 # Customer review photos
 
-`public/customers/google/` holds the photos and profile pictures from the
-public reviews on the Naval Electronics Google Business Profile, served at
-`/customers/google/<file>`. They are listed in `src/lib/customers.ts`.
+Each review card shows one installation photo from the reviewer's public
+review on the Naval Electronics Google Business Profile. Reviews are listed in
+`src/lib/customers.ts`.
 
 To add another review:
 
-1. Save the reviewer's photos as `public/customers/google/<name>-1.jpg`,
-   `-2.jpg`, … and their profile picture as `<name>-avatar.png` (optional —
-   without it the card shows the first letter of their name).
-2. Add an entry to `reviews` in `src/lib/customers.ts`, and update
-   `googleProfile.rating` / `reviewCount` if they have changed.
-3. Rebuild and redeploy.
+1. Save the reviewer's photo as `assets/customers/<name>.jpg`. This is the
+   full-size original; it is not deployed.
+2. Save their profile picture as `public/customers/google/<name>-avatar.png`
+   (optional — without it the card shows the first letter of their name).
+3. Run `npm run images`. It writes compressed copies at
+   `public/customers/google/<name>-480.webp`, `-800.webp` and `-1200.webp`.
+   The card loads the 480 or 800 copy, and tapping it opens the 1200 copy.
+4. Add an entry to `reviews` in `src/lib/customers.ts` with
+   `` photo: `${dir}/<name>` ``, and update `googleProfile.rating` /
+   `reviewCount` if they have changed.
+5. Rebuild and redeploy.
 
-The first photo is the card's 4:3 cover; up to three more show as thumbnails.
+The photo is shown as a 4:3 crop; set `coverPosition` (e.g. `"bottom"`) if the
+crop cuts off the panels.
