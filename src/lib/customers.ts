@@ -40,7 +40,7 @@ export const googleProfile = {
 } as const;
 
 /** A size of a review photo written by `npm run images`. */
-export const photoSrc = (photo: string, width: 480 | 800 | 1200) =>
+export const photoSrc = (photo: string, width: 480 | 800) =>
   `${photo}-${width}.webp`;
 
 const dir = "/customers/google";

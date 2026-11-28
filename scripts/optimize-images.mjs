@@ -5,7 +5,7 @@
  *   npm run images
  *
  * - Customer review photos: originals live in `assets/customers/<name>.jpg`
- *   (not deployed). Writes `public/customers/google/<name>-{480,800,1200}.webp`.
+ *   (not deployed). Writes `public/customers/google/<name>-{480,800}.webp`.
  * - Brand photos: originals are the 960×720 files in `public/brands/` (the
  *   detail gallery shows those). Writes card-sized copies to
  *   `public/brands/sized/<name>-{400,640}.webp`.
@@ -37,7 +37,7 @@ async function customers() {
   for (const file of await readdir(src)) {
     if (!/\.(jpe?g|png|webp)$/i.test(file)) continue;
     const name = file.replace(/\.[^.]+$/, "");
-    for (const width of [480, 800, 1200]) {
+    for (const width of [480, 800]) {
       await resize(path.join(src, file), path.join(out, `${name}-${width}.webp`), width);
     }
   }

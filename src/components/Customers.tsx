@@ -48,19 +48,17 @@ export default function Customers() {
               key={r.name}
               className="flex flex-col overflow-hidden rounded-3xl border border-forest/10 bg-white shadow-sm transition-shadow hover:shadow-xl"
             >
-              <a href={photoSrc(r.photo, 1200)} target="_blank" rel="noopener noreferrer">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={photoSrc(r.photo, 480)}
-                  srcSet={`${photoSrc(r.photo, 480)} 480w, ${photoSrc(r.photo, 800)} 800w`}
-                  sizes="(min-width: 1280px) 392px, (min-width: 1024px) 31vw, (min-width: 640px) 50vw, 85vw"
-                  alt={`Solar installation photo shared by ${r.name}`}
-                  loading="lazy"
-                  decoding="async"
-                  className="aspect-4/3 w-full object-cover"
-                  style={{ objectPosition: r.coverPosition ?? "center" }}
-                />
-              </a>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={photoSrc(r.photo, 480)}
+                srcSet={`${photoSrc(r.photo, 480)} 480w, ${photoSrc(r.photo, 800)} 800w`}
+                sizes="(min-width: 1280px) 392px, (min-width: 1024px) 31vw, (min-width: 640px) 50vw, 85vw"
+                alt={`Solar installation photo shared by ${r.name}`}
+                loading="lazy"
+                decoding="async"
+                className="aspect-4/3 w-full object-cover"
+                style={{ objectPosition: r.coverPosition ?? "center" }}
+              />
 
               <div className="flex flex-1 flex-col p-6">
                 <div className="flex items-center gap-3">
