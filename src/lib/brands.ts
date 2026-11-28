@@ -6,25 +6,23 @@
  *    `public/brands/` and set the path here. Until then a typographic mark is
  *    rendered. Do not use logos scraped from the web; request the brand's
  *    press-kit file or written permission as a channel partner.
- * 2. `photos` — product / installation images in `public/brands/`, cropped
- *    to 4:3 (960×720 WebP). The first one is the card cover; all of them show
- *    in the detail dialog. Falls back to a panel illustration when empty.
- *    After adding or replacing one, run `npm run images` to write the smaller
- *    copies the card and gallery thumbnails use.
+ * 2. `photo` — one product / installation image per brand, shown on the card
+ *    and in the detail dialog. Save the 4:3 original (960×720 works well) as
+ *    `assets/brands/<name>.webp` (not deployed), run `npm run images` to write
+ *    the compressed `public/brands/<name>-{400,640}.webp` copies, and set
+ *    `src: "/brands/<name>"`. Falls back to a panel illustration when omitted.
  * 3. Product and warranty lines reflect general category positioning. Confirm
  *    against each manufacturer's current datasheet before publishing.
  */
 export interface BrandPhoto {
+  /** Path under /public without the size suffix, e.g. "/brands/utl-4". */
   src: string;
   alt: string;
 }
 
-/**
- * Card-sized copy of a brand photo, written by `npm run images` to
- * `public/brands/sized/` — e.g. `/brands/utl-4.webp` → `/brands/sized/utl-4-400.webp`.
- */
-export const sizedPhoto = (src: string, width: 400 | 640) =>
-  src.replace(/^\/brands\/(.+)\.[^.]+$/, `/brands/sized/$1-${width}.webp`);
+/** A size of a brand photo written by `npm run images`. */
+export const brandPhotoSrc = (src: string, width: 400 | 640) =>
+  `${src}-${width}.webp`;
 
 export interface Brand {
   slug: string;
@@ -37,8 +35,8 @@ export interface Brand {
   accent: string;
   /** Official logo in /public/brands — falls back to the typographic mark. */
   logo?: string;
-  /** 4:3 images in /public/brands — falls back to an illustration. */
-  photos?: BrandPhoto[];
+  /** 4:3 photo — falls back to an illustration. */
+  photo?: BrandPhoto;
   category: string;
   about: string;
   products: string[];
@@ -53,12 +51,7 @@ export const brands: Brand[] = [
     tagline: "Inverters, PCUs and hybrid backup",
     initials: "UTL",
     accent: "#B45309",
-    photos: [
-      { src: "/brands/utl-4.webp", alt: "UTL Solar on-grid and hybrid solar system range with modules, inverter and battery" },
-      { src: "/brands/utl-1.webp", alt: "UTL Solar Gamma+ inverter with tubular battery and solar module" },
-      { src: "/brands/utl-2.webp", alt: "UTL Solar grid-export PCU with tubular battery and solar module" },
-      { src: "/brands/utl-3.webp", alt: "UTL Solar on-grid string inverter" },
-    ],
+    photo: { src: "/brands/utl-4", alt: "UTL Solar on-grid and hybrid solar system range with modules, inverter and battery" },
     category: "Inverters & hybrid systems",
     about:
       "UTL is best known on the electrical side rather than the panel side — solar inverters, PCUs and hybrid charge controllers. When a customer in a load-shedding pocket wants backup through an outage rather than only a lower bill, a UTL hybrid inverter paired with a battery bank is usually what we specify.",
@@ -76,11 +69,7 @@ export const brands: Brand[] = [
     tagline: "India's most widely installed module brand",
     initials: "WE",
     accent: "#E11D48",
-    photos: [
-      { src: "/brands/waaree-3.webp", alt: "Waaree half-cut solar module — Tier 1, 23% efficiency, 30-year performance warranty" },
-      { src: "/brands/waaree-1.webp", alt: "Waaree 5.5 kW PM Surya Ghar solar kit with module, inverter and earthing accessories" },
-      { src: "/brands/waaree-2.webp", alt: "Complete 3 kW DCR solar kit with battery, hybrid inverter and earthing" },
-    ],
+    photo: { src: "/brands/waaree-3", alt: "Waaree half-cut solar module — Tier 1, 23% efficiency, 30-year performance warranty" },
     category: "Solar modules",
     about:
       "One of India's largest solar module manufacturers, with an ALMM-listed, DCR-compliant range that covers both subsidised residential rooftops and large commercial plants. Their nationwide distribution and service footprint is the widest of any brand we carry, which matters when a module needs replacing eight years from now.",
@@ -98,11 +87,7 @@ export const brands: Brand[] = [
     tagline: "ALMM-listed cells made in Hyderabad",
     initials: "PE",
     accent: "#7C3AED",
-    photos: [
-      { src: "/brands/premier-3.webp", alt: "Premier Energies rooftop solar on a family home" },
-      { src: "/brands/premier-1.webp", alt: "Premier Energies on-grid solar inverter" },
-      { src: "/brands/premier-2.webp", alt: "On-grid string inverter paired with a mono solar module" },
-    ],
+    photo: { src: "/brands/premier-3", alt: "Premier Energies rooftop solar on a family home" },
     category: "Solar modules & cells",
     about:
       "A Hyderabad-based manufacturer of both solar cells and modules, enlisted on ALMM List-II for cells. Their domestic cell production is what makes genuinely DCR-compliant modules possible, which is a hard requirement for PM Surya Ghar subsidy claims rather than a marketing line.",
@@ -120,10 +105,7 @@ export const brands: Brand[] = [
     tagline: "N-type TOPCon specialists",
     initials: "VS",
     accent: "#EA580C",
-    photos: [
-      { src: "/brands/vikram-2.webp", alt: "Vikram Solar rooftop modules — up to ₹78,000 subsidy under PM Surya Ghar Yojana" },
-      { src: "/brands/vikram-1.webp", alt: "Range of Vikram Solar modules in different sizes" },
-    ],
+    photo: { src: "/brands/vikram-2", alt: "Vikram Solar rooftop modules — up to ₹78,000 subsidy under PM Surya Ghar Yojana" },
     category: "Solar modules",
     about:
       "A Kolkata-headquartered manufacturer that moved early to n-type TOPCon, the technology now replacing PERC across the Indian market. TOPCon modules hold output better at the high roof temperatures of an Indian summer and degrade more slowly over its 25–30 year life.",
@@ -141,11 +123,7 @@ export const brands: Brand[] = [
     tagline: "Fully integrated cell-to-module manufacturing",
     initials: "AS",
     accent: "#0F766E",
-    photos: [
-      { src: "/brands/adani-3.webp", alt: "Adani Solar MonoPERC and Shine TOPCon modules — BloombergNEF Tier 1 PV module manufacturer" },
-      { src: "/brands/adani-1.webp", alt: "Adani Solar utility-scale solar plant" },
-      { src: "/brands/adani-2.webp", alt: "Adani on-grid solar inverter" },
-    ],
+    photo: { src: "/brands/adani-3", alt: "Adani Solar MonoPERC and Shine TOPCon modules — BloombergNEF Tier 1 PV module manufacturer" },
     category: "Solar modules & cells",
     about:
       "Adani's Mundra facility in Gujarat is one of the few in India making both cells and modules under one roof, and its cell capacity is enlisted under ALMM List-II. That vertical integration shows up as consistent supply and short lead times — useful when a commercial project cannot wait on an import queue.",
@@ -163,11 +141,7 @@ export const brands: Brand[] = [
     tagline: "The trust benchmark for Indian homes",
     initials: "TP",
     accent: "#1D4ED8",
-    photos: [
-      { src: "/brands/tata-3.webp", alt: "Tata Power Solaroof — clean solar energy for a home, illustrated with a child and a smiling sun" },
-      { src: "/brands/tata-2.webp", alt: "Tata Power Solaroof rooftop system with modules, inverter and earthing" },
-      { src: "/brands/tata-1.webp", alt: "Tata solar kit with modules, inverter, distribution boxes and cabling" },
-    ],
+    photo: { src: "/brands/tata-3", alt: "Tata Power Solaroof — clean solar energy for a home, illustrated with a child and a smiling sun" },
     category: "Solar modules & cells",
     about:
       "One of the oldest solar manufacturers in India and the brand most homeowners name first. Tata Power Solar's cell capacity is enlisted under ALMM, so its modules remain eligible for the residential subsidy. Customers who want a name their family already trusts, with a nationwide service structure behind it, usually land here.",
@@ -185,9 +159,7 @@ export const brands: Brand[] = [
     tagline: "New-generation giga-scale manufacturing",
     initials: "RS",
     accent: "#1E3A8A",
-    photos: [
-      { src: "/brands/reliance-1.webp", alt: "Reliance RNE Pro-L series 690–720 Wp heterojunction module" },
-    ],
+    photo: { src: "/brands/reliance-1", alt: "Reliance RNE Pro-L series 690–720 Wp heterojunction module" },
     category: "Solar modules",
     about:
       "Reliance's New Energy business is building fully integrated module manufacturing at its Jamnagar giga-complex, with heterojunction technology at the core of the roadmap. We offer it to customers who want the newest cell architecture available from an Indian producer.",

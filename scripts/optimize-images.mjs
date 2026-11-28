@@ -6,9 +6,8 @@
  *
  * - Customer review photos: originals live in `assets/customers/<name>.jpg`
  *   (not deployed). Writes `public/customers/google/<name>-{480,800}.webp`.
- * - Brand photos: originals are the 960×720 files in `public/brands/` (the
- *   detail gallery shows those). Writes card-sized copies to
- *   `public/brands/sized/<name>-{400,640}.webp`.
+ * - Brand photos: originals live in `assets/brands/<name>.webp` (not
+ *   deployed). Writes `public/brands/<name>-{400,640}.webp`.
  * - Hero: writes `public/hero/hero-v3-1280.webp` from the 2720px original.
  *
  * Existing outputs are overwritten, so the script is safe to re-run.
@@ -31,30 +30,22 @@ async function resize(input, output, width) {
   );
 }
 
-async function customers() {
-  const src = path.join(root, "assets/customers");
-  const out = path.join(root, "public/customers/google");
+/** Writes `<out>/<name>-<width>.webp` for every image in `<src>`. */
+async function resizeAll(srcDir, outDir, widths) {
+  const src = path.join(root, srcDir);
+  const out = path.join(root, outDir);
+  await mkdir(out, { recursive: true });
   for (const file of await readdir(src)) {
     if (!/\.(jpe?g|png|webp)$/i.test(file)) continue;
     const name = file.replace(/\.[^.]+$/, "");
-    for (const width of [480, 800]) {
+    for (const width of widths) {
       await resize(path.join(src, file), path.join(out, `${name}-${width}.webp`), width);
     }
   }
 }
 
-async function brands() {
-  const src = path.join(root, "public/brands");
-  const out = path.join(src, "sized");
-  await mkdir(out, { recursive: true });
-  for (const file of await readdir(src)) {
-    if (!/\.(jpe?g|png|webp)$/i.test(file)) continue;
-    const name = file.replace(/\.[^.]+$/, "");
-    for (const width of [400, 640]) {
-      await resize(path.join(src, file), path.join(out, `${name}-${width}.webp`), width);
-    }
-  }
-}
+const customers = () => resizeAll("assets/customers", "public/customers/google", [480, 800]);
+const brands = () => resizeAll("assets/brands", "public/brands", [400, 640]);
 
 async function hero() {
   const dir = path.join(root, "public/hero");

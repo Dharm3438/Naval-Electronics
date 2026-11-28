@@ -1,18 +1,22 @@
 # Brand logos and installation photos
 
-Files dropped here are served at `/brands/<filename>`.
+Each brand has at most one logo and one photo.
 
-1. Add the file, e.g. `waaree-logo.svg` or `waaree-install.jpg`.
-2. Reference it in `src/lib/brands.ts` on that brand's entry:
-   `logo: "/brands/waaree-logo.svg"` and/or add to `photos`:
-   `{ src: "/brands/waaree-install.webp", alt: "…" }`. Crop photos to 4:3
-   (960×720 WebP works well) — the first one is the card cover, and all of
-   them appear in the brand's detail gallery.
-3. For photos, run `npm run images`. It writes the smaller 400px and 640px
-   copies to `public/brands/sized/`, which the card and gallery thumbnails
-   load; the full 960px file is only loaded in the detail gallery.
-4. Rebuild. A brand with no `logo` renders a typographic mark, and one with no
-   `photos` renders a panel illustration, so the layout never breaks.
+**Logo:** save it as `public/brands/<name>-logo.svg` (served at
+`/brands/<name>-logo.svg`) and set `logo: "/brands/<name>-logo.svg"` on the
+brand's entry in `src/lib/brands.ts`.
+
+**Photo:**
+
+1. Crop it to 4:3 (960×720 works well) and save it as
+   `assets/brands/<name>.webp`. This is the original; it is not deployed.
+2. Run `npm run images`. It writes compressed copies at
+   `public/brands/<name>-400.webp` and `-640.webp`, which the card and the
+   detail dialog load.
+3. Set `photo: { src: "/brands/<name>", alt: "…" }` on the brand's entry.
+
+Rebuild afterwards. A brand with no `logo` renders a typographic mark, and one
+with no `photo` renders a panel illustration, so the layout never breaks.
 
 **Use official files only.** Request the logo pack from each manufacturer's
 channel-partner or marketing contact. Do not copy logos off the web — brand

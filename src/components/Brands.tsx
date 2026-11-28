@@ -4,17 +4,14 @@ import { useEffect, useRef, useState } from "react";
 import {
   ArrowRight,
   BadgeCheck,
-  ChevronLeft,
-  ChevronRight,
   Factory,
   HelpCircle,
-  Images,
   Layers,
   ShieldCheck,
   Target,
   X,
 } from "lucide-react";
-import { brands, sizedPhoto, type Brand, type BrandPhoto } from "@/lib/brands";
+import { brands, brandPhotoSrc, type Brand, type BrandPhoto } from "@/lib/brands";
 import { site } from "@/lib/site";
 import { formatINR } from "@/lib/solar";
 import { BrandMark, PanelVisual } from "./BrandVisual";
@@ -77,29 +74,18 @@ export default function Brands() {
                 className="group flex h-full w-full flex-col overflow-hidden rounded-2xl border sm:rounded-3xl border-forest/10 bg-white text-left shadow-sm transition-all hover:-translate-y-1 hover:border-leaf/50 hover:shadow-xl"
               >
                 <div className="relative aspect-[4/3] w-full overflow-hidden border-b border-forest/10 bg-white">
-                  {brand.photos?.length ? (
+                  {brand.photo ? (
                     // Brand images are pre-cropped to 4:3, so cover never trims them.
-                    // eslint-disable-next-line @next/next/no-img-element
-                    <img
-                      src={sizedPhoto(brand.photos[0].src, 400)}
-                      srcSet={`${sizedPhoto(brand.photos[0].src, 400)} 400w, ${sizedPhoto(brand.photos[0].src, 640)} 640w, ${brand.photos[0].src} 960w`}
+                    <BrandImage
+                      photo={brand.photo}
                       sizes="(min-width: 1280px) 392px, (min-width: 1024px) 31vw, 50vw"
-                      alt={brand.photos[0].alt}
-                      loading="lazy"
-                      decoding="async"
+                      lazy
                       className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
                     />
                   ) : (
                     <div className="flex h-full items-center justify-center">
                       <PanelVisual accent={brand.accent} className="h-full w-auto" />
                     </div>
-                  )}
-                  {brand.photos && brand.photos.length > 1 && (
-                    <span className="absolute bottom-2 right-2 inline-flex items-center gap-1 rounded-full bg-forest/75 px-2 py-0.5 text-[10px] font-bold text-white backdrop-blur-sm sm:bottom-3 sm:right-3 sm:px-2.5 sm:py-1 sm:text-[11px]">
-                      <Images className="h-3 w-3 sm:h-3.5 sm:w-3.5" aria-hidden />
-                      {brand.photos.length}
-                      <span className="hidden sm:inline"> photos</span>
-                    </span>
                   )}
                 </div>
 
@@ -214,8 +200,15 @@ function BrandDialog({ brand, onClose }: { brand: Brand; onClose: () => void }) 
         className="max-h-[92vh] w-full max-w-2xl overflow-y-auto rounded-t-3xl bg-wash shadow-2xl sm:rounded-3xl"
       >
         <div className="relative">
-          {brand.photos?.length ? (
-            <Gallery photos={brand.photos} />
+          {brand.photo ? (
+            <div className="relative aspect-[4/3] max-h-[22rem] w-full overflow-hidden rounded-t-3xl bg-white sm:aspect-[16/10]">
+              {/* Shows the whole 4:3 image, centred on white, inside a wider frame. */}
+              <BrandImage
+                photo={brand.photo}
+                sizes="(min-width: 640px) 470px, 100vw"
+                className="absolute inset-0 h-full w-full object-contain"
+              />
+            </div>
           ) : (
             <div className="flex h-44 w-full items-center justify-center rounded-t-3xl bg-[#F1F5F9] sm:h-52">
               <PanelVisual accent={brand.accent} className="h-full w-auto" />
@@ -328,82 +321,28 @@ function BrandDialog({ brand, onClose }: { brand: Brand; onClose: () => void }) 
   );
 }
 
-/** Shows the whole 4:3 image, centred on white, inside a wider frame. */
-function PhotoFrame({ photo }: { photo: BrandPhoto }) {
+/** A brand photo from its compressed 400px / 640px copies. */
+function BrandImage({
+  photo,
+  sizes,
+  lazy = false,
+  className,
+}: {
+  photo: BrandPhoto;
+  sizes: string;
+  lazy?: boolean;
+  className: string;
+}) {
   return (
     // eslint-disable-next-line @next/next/no-img-element
     <img
-      src={photo.src}
+      src={brandPhotoSrc(photo.src, 400)}
+      srcSet={`${brandPhotoSrc(photo.src, 400)} 400w, ${brandPhotoSrc(photo.src, 640)} 640w`}
+      sizes={sizes}
       alt={photo.alt}
-      className="absolute inset-0 h-full w-full object-contain"
+      loading={lazy ? "lazy" : undefined}
+      decoding="async"
+      className={className}
     />
-  );
-}
-
-function Gallery({ photos }: { photos: BrandPhoto[] }) {
-  const [index, setIndex] = useState(0);
-  const count = photos.length;
-  const go = (step: number) => setIndex((i) => (i + step + count) % count);
-  const touchX = useRef<number | null>(null);
-
-  return (
-    <div className="overflow-hidden rounded-t-3xl bg-white">
-      <div
-        className="relative aspect-[4/3] max-h-[22rem] w-full overflow-hidden bg-white sm:aspect-[16/10]"
-        onTouchStart={(e) => (touchX.current = e.touches[0].clientX)}
-        onTouchEnd={(e) => {
-          if (touchX.current === null) return;
-          const dx = e.changedTouches[0].clientX - touchX.current;
-          if (Math.abs(dx) > 40) go(dx < 0 ? 1 : -1);
-          touchX.current = null;
-        }}
-      >
-        <PhotoFrame key={photos[index].src} photo={photos[index]} />
-        {count > 1 && (
-          <>
-            <button
-              type="button"
-              onClick={() => go(-1)}
-              aria-label="Previous photo"
-              className="absolute left-3 top-1/2 inline-flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white/90 text-forest shadow-lg transition-colors hover:bg-white"
-            >
-              <ChevronLeft className="h-5 w-5" aria-hidden />
-            </button>
-            <button
-              type="button"
-              onClick={() => go(1)}
-              aria-label="Next photo"
-              className="absolute right-3 top-1/2 inline-flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white/90 text-forest shadow-lg transition-colors hover:bg-white"
-            >
-              <ChevronRight className="h-5 w-5" aria-hidden />
-            </button>
-            <span className="absolute bottom-3 left-3 rounded-full bg-forest/75 px-2.5 py-1 text-[11px] font-bold text-white">
-              {index + 1} / {count}
-            </span>
-          </>
-        )}
-      </div>
-      {count > 1 && (
-        <div className="flex gap-2 border-b border-forest/10 bg-wash px-6 pt-4 sm:px-8">
-          {photos.map((p, i) => (
-            <button
-              key={p.src}
-              type="button"
-              onClick={() => setIndex(i)}
-              aria-label={`Show photo ${i + 1}: ${p.alt}`}
-              aria-current={i === index}
-              className={`relative mb-4 h-14 w-[4.5rem] overflow-hidden rounded-lg border-2 bg-white transition-all ${
-                i === index
-                  ? "border-leaf shadow-md"
-                  : "border-transparent opacity-60 hover:opacity-100"
-              }`}
-            >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={sizedPhoto(p.src, 400)} alt="" className="h-full w-full object-cover" />
-            </button>
-          ))}
-        </div>
-      )}
-    </div>
   );
 }
